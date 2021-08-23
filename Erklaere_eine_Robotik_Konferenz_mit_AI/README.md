@@ -26,6 +26,8 @@ Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt s
 
 Abbildung 1 zeigt die Ergebnisse der Klassifikation der Paper pro Jahr für die Workshops von 2016 bis 2020. Die Themenbereiche der Veröffentlichungen zeigen einen klaren Trend zur Verwendung von Künstlicher Intelligenz in Robotik. Besonders im Jahr 2018, dem einzigen Jahr zwischen 2016 und 2020, in dem der Austrian Robotics Workshop nicht zusammen mit einer anderen Konferenz abgehalten wurde, fällt der Anteil an Publikationen mit Fokus auf AI sehr hoch aus. Dies zeigt uns, dass AI in der österreichischen Forschung an Robotik Anwendung findet.
 
+![Abbildung 1](images/Abbildung2Resultate.png)
+
 # Diskussion
 
 In diesem Use Case haben wir uns mit der Verarbeitung von geschriebenem Text befasst. Dabei zeigen wir, dass Werkzeuge wie Regular Expressions, es uns erlauben schnell und effizient Text automatisiert zu verstehen. Dadurch das RegEx so optimiert sind, können Untersuchungen von großen Mengen Text lokal, ohne viel Rechenleistung durchgeführt werden.
