@@ -1,8 +1,8 @@
-# Suchen 2 - Labyrinth Navigation mittels A Stern
+# Labyrinth Navigation mittels A Stern
 
 Hier finden Sie Programmcode und Beispiele wie man einen Roboter mittels des A* Algorithmus in einer unbekannten Umgebung navigieren lässt.
 
-Dabei wird, wie auf der AIAV Plattform, eine simple Aufgabe gelöst. Ein [MiR100](https://github.com/dfki-ric/mir_robot) Roboter wird am Eingang eines Labyrinths plaziert und soll den Ausgang finden. Das [Notebook](./Suchen2.ipynb) beschreibt den Use Case, die Theorie und den Code im Detail. Dabei wird wie Folgt vorgegangen:
+Dabei wird, wie auf der AIAV Plattform, eine simple Aufgabe gelöst. Ein [MiR100](https://github.com/dfki-ric/mir_robot) Roboter wird am Eingang eines Labyrinths plaziert und soll den Ausgang finden. Das [Notebook](./Notebook.ipynb) beschreibt den Use Case, die Theorie und den Code im Detail. Dabei wird wie Folgt vorgegangen:
 
 - Der Roboter erfasst das Labyrinth mittels eines Laserscanners und erstellt einen Graphen, welcher das Labyrinth repräsentiert. Verzweigungen werden dabei anhand des A* Algorithmus angefahren, um so lange den Graphen weiter aufzubauen, bis der Roboter den Ausgang des Labyrinths erreicht hat.
 
@@ -13,7 +13,7 @@ Dabei wird, wie auf der AIAV Plattform, eine simple Aufgabe gelöst. Ein [MiR100
 
 Die Implementierung basiert auf Python 3 und dem [Robot Operating System (ROS)](https://www.ros.org/). ROS ist eine Entwicklungsumgebung für Robotik Anwendungen und ermöglicht es uns für den Use Case einen Roboter zu simulieren. Damit ROS zur Ausführung des Codes installiert sein muss, stellen wir einen Docker Container, welcher alle benötigten Software Pakete beinhaltet, zur Verfügung.
 
-Das Skript _buildandrun.sh_ erstellt automatisch den Docker Containter mit der Benötigten Robotiksoftware. Der Container beinhaltet ROS und Python 3, sowie [mazelib](https://github.com/john-science/mazelib), eine Bibliothek zur Generierung des Labyrinths. Damit das Skript funktioniert müssende folgende Systemvoraussetzungen erfüllt sein:
+Das Skript _buildandrun.sh_ erstellt automatisch den Docker Containter mit der Benötigten Robotiksoftware. Der Container beinhaltet ROS und Python 3, sowie [mazelib](https://github.com/john-science/mazelib), eine Bibliothek zur Generierung des Labyrinths. Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein:
 
 - Docker muss installiert sein. Unter Linux kann Docker [nativ Installiert werden](https://docs.docker.com/engine/install/ubuntu/), unter Windows wird [das wsl2 Backend benötigt](https://docs.docker.com/desktop/windows/install/) (für Windows wird Windows 10 Update 21h1 oder höher benötigt, da sonst die Fenster von Docker nicht angezeigt werden können).
 
