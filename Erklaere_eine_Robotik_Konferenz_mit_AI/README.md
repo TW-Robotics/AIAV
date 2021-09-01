@@ -11,6 +11,8 @@ Die Grundlagen von Regular Expressions, sowie das genaue Vorgehen sind Schritt f
 
 Die Implementierung benötigt neben [Python 3](https://docs.python.org/3/) und dessen eingebautem [re Modul](https://docs.python.org/3/library/re.html),[tika-python](https://github.com/chrismattmann/tika-python) zum Einlesen der PDF Dateien, sowie [NumPy](https://numpy.org/) und das [Natural Language Toolkit](https://www.nltk.org/). Da Tika Java Komponenten benötigt, wird ein Dockerfile zur Verfügung gestellt, welches die benötigten Software Pakete automatisch in einer abgekapselten Umgebung, dem Container, installiert. Bei Ausführung des *buildandrun.sh* Skriptes wird dieser Container erstellt, die Publikationen automatisch in den [app](./app) Ordner heruntergeladen und das Programm ausgeführt.
 
+Die Implementierung verwendet [Docker](https://www.docker.com/) zur Erstellung der Umgebung in der das Programm ausgeführt wird. Docker erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
+
 Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein:
 
 - Docker muss installiert sein. Unter Linux kann Docker [nativ Installiert werden](https://docs.docker.com/engine/install/ubuntu/), unter Windows wird [das wsl2 Backend benötigt](https://docs.docker.com/desktop/windows/install/) (für Windows wird Windows 10 Update 21h1 oder höher benötigt, da sonst die Fenster von Docker nicht angezeigt werden können).

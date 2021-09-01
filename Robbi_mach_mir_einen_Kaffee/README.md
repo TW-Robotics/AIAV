@@ -28,5 +28,5 @@ Diese Implementierung von Natural Language Processing resultiert in einigen Gren
 
 # Diskussion
 
-In diesem Use Case haben wir uns mit dem Erkennen und Verstehen von gesprochenen Befehlen befasst. Dabei wurde gezeigt, dass frei zugängliche Lösungen, wie die [Google Webspeech API](https://cloud.google.com/speech-to-text#section-3), zusammen mit Natural Language Processing Methoden (z.B. Regular Expressions) es uns erlauben, mit wenig Aufwand gesprochene Sprache so zu verarbeiten, dass ein Roboter sie versteht.w
+In diesem Use Case haben wir uns mit dem Erkennen und Verstehen von gesprochenen Befehlen befasst. Dabei wurde gezeigt, dass frei zugängliche Lösungen, wie die [Google Webspeech API](https://cloud.google.com/speech-to-text#section-3), zusammen mit Natural Language Processing Methoden (z.B. Regular Expressions) es uns erlauben, mit wenig Aufwand gesprochene Sprache so zu verarbeiten, dass ein Roboter sie versteht.
 
