@@ -13,7 +13,7 @@ Dabei wird, wie auf der AIAV Plattform, eine simple Aufgabe gelöst. Ein [MiR100
 
 Die Implementierung basiert auf Python 3 und dem [Robot Operating System (ROS)](https://www.ros.org/). ROS ist eine Entwicklungsumgebung für Robotik Anwendungen und ermöglicht es uns für den Use Case einen Roboter zu simulieren. Damit ROS zur Ausführung des Codes installiert sein muss, stellen wir einen Docker Container, welcher alle benötigten Software Pakete beinhaltet, zur Verfügung.
 
-Die Implementierung verwendet [Docker](https://www.docker.com/) zur Erstellung der Umgebung in der das Programm ausgeführt wird. Docker erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
+[Docker](https://www.docker.com/) erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
 
 Das Skript _buildandrun.sh_ erstellt automatisch den Docker Containter mit der Benötigten Robotiksoftware. Der Container beinhaltet ROS und Python 3, sowie [mazelib](https://github.com/john-science/mazelib), eine Bibliothek zur Generierung des Labyrinths. Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein:
 
