@@ -2,7 +2,7 @@
 
 Hier finden Sie Programmcode und Beispiele wie man einen Roboter mittels des A* Algorithmus in einer unbekannten Umgebung navigieren lässt.
 
-Dabei wird, wie auf der AIAV Plattform, eine simple Aufgabe gelöst. Ein [MiR100](https://github.com/dfki-ric/mir_robot) Roboter wird am Eingang eines Labyrinths plaziert und soll den Ausgang finden. Das [Notebook](./Notebook.ipynb) beschreibt den Use Case, die Theorie und den Code im Detail. Dabei wird wie Folgt vorgegangen:
+Dabei wird, wie auf der AIAV Plattform beschrieben, eine simple Aufgabe gelöst. Ein [MiR100](https://github.com/dfki-ric/mir_robot) Roboter wird am Eingang eines Labyrinths plaziert und soll den Ausgang finden. Das [Notebook](./Notebook.ipynb) beschreibt den Use Case, die Theorie und den Code im Detail. Dabei wird wie folgt vorgegangen:
 
 - Der Roboter erfasst das Labyrinth mittels eines Laserscanners und erstellt einen Graphen, welcher das Labyrinth repräsentiert. Verzweigungen werden dabei anhand des A* Algorithmus angefahren, um so lange den Graphen weiter aufzubauen, bis der Roboter den Ausgang des Labyrinths erreicht hat.
 
@@ -15,7 +15,7 @@ Die Implementierung basiert auf Python 3 und dem [Robot Operating System (ROS)](
 
 [Docker](https://www.docker.com/) erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
 
-Das Skript _buildandrun.sh_ erstellt automatisch den Docker Containter mit der Benötigten Robotiksoftware. Der Container beinhaltet ROS und Python 3, sowie [mazelib](https://github.com/john-science/mazelib), eine Bibliothek zur Generierung des Labyrinths. Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein:
+Das Skript _buildandrun.sh_ erstellt automatisch den Docker Containter mit der benötigten Robotiksoftware. Der Container beinhaltet ROS und Python 3, sowie [mazelib](https://github.com/john-science/mazelib), eine Bibliothek zur Generierung des Labyrinths. Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein:
 
 - Docker muss installiert sein. Unter Linux kann Docker [nativ Installiert werden](https://docs.docker.com/engine/install/ubuntu/), unter Windows wird [das wsl2 Backend benötigt](https://docs.docker.com/desktop/windows/install/) (für Windows wird Windows 10 Update 21h1 oder höher benötigt, da sonst die Fenster von Docker nicht angezeigt werden können).
 
@@ -42,7 +42,10 @@ Docker erzeugt ein Image, welches die vom Use Case benötigten Komponenten beinh
 
 Da das Labyrinth bei jedem Programmdurchlauf zufällig generiert wird, ändert sich die Effizienz des Roboters bei jedem Durchlauf abhängig vom Labyrinth. Obwohl der A* Algorithmus jedes mal den optimalen Pfad zwischen Start und Ziel findet, variiert hier die Dauer, bis das Ziel gefunden wurde stark. Unbekannte Verzweigungen werden in der vom A* Algorithmus vorgegebenen Reihenfolge abgesucht. Da der Algorithmus sowohl die zurückkgelegte Strecke, als auch die Distanz zum Ziel in Betracht zieht, werden zuerst Verzweigungen nahe der Mitte des Labyrinths abgesucht. Verläuft der Weg zum Ziel nahe des Rands vom Labyrinths, dauert es länger bis der Pfad zum Ziel gefunden wird.
 
+Videos, welche [die Suche nach dem Ziel](https://www.youtube.com/watch?v=lmrehCiv0HY&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=41) und [das Abfahren des optimalen Pfads](https://www.youtube.com/watch?v=X6vg1fCll10&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=42) zeigen, wurden zur Verfügung gestellt.
+
 
 # Diskussion
+
 Wir haben in diesem Usecase gezeigt, dass A* verwendet werden kann, um einen Roboter auf einer dynamisch aufgebauten Karte navigieren zu lassen. Dabei erlaubt A* es uns, auf dem Graphen den optimalen Pfad zwischen Start und Ziel zu ermitteln.
 
