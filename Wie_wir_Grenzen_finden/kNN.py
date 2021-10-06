@@ -15,20 +15,12 @@ from sklearn import neighbors
 
 from PIL import Image
 
-# OpenCV Kamera Objekt zum Einlesen der Bilder
-camera = cv2.VideoCapture('./input/test3.mp4')
-frames = []
-
-scaleFactor = 2
-
-# Einlesen, Herunterskalieren & in Graustufen umwandeln
-ret, frame = camera.read()
-while ret is True:
-        width = int(len(frame[0])/scaleFactor)
-        height = int(len(frame)/scaleFactor)
-        frame = cv2.resize(frame,(width, height), fx=0, fy=0, interpolation=cv2.INTER_LINEAR)
-        frames.append(frame)
-        ret, frame = camera.read()
+def scaleImage(img, scaleFactor=2):
+        """ Skaliert das Bild um scaleFactor herunter """
+        width = int(len(img[0])/scaleFactor)
+        height = int(len(img)/scaleFactor)
+        frame = cv2.resize(img,(width, height), fx=0, fy=0, interpolation=cv2.INTER_LINEAR)
+        return img
 
 def formatInput(frame):
         """ Formatiert frame als Liste von Einträgen für einfachere Klassifizierung """
@@ -61,8 +53,19 @@ def applykNN(frame, K=15):
         return formatImage(ret)
 
 # Festelgen von Referenzbild und zu untersuchendem Bild
-img1 = cv2.cvtColor(frames[2], cv2.COLOR_BGR2GRAY)
-img2 = cv2.cvtColor(frames[127], cv2.COLOR_BGR2GRAY)
+img1Path = './testImages/bild1.jpg'
+img2Path = './testImages/bild2.jpg'
+
+img1 = cv2.imread(img1Path)
+img2 = cv2.imread(img2Path)
+
+# Skalierung der Bilder
+img1 = scaleImage(img1)
+img2 = scaleImage(img2)
+
+# Konvertierung der Bilder zu Graustufen
+img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
 Image.fromarray(img2).show()
 
@@ -85,7 +88,7 @@ Image.fromarray(ssimImage).show()
 
 # Training und Klassifizierung mittels kNN
 # So werden die Grenzen zwischen Vorder- und Hintergrund gefunden
-tmp = applykNN(ssimImage, K=30)
+tmp = applykNN(ssimImage, K=60)
 
 Image.fromarray(tmp).show()
 

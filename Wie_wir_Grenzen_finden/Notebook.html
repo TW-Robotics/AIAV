@@ -14033,7 +14033,6 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung3Pipeline.png" alt="Drawing" style="width: 1200px;"/></p>
 <p><em>Abbildung 3: Um Vorder- und Hintergrund zu trennen wird das zu analysierende Bild zunächst mit einem Bild des Hintergrunds verglichen. Der aus dem Vergleich resultierende Structural Similarity Index (SSIM) wird anhand eines Schwellenwertes quantisiert. Mittels kNN werden dann Artefakte im SSIM entfernt, welche durch sich ändernde Lichtverhältnisse und Bildverarbeitung in der Kamera verursacht wurden.</em></p>
-<p><strong>@Willi: Die Bilder hier sind nur als Platzhalter drinnen. Da werde ich im C Turm noch welche mit industrienahem Setting aufnehmen</strong></p>
 
 </div>
 </div>
@@ -14146,16 +14145,27 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Einlesen und Vorbereiten von Referenzbild und zu untersuchendem Bild</span>
 
-<span class="k">def</span> <span class="nf">prepareImage</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">scaleFactor</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Liest Bild ein, skaliert es herunter &amp; wandelt es in Graustufen um. &quot;&quot;&quot;</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">scaleFactor</span><span class="p">)</span>
-    <span class="n">height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span><span class="o">/</span><span class="n">scaleFactor</span><span class="p">)</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">fx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_LINEAR</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">scaleImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">scaleFactor</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Skaliert das Bild um scaleFactor herunter &quot;&quot;&quot;</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">scaleFactor</span><span class="p">)</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">/</span><span class="n">scaleFactor</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">fx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_LINEAR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img</span>
 
-<span class="n">img1</span> <span class="o">=</span> <span class="n">prepareImage</span><span class="p">(</span><span class="s1">&#39;./images/testInput.png&#39;</span><span class="p">)</span>
-<span class="n">img2</span> <span class="o">=</span> <span class="n">prepareImage</span><span class="p">(</span><span class="s1">&#39;./images/reference.png&#39;</span><span class="p">)</span>
+<span class="c1"># Festelgen von Referenzbild und zu untersuchendem Bild</span>
+<span class="n">img1Path</span> <span class="o">=</span> <span class="s1">&#39;./testImages/bild1.jpg&#39;</span>
+<span class="n">img2Path</span> <span class="o">=</span> <span class="s1">&#39;./testImages/bild2.jpg&#39;</span>
+
+<span class="n">img1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img1Path</span><span class="p">)</span>
+<span class="n">img2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img2Path</span><span class="p">)</span>
+
+<span class="c1"># Skalierung der Bilder</span>
+<span class="n">img1</span> <span class="o">=</span> <span class="n">scaleImage</span><span class="p">(</span><span class="n">img1</span><span class="p">)</span>
+<span class="n">img2</span> <span class="o">=</span> <span class="n">scaleImage</span><span class="p">(</span><span class="n">img2</span><span class="p">)</span>
+
+<span class="c1"># Konvertierung der Bilder zu Graustufen</span>
+<span class="n">img1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="n">img2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img2</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
 
 <span class="c1"># Ermittlung des Unterschieds zwischen Vorder- und Hintergrund</span>
 <span class="n">ssimRet</span><span class="p">,</span> <span class="n">ssimImage</span> <span class="o">=</span> <span class="n">ssim</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">,</span> <span class="n">data_range</span><span class="o">=</span><span class="n">img2</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">img2</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

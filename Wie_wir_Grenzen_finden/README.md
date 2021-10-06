@@ -20,12 +20,9 @@ Das *buildandrun.sh* (*buildandrun.ps1* unter Windows) Skript erstellt ein Pytho
 
 # Ergebnisse
 
-TODO
+Abbildung 1 zeigt die Verarbeitung eines Bespielbildes, auf dem ein Mitarbeiter vom Technikum Wien vor einem Roboter steht. Dabei wollen wir den Teil des Bildes auf dem der Mitarbeiter zu sehen ist ermitteln. Da der Vergleich zwischen neuem und Referenzbild in Graustufen durchgeführt wird, funktioniert die Hindergrundentfernung besonders gut, wenn ein hoher Kontrast zwischen Vorder- und Hintergrund vorhanden ist. Dieses Verhalten schreibt uns auch die Grenzen der Applikation vor. Haben Vorder- und Hintergrund an einer Stelle eine ähnliche Farbe, wird dieser Teil des Bildes eher als Hintergrund eingestuft.
 
-
-![Abbildung 1](images/Abbildung2Klassifizierung.png)
-
-
+![Abbildung 1](images/Abbildung3Pipeline.png)
 
 
 # Diskussion
