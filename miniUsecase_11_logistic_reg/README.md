@@ -3,7 +3,7 @@
 Hier befindet sich der [Beispielcode](./miniUsecase11_logistic_regression.ipynb) für das Implementieren einer Logistischen Regression. Der Use-Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden ob in einem Bild – beziehungsweise einem Kamerastream – sich ein Hammer befindet oder nicht. 
 
 # Bibliotheken
-Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Für die einbindung der Kamera und Bildverarbeitung wird [OpenCV](https://opencv.org/) verwendet. 
+Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Für die Einbindung der Kamera und Bildverarbeitung wird [OpenCV](https://opencv.org/) verwendet. 
 
 Diese drei Bibliotheken geben das Grundgerüst vor. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können auch über diese installiert werden. 
 
@@ -17,7 +17,7 @@ Das unten angeführte [GIF](./demo/webcam_demo.gif) zeigt ein Beispielverhalten 
 ![Abbildung 1](demo/webcam_demo.gif)
 
 # Was nun? 
-In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der Logistischen Regression befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir folgende Use-Cases auf der Platform. All diese drei weiteren Use-Cases sind nach demselben Schema aufgebaut. Sie haben allerdings jeweils ein anderes Model, welches die KLassifizierung durchführt.
+In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der Logistischen Regression befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir folgende Use-Cases auf der Plattform. All diese drei weiteren Use-Cases sind nach demselben Schema aufgebaut. Sie haben allerdings jeweils ein anderes Model, welches die Klassifizierung durchführt.
 
 Use-Case 12: [Support Vecotr Machine Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM) <br>
 Use-Case 13: [k-Nearest Neighbor Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_13_kNN_Classification) <br>
