@@ -1,4 +1,4 @@
-# Labyrinth Navigation mittels A Stern
+# Pfadplanung für autonome Systeme
 
 Hier finden Sie Programmcode und Beispiele wie man einen Roboter mittels des A* Algorithmus in einer unbekannten Umgebung navigieren lässt.
 
