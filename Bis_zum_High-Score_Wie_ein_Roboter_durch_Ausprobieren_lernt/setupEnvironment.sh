@@ -12,11 +12,13 @@ git clone https://github.com/SimonSchwaiger/ros-ml-container
 
 # Kopieren der Applikation
 rm -rf ros-ml-container/app
-cp app ros-ml-container
+cp -r app ros-ml-container
 cp requirements.txt ros-ml-container/requirements.txt
 
 # Download der benötigten Software Pakete
-cd ros-ml-container && mkdir src
-cd ros-ml-container/src && git clone https://github.com/TW-Robotics/RL-with-3DOF-Robots
-cd ros-ml-container/src && git clone https://github.com/HebiRobotics/hebi_description
+mkdir ros-ml-container/src
+cd ros-ml-container/src
+git clone https://github.com/TW-Robotics/RL-with-3DOF-Robots
+git clone https://github.com/HebiRobotics/hebi_description
+cd ../..
 

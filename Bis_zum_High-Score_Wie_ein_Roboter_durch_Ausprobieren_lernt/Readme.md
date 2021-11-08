@@ -35,8 +35,9 @@ Beschleunigung durch eine Grafikkarte wird unterstützt, damit die Simulation fl
 
 - *GRAPHICS_PLATFORM=amdpro ./buildandrun.sh*: Beschleunigung durch den Proprietären AMD Treiber in Linux. Dazu muss zumindest die OpenCL Komponente des proprietären AMDGPU Pro Treibers am System installiert sein.
 
-Docker erzeugt ein Image, welches die vom Use Case benötigten Komponenten beinhaltet. Dieses Image kann mit dem *docker rmi -f ros-ml-container:latest* Befehl gelöscht werden.
+Docker erzeugt ein Image, welches die vom Use Case benötigten Komponenten beinhaltet. Dieses Image kann mit dem *docker rmi -f ros-ml-container:latest* Befehl gelöscht werden. Die restlichen generierten Dateien können einfach entfernt werden, indem man den *ros-ml-container* Ordner löscht.
 
+__Das *buildandrun.sh* Skript muss im *ros-ml-container* augeführt werden, damit alle Dateien richtig gefunden werden.__
 
 # Ergebnisse
 
