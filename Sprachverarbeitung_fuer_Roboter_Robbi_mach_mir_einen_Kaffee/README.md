@@ -1,4 +1,4 @@
-# Robbi, mach mir einen Kaffee!
+# Sprachverarbeitung für Roboter: Robbi, mach mir einen Kaffee!
 
 Hier finden Sie Programmcode und Beispiele, wie man Spracherkennung einsetzen kann, um die Interaktion zwischen Nutzer und Roboter natürlicher zu gestalten.
 
