@@ -8,8 +8,6 @@ Die Grundlagen von Ontologien und Logikprogrammierung sind Schritt für Schritt 
 
 ![Abbildung 1](images/Abbildung1Problem.jpg)
 
-__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das Notebook (Notebook.html) lokal im Browser anzeigen lassen.__
-
 # Der Use Case
 
 Die Implementierung basiert auf [Python 3](https://docs.python.org/3/) und verwendet [Z3](https://github.com/Z3Prover/z3) zur Formulierung und Lösung der Einschränkungen sowie [Nupy](https://numpy.org/) für das Datenmanagement und [Matplotlib](https://matplotlib.org/) zur Visualiserung der Ergebnisse.
@@ -20,6 +18,7 @@ Das *buildandrun.sh* (*buildandrun.ps1* unter Windows) Skript erstellt ein Pytho
 
 - Eine Internetverbindung zum Download der benötigten Komponenten.
 
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das Notebook [./Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
 
 # Ergebnisse
 
