@@ -4,7 +4,9 @@ Hier finden Sie Programmcode und Beispiele, wie man große Mengen an Text automa
 
 Wir haben hier neben anderen Textverarbeitungsmethoden [Regular Expressions (RegEx)](https://docs.python.org/3/howto/regex.html) verwendet, um Schlüsselwörter für die Veröffentlichungen des [Austrian Robotics Workshops (ARW)](https://roboticsworkshop.at/) zu generieren. Die Schlüsselwörter dienen als Grundlage für eine einfache Klassifizierung, welche ermittelt, welcher der Themenbereiche des ARW bearbeitet wurde.
 
-Die Grundlagen von Regular Expressions, sowie das genaue Vorgehen sind Schritt für Schritt im [Notebook](./Notebook.ipynb) präsentiert. Wenn Sie den Beispielcode selbst testen wollen, finden Sie hier ein Skript (*buildandrun.sh*), welches die erforderlichen Komponenten installiert, die ARW Publikationen herunterlädt und die Applikation ausführt.
+Die Grundlagen von Regular Expressions sowie das genaue Vorgehen sind Schritt für Schritt im [Notebook](./Notebook.ipynb) präsentiert. Wenn Sie den Beispielcode selbst testen wollen, finden Sie hier ein Skript (*buildandrun.sh*), welches die erforderlichen Komponenten installiert, die ARW Publikationen herunterlädt und die Applikation ausführt.
+
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das [Notebook](Notebook.html) lokal im Browser anzeigen lassen.__
 
 
 # Der Use Case

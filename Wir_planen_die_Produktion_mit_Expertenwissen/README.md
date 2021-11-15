@@ -6,6 +6,8 @@ Im Zuge dieses Use Cases wurde ein System implementiert, welches einen Produktio
 
 Die Grundlagen von Ontologien und Logikprogrammierung sind Schritt für Schritt im [Notebook](./Notebook.ipynb) erklärt. Wenn Sie den Beispielcode selbst testen wollen, finden Sie hier ein Skript (*buildandrun.sh*), welches die erforderlichen Komponenten in einem Python 3 Virtual Environment installiert und die Applikation ausführt.
 
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das [Notebook](Notebook.html) lokal im Browser anzeigen lassen.__
+
 ![Abbildung 1](images/Abbildung1Problem.jpg)
 
 # Der Use Case
@@ -18,7 +20,6 @@ Das *buildandrun.sh* (*buildandrun.ps1* unter Windows) Skript erstellt ein Pytho
 
 - Eine Internetverbindung zum Download der benötigten Komponenten.
 
-__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das Notebook [./Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
 
 # Ergebnisse
 

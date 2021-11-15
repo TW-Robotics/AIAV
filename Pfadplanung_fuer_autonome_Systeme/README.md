@@ -8,6 +8,10 @@ Dabei wird, wie auf der AIAV Plattform beschrieben, eine simple Aufgabe gelöst.
 
 - Anschließend wird auf dem Graphen mittels A* der optimale Pfad zwischen Start und Ziel ermittelt und in der Simulation angezeigt. Der Roboter fährt entlang dieses optimalen Pfads wieder durch das Labyrinth, zurück zum Start.
 
+Die Grundlagen von Suchalgorithmen sowie das genaue Vorgehen sind Schritt für Schritt im [Notebook](./Notebook.ipynb) präsentiert. Wenn Sie den Beispielcode selbst testen wollen, finden Sie hier ein Skript (*buildandrun.sh*), welches erforderliche Softwarekomponenten installiert und die Demoapplikation ausführt.
+
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das [Notebook](Notebook.html) lokal im Browser anzeigen lassen.__
+
 
 # Der Use Case
 

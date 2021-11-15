@@ -8,6 +8,9 @@ Dabei wurde eine Pick and Place Aufgabe mittels Reinforcement Learning und klass
 
 - Der Roboter plant anschließend sowohl einen Pfad von seiner derzeitigen Pose zum Werkstück als auch vom Werkstück zur Ablegepose mittels [Reinforcement Learning](https://www.youtube.com/watch?v=gNjDBkJRRP0&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=13).
 
+Die Grundlagen von Reinforcement Learning sowie das genaue Vorgehen sind Schritt für Schritt im [Notebook](./Notebook.ipynb) präsentiert. Wenn Sie den Beispielcode selbst testen wollen, finden Sie hier ein Skript (*buildandrun.sh*), welches erforderliche Softwarekomponenten installiert und die Demoapplikation ausführt.
+
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das [Notebook](Notebook.html) lokal im Browser anzeigen lassen.__
 
 # Der Use Case
 
@@ -38,6 +41,7 @@ Beschleunigung durch eine Grafikkarte wird unterstützt, damit die Simulation fl
 Docker erzeugt ein Image, welches die vom Use Case benötigten Komponenten beinhaltet. Dieses Image kann mit dem *docker rmi -f ros-ml-container:latest* Befehl gelöscht werden. Die restlichen generierten Dateien können einfach entfernt werden, indem man den *ros-ml-container* Ordner löscht.
 
 __Das *buildandrun.sh* Skript muss im *ros-ml-container* augeführt werden, damit alle Dateien richtig gefunden werden.__
+
 
 # Ergebnisse
 
