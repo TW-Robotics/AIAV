@@ -6,7 +6,7 @@ Im zuge dieses Use Cases wurde ein System implementiert welches einschätzt, ob 
 
 Die Grundlagen von Generative Adversarial Networks, sowie das genaue Vorgehen sind im [Notebook](./Notebook.ipynb) gezeigt. Wenn Sie den Beispielcode selbst testen wollen, finden Sie im [app Ordner](./app) die gesamte Applikation. In diesem Ordner sind auch mit dem Modell [generierte Beispielbilder](./app/generatedExampleImages) inkludiert.
 
-__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und das [Notebook](Notebook.html) lokal im Browser anzeigen lassen.__
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
 
 
 # Der Use Case
