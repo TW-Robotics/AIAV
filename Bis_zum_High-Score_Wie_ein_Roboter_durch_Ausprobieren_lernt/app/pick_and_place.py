@@ -92,15 +92,11 @@ def goto_jointstate(j3, j2, j1, env):
     env.js.position[0] = j1
     env.js.position[1] = j2
     env.js.position[2] = j3
-    #if real: hebi_pub.add_waypoint()
     env.render()
     if real: hebi_pub.add_waypoint()
-    #if real: hebi_pub.publish_trajectory_to_robot()
 
 def apply_policy(policy, target_state, env):
     """ Performs a learned policy on the simulated and real robots. """
-    if env.s == target_state: return 1
-    
     obs = env.s
     step_idx = 0
     while True:
@@ -108,12 +104,10 @@ def apply_policy(policy, target_state, env):
         obs, _, _, _ = env.step(action)
         step_idx += 1
         env.render_state(obs)
+        time.sleep(0.08)
         if real and (int(step_idx%2)==1): hebi_pub.add_waypoint()
         #if real: hebi_pub.add_waypoint()
         if obs == target_state: 
-            # publish last state to waypoints if not done so already
-            # if real and (int(step_idx%2)!=1): hebi_pub.add_waypoint()
-            #if real: hebi_pub.publish_trajectory_to_robot()
             return 1
         if step_idx >= 100: return -1
     return -1
@@ -135,7 +129,9 @@ rospy.init_node("aiav")
 
 # setup environment
 env = setup_environment()
+env.s = env.reset()
 env.s = home_state
+env.env.s = home_state
 env.render_state(env.s)
 
 # setup helper module for computing policies
@@ -171,9 +167,6 @@ else:
 if real:
     hebi_pub = hebi_publisher.hebi_publisher()
     #hebi_pub.publish_pose_to_robot()
-
-    #open gripper: hebi_pub.open_gripper()
-    #close gripper: hebi_pub.close_gripper()
 
 while True:
     #trigger loop
@@ -237,4 +230,3 @@ if save_model:
     np.savetxt('policies.txt', policies,fmt='%d')
     np.savetxt('known_goalstates.txt', known_goalstates,fmt='%d')
     print("Policies saved successfully.")
-
