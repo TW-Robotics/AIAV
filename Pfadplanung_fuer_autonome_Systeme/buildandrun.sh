@@ -8,17 +8,29 @@
 # (C) Simon Schwaiger 2021 <schwaige@technikum-wien.at>
 
 mkdir src
-# get mir packages, check for updates if the repo is already cloned
-git clone https://github.com/dfki-ric/mir_robot.git || (cd mir_robot ; git pull)
+cd src
+# Get mir packages, check for updates if the repo is already cloned
+git clone https://github.com/dfki-ric/mir_robot.git || (cd src; git pull; cd ..)
 cd ..
-# set environment variable for graphics acceleration in the container
-# possible values are cpu (no acceleration), opensource (intel and amd open-source), amdpro (amdgpu-pro), nvidia (container-toolkit)
-# if GRAPHICS_PLATFORM is null or not set, use cpu
+# Set environment variable for graphics acceleration in the container
+# Possible values are cpu (no acceleration), opensource (intel and amd open-source), amdpro (amdgpu-pro), nvidia (container-toolkit)
+# If GRAPHICS_PLATFORM is null or not set, use cpu
 GRAPHICS_PLATFORM="${GRAPHICS_PLATFORM:-cpu}"
 echo Using graphics platform $GRAPHICS_PLATFORM
 
-# build container
+# if amdpro driver is used, download it if it is not already present
+AMDPROFILE="amdgpu-pro-20.45-1188099-ubuntu-20.04.tar.xz"
+if [ "$GRAPHICS_PLATFORM" == "amdpro" ] && [ ! -f "$AMDPROFILE" ]; then
+    wget --referer=http://support.amd.com  https://drivers.amd.com/drivers/linux/amdgpu-pro-20.45-1188099-ubuntu-20.04.tar.xz
+fi
+
+# Build container
 docker build -t mir_search --build-arg GRAPHICS_PLATFORM=$GRAPHICS_PLATFORM .
+
+# Set xhost permissions for docker
+# TODO better solution
+# https://unix.stackexchange.com/questions/330366/how-can-i-run-a-graphical-application-in-a-container-under-wayland
+xhost +local:docker
 
 if [ "$GRAPHICS_PLATFORM" == "nvidia" ]; then
     # NVIDIA
