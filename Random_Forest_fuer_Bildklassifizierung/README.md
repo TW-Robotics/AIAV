@@ -29,16 +29,9 @@ Ebenso wird im Theorieteil immer von einem CNN gesprochen und dass dieses CNN ve
 
 
 # Weitere externe Informationen/Quellen
-[Installieren von Bibliotheken mittels requirement.txt](https://note.nkmk.me/en/python-pip-install-requirements/) <br>
-
-[Erstellen eines Dictionary für die verarbeitung der Trainingsbilder](https://kapernikov.com/tutorial-image-classification-with-scikit-learn/)<br>
-
-[Implementierung einer PCA](https://medium.com/@sebastiannorena/pca-principal-components-analysis-applied-to-images-of-faces-d2fc2c083371)<br>
-
-[Visualisierung einer PCA](https://jakevdp.github.io/PythonDataScienceHandbook/05.02-introducing-scikit-learn.html) 
-<br>
-
-[SVM Model Implementierungs Guide](https://rpubs.com/Sharon_1684/454441)
-<br>
-
-[SVM Dokumentation](https://scikit-learn.org/stable/modules/svm.html)
+[Installieren von Bibliotheken mittels requirement.txt](https://note.nkmk.me/en/python-pip-install-requirements/) </br>
+[Erstellen eines Dictionary für die verarbeitung der Trainingsbilder](https://kapernikov.com/tutorial-image-classification-with-scikit-learn/)</br>
+[Implementierung einer PCA](https://medium.com/@sebastiannorena/pca-principal-components-analysis-applied-to-images-of-faces-d2fc2c083371)</br>
+[Visualisierung einer PCA](https://jakevdp.github.io/PythonDataScienceHandbook/05.02-introducing-scikit-learn.html) </br>
+[Random Forest Dokumentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)</br>
+[Implementierungs Guide zu ML Modellen](https://rpubs.com/Sharon_1684/454441)</br>
