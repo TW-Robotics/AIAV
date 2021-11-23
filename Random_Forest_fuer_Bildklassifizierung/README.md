@@ -1,35 +1,31 @@
 # Random Forest 
 
-Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für das Implementieren einer Support Vector Machine. 
-
-
----- Old : -----
-
-
-Der Use-Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden ob in einem Bild – beziehungsweise einem Kamerastream – sich ein Hammer befindet oder nicht. 
+Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für das Implementieren einer Support Vector Machine. Der Use-Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden ob in einem Bild – beziehungsweise einem Kamerastream – sich ein Hammer befindet oder nicht. Dies ist auch der 4. Use-Case dieser Reihe. Die angesprochene Problemstellung wurde schon mit drei weiteren Modellen in den Use-Cases [Logistische Regression](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM), [Support Vector Machine](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_11_logistic_reg) und [k-Nearest Neighbor](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest) behandelt. 
 
 # Bibliotheken
 Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Für die Einbindung der Kamera und Bildverarbeitung wird [OpenCV](https://opencv.org/) verwendet. 
 
-Diese drei Bibliotheken geben das Grundgerüst vor. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können auch über diese installiert werden. 
+Diese drei Bibliotheken geben das Grundgerüst vor. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können auch über diese installiert werden. Wie das genau funktioniert ist auch in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) beschrieben.
 
 # Ordnerstruktur
- Die SVM benötigt zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze Trainiert werden. Im Ordner [Tool_Data](./Tool_Data) befinden sich zwei Unterordner. Diese sind in unserem Fall [Hammer](./Tool_Data/Hammer) und [Workspace](./Tool_Data/Workspace). Dies gibt gleich die beiden Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
+ Das Random Forest Model benötigt - wie auch die anderen drei Modelle - zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze Trainiert werden. Im Ordner [Tool_Data](./Tool_Data) befinden sich zwei Unterordner. Diese sind in unserem Fall [Hammer](./Tool_Data/Hammer) und [Workspace](./Tool_Data/Workspace). Dies gibt gleich die beiden Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
 
 
 # Ergebnisse
-Das unten angeführte [GIF](./demo/SVM_Test.gif) zeigt ein Beispielverhalten des Use-Cases. Eine Webcam ist über dem Arbeitsbereich positioniert und klassifiziert den Kamerastream. Es wird im Bild ausgegeben ob das Model denk, dass ein Hammer im Arbeitsbereich ist oder nicht. 
+Das unten angeführte [GIF](./demo/Random_Forest_Test.gif) zeigt ein Beispielverhalten des Use-Cases. Eine Webcam ist über dem Arbeitsbereich positioniert und klassifiziert den Kamerastream. Es wird im Bild direkt eingeblendet, ob das Model einen Hammer im Frame erkannt hat oder nicht. 
 
-![Abbildung 1](demo/SVM_Test.gif)
+![Abbildung 1](demo/Random_Forest_Test.gif)
 
 # Was nun? 
-In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der Support Vector Machine befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir folgende Use-Cases auf der Plattform. All diese drei weiteren Use-Cases sind nach demselben Schema aufgebaut. Sie haben allerdings jeweils ein anderes Model, welches die Klassifizierung durchführt.
+In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels dem Random Forest Model befasst. Dies war der letzte der vier Klassifizierungen mit "klassischen" Modellen die für eine Klassifizierung eingesetzt werden können. Es gibt natürlich noch weitere Modelle und auch deutlich komplexere Modelle. Die drei vorherigen Modelle sind hier nocheinmal verlinkt. 
 
 Use-Case 11: [Logistische Regression für Klassifizierungsprobleme](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM) <br>
-Use-Case 13: [k-Nearest Neighbor Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_11_logistic_reg) <br>
-Use-Case 15: [Random Forest Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest)
+Use-Case 13: [Support Vector Machine für Klassifizierungsprobleme](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_11_logistic_reg) <br>
+Use-Case 15: [k-Nearest Neighbour Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest)
 
-<br>
+
+Ebenso wird im Theorieteil immer von einem CNN gesprochen und dass dieses CNN vermutlich bessere Ergebnisse liefern kann. Was das genau ist und wie so ein CNN Funktioniert wird hier beschrieben. (coming soon)
+
 
 
 # Weitere externe Informationen/Quellen
