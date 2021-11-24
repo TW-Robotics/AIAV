@@ -41,4 +41,6 @@ Note: Use Tensorflow 2.4.1  (pip3 install tensorflow==2.4.1)
 - devide_number can also be used to switch between webcams if more than one is available 
 
 Usefull links: <br>
-CNN Model is based on: https://www.tensorflow.org/tutorials/images/classification
+[CNN Model](https://www.tensorflow.org/tutorials/images/classification) </br>
+[Konvertieren OpenCV Mat zu Tensorflow](https://stackoverflow.com/questions/40273109/convert-python-opencv-mat-image-to-tensorflow-image-data/40273815)</br>
+[Google Colab](https://colab.research.google.com/notebooks/welcome.ipynb?hl=de)
