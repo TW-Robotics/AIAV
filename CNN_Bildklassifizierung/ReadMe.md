@@ -29,10 +29,10 @@ Wie schon angesprochen ist in diesem Use-Case das trainieren eines CNNs notwendi
 ### Einstellen der GPU-Laufzeit 
 1) Im Reiter **Laufzeit** auf **Laufzeittyp ändern** klicken. 
 </br></br>
-![Laufzeit-Reiter](./Laufzeit.png) </br> </br> 
+![Laufzeit-Reiter](Laufzeit.png) </br> </br> 
 2) Nachdem sich das unten abgebildete Fenster geöffnet hat kann mittels der Pfeiltaste des Auswahlfensters **Hardwarebeschleuniger** von None oder TPU auf **GPU** gewechselt werden.   
 </br>
-![Laufzeit_Einstellungen](./Laufzeit_Einstellungen.png)
+![Laufzeit_Einstellungen](Laufzeit_Einstellungen.png)
 
 
 ## Workflow Online 
