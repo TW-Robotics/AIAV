@@ -34,6 +34,7 @@ Wie schon angesprochen ist in diesem Use-Case das trainieren eines CNNs notwendi
 </br>
 ![Laufzeit-Einstellungen](LaufzeitEinstellungen.png)
 
+TEST 
 
 ## Workflow Online 
 - Erstellen Sie einen Ordner in Ihrem Google Drive für Ihre Bilder für die Schulung. (z. B.: "/Inhalt/Laufwerk/Mein Laufwerk/Mein_Folder/Colab_Notebooks/" )
