@@ -85,10 +85,19 @@ In dem Use-Case haben wir uns mit einem Neuronalen Netzwerk zur Klassifizierung 
 
 Falls dieses zu komplex oder Hardware intensiv ist, können wir die etwas rechenfreundlicheren Klassifizierungen empfehlen welche wir in den unten aufgelisteten Use-Cases behandelt haben. Vielleicht passen diese besser für Ihren Anwendungsfall? 
 
-[Logistische Regression für Klassifizierungsprobleme](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM) <br>
-[Support Vector Machine für Klassifizierungsprobleme](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_11_logistic_reg) <br>
-[k-Nearest Neighbour Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest)<br>
-[Random Forest für Bildklassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest)
+#### logistische Regression </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Logistische_Regression_fuer_Bildklassifizierung) </br>
+### Support Vector Machine </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Support_Vector_Machine_fuer_Bildklassifizierung) </br>
+#### k-Neares Neighbour </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/kNearest_Neighbor_fuer_Bildklassifizierung) </br>
+#### Random Forest </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Random_Forest_fuer_Bildklassifizierung)
+
 
 
 ## Weitere externe Informationen/ Quellen
