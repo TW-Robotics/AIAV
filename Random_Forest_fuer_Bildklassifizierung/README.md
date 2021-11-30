@@ -19,9 +19,16 @@ Das unten angeführte [GIF](./demo/Random_Forest_Test.gif) zeigt ein Beispielver
 # Was nun? 
 In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels dem Random Forest Model befasst. Dies war der letzte der vier Klassifizierungen mit "klassischen" Modellen die für eine Klassifizierung eingesetzt werden können. Es gibt natürlich noch weitere Modelle und auch deutlich komplexere Modelle. Die drei vorherigen Modelle sind hier nocheinmal verlinkt. 
 
-Use-Case 11: [Logistische Regression für Klassifizierungsprobleme](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM) <br>
-Use-Case 13: [Support Vector Machine für Klassifizierungsprobleme](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_11_logistic_reg) <br>
-Use-Case 15: [k-Nearest Neighbour Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest)
+#### logistische Regression </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Logistische_Regression_fuer_Bildklassifizierung) </br>
+### Support Vector Machine </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Support_Vector_Machine_fuer_Bildklassifizierung) </br>
+#### k-Neares Neighbour </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/kNearest_Neighbor_fuer_Bildklassifizierung) </br>
+
 
 
 Ebenso wird im Theorieteil immer von einem CNN gesprochen und dass dieses CNN vermutlich bessere Ergebnisse liefern kann. Was das genau ist und wie so ein CNN Funktioniert wird hier beschrieben. (coming soon)

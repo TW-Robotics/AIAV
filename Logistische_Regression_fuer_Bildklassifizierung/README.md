@@ -19,9 +19,17 @@ Das unten angeführte [GIF](./demo/webcam_demo.gif) zeigt ein Beispielverhalten 
 # Was nun? 
 In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der Logistischen Regression befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir folgende Use-Cases auf der Plattform. All diese drei weiteren Use-Cases sind nach demselben Schema aufgebaut. Sie haben allerdings jeweils ein anderes Model, welches die Klassifizierung durchführt.
 
-Use-Case 12: [Support Vecotr Machine Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM) <br>
-Use-Case 13: [k-Nearest Neighbor Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_13_kNN_Classification) <br>
-Use-Case 15: [Random Forest Klassifizierung](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest)
+### Support Vector Machine </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Support_Vector_Machine_fuer_Bildklassifizierung) </br>
+#### k-Neares Neighbour </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/kNearest_Neighbor_fuer_Bildklassifizierung) </br>
+#### Random Forest </br>
+[Storyboard](http://www.aiav.technikum-wien.at/) </br>
+[GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Random_Forest_fuer_Bildklassifizierung)
+
+
 
 <br>
 
