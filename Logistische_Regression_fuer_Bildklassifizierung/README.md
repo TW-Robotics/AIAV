@@ -10,6 +10,8 @@ Diese drei Bibliotheken geben das Grundgerüst vor. Alle benötigten Bibliotheke
 # Ordnerstruktur
 Die logistische Regression benötigt zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze trainiert werden. Im Ordner [Tool_Data](./Tool_Data) befinden sich zwei Unterordner. Diese sind in unserem Fall [Hammer](./Tool_Data/Hammer) und [Workspace](./Tool_Data/Workspace). Dies gibt gleich die beiden Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
 
+Das Noteboook [miniUsecase11_logistic_regression](miniUsecase11_logistic_regression.ipynb) bietet eine Implementation der logistischen Regression. Falls weiteres Interesse besteht, kann das Notebook [miniUsecase11_logistic_regression_with_visuals](miniUsecase11_logistic_regression_with_visuals.ipynb) ausgeführt werden. Hier werden weitere Informationen wie eine Visualisierung der PCA ausgegeben. 
+
 
 # Ergebnisse
 Das unten angeführte [GIF](./demo/webcam_demo.gif) zeigt ein Beispielverhalten des Use-Cases. Eine Webcam ist über dem Arbeitsbereich positioniert und klassifiziert den Kamerastream. Es wird im Bild ausgegeben ob das Model denk, dass ein Hammer im Arbeitsbereich ist oder nicht. 
