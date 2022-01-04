@@ -20,4 +20,8 @@ Für mehr Informationen kann das [AIAV Naive Bayes Video](https://youtu.be/ioDdA
 Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen AIAV Website(https://www.aiav.technikum-wien.at/).
 
 
-![Abbildung 1](images/NB.png)
+![Abbildung 1](img/NB_Abbildung.png)
+
+![Abbildung 2](img/FH_Technikum_Wien_logo.png)
+
+![Abbildung 3](img/wien_ma23.png)
