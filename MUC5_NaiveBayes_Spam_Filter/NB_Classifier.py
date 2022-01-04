@@ -33,4 +33,4 @@ class NB_Class:
         predicted = self.clf.predict(x_test)
         print("Classification report:\n",classification_report(predicted, y_test))
         print("Confusion matrix:\n",confusion_matrix(predicted, y_test))
-        print("Accuracy score:",accuracy_score(predicted, y_test)*100,"%")
+        print("\n\033[92mAccuracy score:",accuracy_score(predicted, y_test)*100,"% \033[0m \n")
