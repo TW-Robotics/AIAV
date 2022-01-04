@@ -1,1 +1,1 @@
-# NaiveBayes-Spam-Filter
+# Einsatz einer Naive Bayes Klassifikation für die Emailspam Filterung
