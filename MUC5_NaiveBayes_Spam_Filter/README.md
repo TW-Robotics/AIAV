@@ -12,3 +12,9 @@ Eine mögliche Implementierung des Klassifizieres kann wie folgt umgesetzt werde
 
 Zum ausführen des Projektes die Datei start.bash im Terminal ausführen. Nach der Installierung in der virtuellen Umgebung, wird der Naive Bayes Klassifizierer am Datensatz [spam_ham_dataset](https://www.kaggle.com/ayhampar/spam-ham-dataset/data).
 
+Alternativ kann auch das vorhande Jupyter Notebook ausgeführt werden, wo zusätzliche Beschreibungen zum Code vorhanden sind.
+
+## Zusätzliche Information
+
+Für mehr Informationen kann das [AIAV Naive Bayes Video](https://youtu.be/ioDdAE6AOMQ) betrachtet werden, in der die mathematischen Hintergründe erklärt werden.
+Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen AIAV Website(https://www.aiav.technikum-wien.at/.
