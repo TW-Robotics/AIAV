@@ -22,4 +22,4 @@ Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Lear
 
 ![Abbildung 1](img/NB_Abbildung.png)
 
-![Abbildung 2](img/FH_Technikum_Wien_logo.png) ![Abbildung 3](img/wien_ma23.png)
+![alt-text-1](img/FH_Technikum_Wien_logo.png "title-1") ![alt-text-2](img/wien_ma23.png "title-2")
