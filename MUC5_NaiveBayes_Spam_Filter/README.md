@@ -7,3 +7,9 @@ Eine Abhilfe ist dabei der Spamfilter, welcher hinterlistigen Nachrichten entdec
 Der Naive Bayes beruht auf dem Bayes Theorem, welcher Wahrscheinlichkeiten bezogen auf Ereignisse berechnet. Für unsere konkretes Beispiel des Filters, wird für jede Email die Anzahl an Wörtern gezählt, um anschließend bestimmen zu können, ob es sich tatsächlich um Spam handelt, oder doch nur um eine ganz normale Email. Dabei geht der Klassifizier davon aus, dass die einzelnen Variablen unabhängig sind.
 
 Eine mögliche Implementierung des Klassifizieres kann wie folgt umgesetzt werden. Dabei wurde der Datensatz "spam_ham_dataset" verwendet, welcher eine große Anzahl an englischen Emails und Spamemails beinhaltet. Von den ingesamt 5170 Email sind 1500 mit Spam klassifiziert.
+
+## Ausführung
+
+Zum ausführen des Projektes die Datei start.bash im Terminal ausführen. Nach der Installierung in der virtuellen Umgebung, wird der Naive Bayes Klassifizierer am Datensatz spam_or_ham https://www.kaggle.com/ayhampar/spam-ham-dataset/data
+[Link to Google](https://www.google.com)
+
