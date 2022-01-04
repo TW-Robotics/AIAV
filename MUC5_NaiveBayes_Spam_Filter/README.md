@@ -22,4 +22,4 @@ Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Lear
 
 ![Abbildung 1](img/NB_Abbildung.png)
 
-<img src="img/NB_Abbildung.png" width="48">
+<img src="img/wien_ma23.png" width="480">
