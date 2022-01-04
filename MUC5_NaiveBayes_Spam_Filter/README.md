@@ -17,7 +17,7 @@ Alternativ kann auch das vorhande Jupyter Notebook ausgeführt werden, wo zusät
 ## Zusätzliche Informationen
 
 Für mehr Informationen kann das [AIAV Naive Bayes Video](https://youtu.be/ioDdAE6AOMQ) betrachtet werden, in der die mathematischen Hintergründe erklärt werden.
-Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen AIAV Website(https://www.aiav.technikum-wien.at/).
+Zusätzlich finden sich viele Informationen und Beispiele zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen [AIAV Website](https://www.aiav.technikum-wien.at/).
 
 
 <p align="center">
