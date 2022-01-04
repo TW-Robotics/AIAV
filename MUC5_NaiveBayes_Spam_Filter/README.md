@@ -10,6 +10,5 @@ Eine mögliche Implementierung des Klassifizieres kann wie folgt umgesetzt werde
 
 ## Ausführung
 
-Zum ausführen des Projektes die Datei start.bash im Terminal ausführen. Nach der Installierung in der virtuellen Umgebung, wird der Naive Bayes Klassifizierer am Datensatz spam_or_ham https://www.kaggle.com/ayhampar/spam-ham-dataset/data
-[Link to Google](https://www.google.com)
+Zum ausführen des Projektes die Datei start.bash im Terminal ausführen. Nach der Installierung in der virtuellen Umgebung, wird der Naive Bayes Klassifizierer am Datensatz [spam_ham_dataset](https://www.kaggle.com/ayhampar/spam-ham-dataset/data).
 
