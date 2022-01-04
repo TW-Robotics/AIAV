@@ -20,4 +20,4 @@ Für mehr Informationen kann das [AIAV Naive Bayes Video](https://youtu.be/ioDdA
 Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen AIAV Website(https://www.aiav.technikum-wien.at/).
 
 
-![alt text](https://github.com/TW-Robotics/AIAV/edit/devel_muster/MUC5_NaiveBayes_Spam_Filter/img/image.jpg?raw=true)
+![Abbildung 1](images/NB.png)
