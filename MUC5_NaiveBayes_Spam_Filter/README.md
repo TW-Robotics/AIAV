@@ -18,3 +18,6 @@ Alternativ kann auch das vorhande Jupyter Notebook ausgeführt werden, wo zusät
 
 Für mehr Informationen kann das [AIAV Naive Bayes Video](https://youtu.be/ioDdAE6AOMQ) betrachtet werden, in der die mathematischen Hintergründe erklärt werden.
 Zusätzlich finden sich viele Informationen und Beispeile zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen AIAV Website(https://www.aiav.technikum-wien.at/).
+
+
+![alt text](https://github.com/TW-Robotics/AIAV/edit/devel_muster/MUC5_NaiveBayes_Spam_Filter/img/image.jpg?raw=true)
