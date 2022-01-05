@@ -1,4 +1,6 @@
-MUC5 Bayes Filter
+# MUC5 Bayes Filter für die mobile Robotik
+
+
 ROS Melodic
 Ubuntu 18.04
 
@@ -13,9 +15,19 @@ Kalman Filter für MiR
 * Beschreiben Sie Ihre Experimente im Paper
 * Diskutieren Sie die gelernten KF Parameter
 
-Zum starten 
-* start.bash ausführen (Kann einen Fehler durch Gazebo geben, wenn der Rechner Gazebo nicht schnell genug laden kann -> einfach nochmal starten)
+## Ausführung
+
+* start.bash ausführen
 * Bash skript startet gazebo (mit zusätzlichem unpause), MiR Nodes, Tasks, Laserscan Node, KalmanFilter und anschließend RViz.
 * In RViz zum Starten des Task programms ein 2D Nav Goal setzen.
 * rqt starten und das Topic /evaluation auslesen
 
+## Zusätzliche Informationen
+
+Für mehr Informationen kann das [AIAV bayes Filter Video]() betrachtet werden, in der die mathematischen Hintergründe erklärt werden.
+Zusätzlich finden sich viele Informationen und Beispiele zum Thema Machine Learning und Künstlicher Intelligenz auf unserer offziellen [AIAV Website](https://www.aiav.technikum-wien.at/).
+
+
+<p align="center">
+  <img src="img/wien_ma23.png" width="480"> <img src="img/FH_Technikum_Wien_logo.png" width="260">
+</p>
