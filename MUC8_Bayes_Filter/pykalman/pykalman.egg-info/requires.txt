@@ -1,9 +1,0 @@
-numpy
-scipy
-
-[docs]
-Sphinx
-numpydoc
-
-[tests]
-nose
