@@ -1,0 +1,7 @@
+numpy
+sympy
+scipy
+hebi-py
+gym
+pyserial
+
