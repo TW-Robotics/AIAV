@@ -10,3 +10,5 @@ Beachten Sie bitte:
 
 
 Wir bedanken uns bei unseren Fördergeber und der FH Technikum Wien.
+
+![Logos](miscellaneous/img.png)
