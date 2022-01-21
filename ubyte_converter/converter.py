@@ -6,6 +6,7 @@
 import os
 import cv2
 import numpy as np
+from numpy import imag
 
 train_image = 'gzip/emnist-letters-train-images-idx3-ubyte'
 train_label = 'gzip/emnist-letters-train-labels-idx1-ubyte'
@@ -22,7 +23,8 @@ for image_f, label_f in [(train_image, train_label)]:
         images = f.read()
     with open(label_f, 'rb') as f:
         labels = f.read()
-    
+
+        
     images = [d for d in images[16:]]
     images = np.array(images, dtype=np.uint8)
     images = images.reshape((-1,28,28))
@@ -32,13 +34,13 @@ for image_f, label_f in [(train_image, train_label)]:
         os.mkdir(outdir)
     for k,image in enumerate(images):
         break_count = break_count+1
-        print(break_count)
         if(break_count > 20):
-            print("BREAK")
+            print("BREAK Images")
             break
         else:
+            cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE, image)
             cv2.imwrite(os.path.join(outdir, '%05d.png' % (k,)), image)
     
-    labels = [outdir + '/%05d.png %c' % (k, chr(l)) for k,l in enumerate(labels[8:])]
+    labels = [outdir + '/%05d.png %d' % (k, l) for k,l in enumerate(labels[8:])]
     with open('%s.txt' % label_f, 'w') as f:
         f.write(os.linesep.join(labels))
