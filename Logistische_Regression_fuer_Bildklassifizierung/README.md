@@ -16,7 +16,7 @@ Das unten angeführte [GIF](./demo.gif) zeigt ein Beispielverhalten des Use-Case
 
 ![Abbildung 1](demo.gif)
 
-Die sogenannte Accuracy (Genauigkeit) sagt uns aus wie gut unser Modell klassifizieren kann. Mit dem Testdatensatz wurde eine Accuracy von 98% erreicht. Das ist für die Praxis oft nicht gut genug. Wenn dieses Modell beispielsweise bei einer Verpackungsstation eingesetzt wird, bei der 1 Millionen Produkte am Tag verpackt werden, dann ist mit 20 000 Fehlern zu rechnen. 
+Die sogenannte Accuracy (Genauigkeit) sagt uns aus wie gut unser Modell klassifizieren kann. Mit dem Testdatensatz wurde eine Accuracy von 97% erreicht. Das ist für die Praxis oft nicht gut genug. Wenn dieses Modell beispielsweise bei einer Verpackungsstation eingesetzt wird, bei der 1 Millionen Produkte am Tag verpackt werden, dann ist mit 30 000 Fehlern zu rechnen. 
 
 # Was nun?
 In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der logistischen Regression befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir auch folgende Use-Cases auf der AIAV-Platform: 
