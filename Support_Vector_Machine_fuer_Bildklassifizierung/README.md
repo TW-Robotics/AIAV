@@ -4,21 +4,26 @@ Hier befindet sich der [Beispielcode](./miniUsecase12_SVM.ipynb) für das Implem
 
 
 # Bibliotheken
-Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Für die Einbindung der Kamera und Bildverarbeitung wird [OpenCV](https://opencv.org/) verwendet. 
+Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. 
 
-Diese drei Bibliotheken geben das Grundgerüst vor. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können auch über diese installiert werden. Wie das genau funktioniert ist in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) auch beschrieben.  
+Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können auch über diese installiert werden. Wie das genau funktioniert ist in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) auch beschrieben.  
 
 # Ordnerstruktur
-Die SVM benötigt zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze Trainiert werden. Im Ordner [Tool_Data](./Tool_Data) befinden sich zwei Unterordner. Diese sind in unserem Fall [Hammer](./Tool_Data/Hammer) und [Workspace](./Tool_Data/Workspace). Dies gibt gleich die beiden Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
+Die SVM benötigt zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze Trainiert werden. Im Ordner [data](./data) befinden sich 10 Unterordner. Diese sind in unserem Fall Ordner mit der Beschriftung 0-9. In jedem Ordner sind Bilder von den entsprechenden Zahlen. Die Ordnernamen geben gleichzeitig die Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
 
 
 # Ergebnisse
-Das unten angeführte [GIF](./demo/SVM_Test.gif) zeigt ein Beispielverhalten des Use-Cases. Eine Webcam ist über dem Arbeitsbereich positioniert und klassifiziert den Kamerastream. Es wird im Bild notiert ob das Model einen Hammer im Arbeitsbereich erkannt hat oder nicht. 
+Das unten angeführte [GIF](./demo.gif) zeigt ein Beispielverhalten des Use-Cases. Nachdem das Model trainiert wurde werden neue Bilder dem Model gezeigt. Die SVM klassifiziert diese und gibt uns die Prediction aus. 
 
-![Abbildung 1](demo/SVM_Test.gif)
+![Abbildung 1](demo.gif)
 
-# Was nun? 
-In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der Support Vector Machine befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir folgende Use-Cases auf der Plattform. Der erste Link (logistische Regression) beschreibt das gleiche Problem wie in dem Use-Case allerdings mit einer logistischen Regression. Ebenso ist dort die Theorie zu der Umwandlung von einer Bildmatrix in einen Importvektor erklärt. Die anderen beiden Use-Cases sind ebenso nach demselben Schema aufgebaut. Sie haben allerdings jeweils ein anderes Model, welches die Klassifizierung durchführt.
+Die SVM liefert uns eine Accuracy von rund 93%. Wenn wir nun das Model für eine Klassifizierung von Zahlen eines Drucksensors beispielsweise einsetzen wollen, dann müssen wir den Fehler beachten! Wenn an einem Tag (24h) alle 15 Minuten eine Messung erfolgt dann enspricht das 96 Messungen. Darunter sind allerdings 6 Messungen wahrscheinlich falsch.  
+
+
+
+
+# Was nun?
+In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der SVM befasst. Wenn Sie weiteres Interesse an klassifizierungs Modellen haben, empfehlen wir auch folgende Use-Cases auf der AIAV-Platform: 
 
 #### logistische Regression </br>
 [Storyboard](http://www.aiav.technikum-wien.at/) </br>
@@ -30,7 +35,8 @@ In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels der Su
 [Storyboard](http://www.aiav.technikum-wien.at/) </br>
 [GitHub](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/Random_Forest_fuer_Bildklassifizierung)
 
-
+Ebenso haben wir angesprochen, dass die klassische Methode nicht immer ausreichend ist in der Praxis. Um dieses Problem zu lösen kann auf ein komplexeres Modell umgestellt werden wie zum Beispiel ein CNN. 
+[Coming Soon]
 
 <br>
 
