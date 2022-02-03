@@ -17,7 +17,7 @@ Das unten angeführte [GIF](./demo.gif) zeigt ein Beispielverhalten des Use-Case
 ![Abbildung 1](demo.gif)
 
 
-Das Model hat eine Accuracy (Genauigkeit) von rund 87%. Ein typisches Storyboard hier auf der AIAV Seite hat rund 10000 Zeichen (ohne leerzeichen). Nehmen wir an die Storyboards bestehen nur aus Buchstaben und sind handschriftlich geschrieben. Das bedeutet, dass wir mit dem Modell ca 1300 Fehler machen würden, wenn wir den Text scannen würden. Das ist für eine Praxis Anwendung wahrscheinlich nicht ausreichend genug. 
+Das Model hat eine Accuracy (Genauigkeit) von rund 84%. Ein typisches Storyboard hier auf der AIAV Seite hat rund 10000 Zeichen (ohne leerzeichen). Nehmen wir an die Storyboards bestehen nur aus Buchstaben und sind handschriftlich geschrieben. Das bedeutet, dass wir mit dem Modell ca 1600 Fehler machen würden, wenn wir den Text scannen würden. Das ist für eine Praxis Anwendung wahrscheinlich nicht ausreichend genug. 
 
 
 # Was nun? 
