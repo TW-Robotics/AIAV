@@ -1,24 +1,25 @@
 # Random Forest 
 
-Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für das Implementieren einer Support Vector Machine. Der Use-Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden ob in einem Bild – beziehungsweise einem Kamerastream – sich ein Hammer befindet oder nicht. Dies ist auch der 4. Use-Case dieser Reihe. Die angesprochene Problemstellung wurde schon mit drei weiteren Modellen in den Use-Cases [Support Vector Machine](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_12_SVM), [Logistische Regression](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_11_logistic_reg) und [k-Nearest Neighbor](https://github.com/TW-Robotics/AIAV/tree/devel_abdank/miniUsecase_15_Random_Forest) behandelt. 
-Die Theorie zu dem Random Forest Model ist im [Storyboard](15_Storyboard_Random_Forest.pdf) zu finden. 
+Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für das Implementieren einer Support Vector Machine. Der Use-Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden ob auf einem Bild eine Stiefelette oder ein Sneaker abgebildet ist. Hierzu verwenden wir den [MNIST Fashion Datensatz](https://github.com/zalandoresearch/fashion-mnist). Die Theorie zu dem Random Forest Model ist im [Storyboard](15_Storyboard_Random_Forest.pdf) zu finden. 
 
 # Bibliotheken
-Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Für die Einbindung der Kamera und Bildverarbeitung wird [OpenCV](https://opencv.org/) verwendet. 
+Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt.
 
 Diese drei Bibliotheken geben das Grundgerüst vor. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können auch über diese installiert werden. Wie das genau funktioniert ist auch in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) beschrieben.
 
 # Ordnerstruktur
- Das Random Forest Model benötigt - wie auch die anderen drei Modelle - zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze Trainiert werden. Im Ordner [Tool_Data](./Tool_Data) befinden sich zwei Unterordner. Diese sind in unserem Fall [Hammer](./Tool_Data/Hammer) und [Workspace](./Tool_Data/Workspace). Dies gibt gleich die beiden Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
+ Das Random Forest Model benötigt zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. Im Ordner [data](./data) befinden sich zwei Unterordner. Diese sind in unserem Fall [Stiefeletten](./data/Stiefeletten) und [Sneaker](./data/Sneaker). Dies gibt gleich die beiden Klassen für die Klassifizierung vor. Soll der Code für einen anderen Use-Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 
 
 
 # Ergebnisse
-Das unten angeführte [GIF](./demo/Random_Forest_Test.gif) zeigt ein Beispielverhalten des Use-Cases. Eine Webcam ist über dem Arbeitsbereich positioniert und klassifiziert den Kamerastream. Es wird im Bild direkt eingeblendet, ob das Model einen Hammer im Frame erkannt hat oder nicht. 
+Das unten angeführte [GIF](./demo.gif) zeigt ein Beispielverhalten des Use-Cases. Ein (für das Modell) neues Bild wird aus dem demo-Ordner eingelessen und das trainierte Modell versucht das Bild richtig zu klassifizieren. Mit dem Testdatensatz wurde eine Genauigkeit (Accuracy) von ca 90% erreicht. Wie auch schon in dem Use-Case der [Logistische Regression](http://www.aiav.technikum-wien.at/) haben wir hier für die Praxis wahrscheinlich eine zu schlechte genauigkeit. Wird das Modell für eine Verpackungsstation eingesetzt, bei der 1 Millionen Produkte pro Tag verpackt werden, dann sind vermutlich 100.000 verpackte Bestellungen fehlerhaft. 
 
-![Abbildung 1](demo/Random_Forest_Test.gif)
+![Abbildung 1](demo.gif)
+
+
 
 # Was nun? 
-In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels dem Random Forest Model befasst. Dies war der letzte der vier Klassifizierungen mit "klassischen" Modellen die für eine Klassifizierung eingesetzt werden können. Es gibt natürlich noch weitere Modelle und auch deutlich komplexere Modelle. Die drei vorherigen Modelle sind hier nocheinmal verlinkt. 
+In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels dem Random Forest Model befasst. Es gibt natürlich noch weitere Modelle klassische Modelle die ähnlich aufgebaut sind und für eine Klassifizierung eingesetzt werden können. Mit drei weiteren dieser Art hat sich AIAV beschäftigt und sind hier verlinkt. 
 
 #### logistische Regression </br>
 [Storyboard](http://www.aiav.technikum-wien.at/) </br>
@@ -32,7 +33,7 @@ In dem Use-Case haben wir uns mit der Klassifizierung von Bildern mittels dem Ra
 
 
 
-Ebenso wird im Theorieteil immer von einem CNN gesprochen und dass dieses CNN vermutlich bessere Ergebnisse liefern kann. Was das genau ist und wie so ein CNN Funktioniert wird hier beschrieben. (coming soon)
+Ebenso wird im Theorieteil immer von einem CNN gesprochen und dass dieses CNN vermutlich bessere Ergebnisse liefern kann, da es ein komplexeres Modell ist. Was das genau ist und wie so ein CNN Funktioniert wird ebenfalls auf der AIAV Platform beschrieben. (coming soon)
 
 
 
