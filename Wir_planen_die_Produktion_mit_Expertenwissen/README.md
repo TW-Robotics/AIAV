@@ -30,7 +30,7 @@ Abbildung 2 zeigt die aus der Aufgabenstellung resultierende Ontologie. Diese be
 
 Anschließend werden die Einschränkungen basierend auf der verarbeiteten Anfrage erstellt und in einem Z3 Modell gespeichert. Dieses ermittelt eine spezifische Lösung, welche mittels Matplotlib als Zeitplan dargestellt wird (siehe Abbildung 3).
 
-![Abbildung 3](images/Abbildung4Plan.png)
+![Abbildung 3](images/Abbildung4Plan.jpg)
 
 
 # Diskussion
