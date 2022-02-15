@@ -14454,25 +14454,79 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
+/* Misc */
 a.anchor-link {
-   display: none;
+  display: none;
 }
+
 .highlight  {
-    margin: 0.4em;
+  margin: 0.4em;
 }
 
 /* Input area styling */
 .jp-InputArea {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .jp-InputArea-editor {
-    overflow: hidden;
+  overflow: hidden;
+}
+
+.CodeMirror pre {
+  margin: 0;
+  padding: 0;
+}
+
+/* Using table instead of flexbox so that we can use break-inside property */
+/* CSS rules under this comment should not be required anymore after we move to the JupyterLab 4.0 CSS */
+
+
+.jp-CodeCell.jp-mod-outputsScrolled .jp-OutputArea-prompt {
+  min-width: calc(
+    var(--jp-cell-prompt-width) - var(--jp-private-cell-scrolling-output-offset)
+  );
+}
+
+.jp-OutputArea-child {
+  display: table;
+  width: 100%;
+}
+
+.jp-OutputPrompt {
+  display: table-cell;
+  vertical-align: top;
+  min-width: var(--jp-cell-prompt-width);
+}
+
+body[data-format='mobile'] .jp-OutputPrompt {
+  display: table-row;
+}
+
+.jp-OutputArea-output {
+  display: table-cell;
+  width: 100%;
+}
+
+body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
+  display: table-row;
+}
+
+.jp-OutputArea-output.jp-OutputArea-executeResult {
+  width: 100%;
 }
 
 @media print {
-  body {
-    margin: 0;
+  .jp-Collapser {
+    display: none;
+  }
+
+  .jp-Cell-inputWrapper,
+  .jp-Cell-outputWrapper {
+    display: block;
+  }
+
+  .jp-OutputArea-child {
+    break-inside: avoid-page;
   }
 }
 </style>
@@ -14513,93 +14567,151 @@ a.anchor-link {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Wir-planen-die-Produktion---mit-Expertenwissen!">Wir planen die Produktion - mit Expertenwissen!<a class="anchor-link" href="#Wir-planen-die-Produktion---mit-Expertenwissen!">&#182;</a></h1>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Storyboard">Storyboard<a class="anchor-link" href="#Storyboard">&#182;</a></h2>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
     In der Technikum Digital Factory stellen wir zurzeit Komponenten für Forschung- und Ausbildungszwecke her. Da dabei mehrere Arten von Komponenten in der gleichen Produktionsumgebung gefertigt werden, ändert sich der Ablauf in der Fabrik regelmäßig. Bei jeder Änderung des Produktionsablaufs muss aber erneut geplant werden, wie die einzelnen Werkstücke die Fabrik durchlaufen müssen, damit unsere Produkte gefertigt werden können. Dabei muss die Dauer jedes Bearbeitungsschritts, die Verfügbarkeit mehrerer gleicher Maschinen und die Reihenfolge der Bearbeitungsschritte berücksichtigt werden. Da diese Planungsaufgabe für jede Änderung der Produktion erneut durchgeführt werden muss, wollen wir sie automatisch lösen lassen.
     <br /><br />
 
-    Abbildung 1 zeigt eine der Produktionsstraßen, in der die ankommenden Teile an vier Stationen verarbeitet werden. Die zu verplanenden Stationen sind eine Fräse, eine Borhstation, eine Station zum Zusammenbau und eine Polierstation. Dabei dauern die Bearbeitungsschritte an den Stationen unterschiedlich lang und die Fräse ist mehrmals vorhanden. Da das vorliegende Problem eine Planungsaufgabe ist, wollen wir Logikprogrammierung anwenden. Im Zuge von Logikprogrammierung formulieren wir ein Problem in Form von Einschränkungen, damit es automatisch gelöst werden kann. Diese Art der Problemformulierung ist speziell geeignet, um solche Planungsaufgaben zu lösen (siehe AIAV Video <a href="https://www.youtube.com/watch?v=wp1Lg_naXvU&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=9">Heutige Anwendungen - Fokus Logikprogrammierung</a>).
+    Abbildung 1 zeigt eine der Produktionsstraßen, in der die ankommenden Teile an vier Stationen verarbeitet werden. Die zu verplanenden Stationen sind eine Fräse, eine Bohrstation, eine Station zum Zusammenbau und eine Polierstation. Dabei dauern die Bearbeitungsschritte an den Stationen unterschiedlich lang und die Fräse ist mehrmals vorhanden. Da das vorliegende Problem eine Planungsaufgabe ist, wollen wir Logikprogrammierung anwenden. Im Zuge von Logikprogrammierung formulieren wir ein Problem in Form von Einschränkungen, damit es automatisch gelöst werden kann. Diese Art der Problemformulierung ist speziell geeignet, um solche Planungsaufgaben zu lösen (siehe AIAV Video <a href="https://www.youtube.com/watch?v=wp1Lg_naXvU&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=9">Heutige Anwendungen - Fokus Logikprogrammierung</a>).
     <br /><br />
 
-    Dabei verbinden wir Logikprogrammierung mit einer Ontologie, um aus Wissen über die einzelnen Produktionsschritte automatisch den Produktionsablauf zu planen. In der Ontologie (siehe AIAV Video <a href="https://www.youtube.com/watch?v=RQWc9-tKf7U&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=8">Ontologien</a>) legen wir fest, wie sich der Zustand des Werkstücks durch die Bearbeitung an einer Station ändert. Basierend auf Informationen über die Dauer jedes Produktionsschrittes können wir dann mittels Logikprogrammierung (siehe AIAV Video <a href="https://www.youtube.com/watch?v=ETW0_xcL3CM&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=6">Wissensrepräsentation und Logikprogrammierung</a>) den Zeitlichen Ablauf in der Fabrik planen. Dieses Vorgehen erlaubt es uns, bei einem sich ändernden Produktionsumfeld die Ontologie anzupassen und den Ablauf automatisch neu planen zu lassen.
+    Dabei verbinden wir Logikprogrammierung mit einer Ontologie, um aus Wissen über die einzelnen Produktionsschritte automatisch den Produktionsablauf zu planen. In der Ontologie (siehe AIAV Video <a href="https://www.youtube.com/watch?v=RQWc9-tKf7U&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=8">Ontologien</a>) legen wir fest, wie sich der Zustand des Werkstücks durch die Bearbeitung an einer Station ändert. Basierend auf Informationen über die Dauer jedes Produktionsschrittes, können wir dann mittels Logikprogrammierung (siehe AIAV Video <a href="https://www.youtube.com/watch?v=ETW0_xcL3CM&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=6">Wissensrepräsentation und Logikprogrammierung</a>) den Zeitlichen Ablauf in der Fabrik planen. Dieses Vorgehen erlaubt es uns, bei einem sich ändernden Produktionsumfeld die Ontologie anzupassen und den Ablauf automatisch neu planen zu lassen.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="images/Abbildung1Problem.jpg" width="700"/></p>
+<p><img src="images/Abbildung1Problem.jpg" width="750"/></p>
 <p><em>Abbildung 1: Der zu planende Produktionsablauf umfasst eine Fräse, eine Bohrstation, eine Station zum Zusammenbau und eine Poliermaschine. Dabei dauert jeder Bearbeitungsschritt unterschiedlich lang und manche Maschinen, wie z.B. die Fräse, sind mehrmals vorhanden.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Ontologien">Ontologien<a class="anchor-link" href="#Ontologien">&#182;</a></h3><div style="text-align: justify">
-    Mittels <a href="https://towardsdatascience.com/knowledge-graphs-at-a-glance-c9119130a9f0">Ontologien</a> können wir Expertenwissen in eine maschinenlesbare Form bringen (siehe AIAV Video <a href="https://www.youtube.com/watch?v=RQWc9-tKf7U&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=8">Ontologien</a>), indem wir Vorgänge in der Umwelt mittels Konzepten und Instanzen beschreiben. Konzepte stellen dabei allgemeine Zusammenhänge dar, während Instanzen konkrete Beispiele für diese Zusammenhänge sind. Ein Beispiel für so ein Konzept ist "<i>Künstler malen Kunstwerke.</i>", welches im allgemeinen Künstler mit Kunstwerken in Beziehung setzt (siehe Abbildung 2). Basierend auf so einem Konzept werden dann Instanzen, also konkrete Beispiele für die Konzepte, festgehalten. "<i>Da Vinci ist ein Künstler, Mona Lisa ein Kunstwerk.</i>", sind jeweils Instanzen der Konzepte von <i>Künstler</i> und <i>Kunstwerk</i>. Vom Wissen aus unserem Konzept können wir nun ableiten, dass Da Vinci die Mona Lisa gemalt hat.
+    Mittels <a href="https://towardsdatascience.com/knowledge-graphs-at-a-glance-c9119130a9f0">Ontologien</a> können wir Expertenwissen in eine maschinenlesbare Form bringen (siehe AIAV Video <a href="https://www.youtube.com/watch?v=RQWc9-tKf7U&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=8">Ontologien</a>), indem wir Vorgänge in der Umwelt mittels Konzepten und Instanzen beschreiben. Konzepte stellen dabei allgemeine Zusammenhänge dar, während Instanzen konkrete Beispiele für diese Zusammenhänge sind. Ein Beispiel für so ein Konzept ist "<i>KünstlerInnen malen Kunstwerke.</i>", welches im allgemeinen KünstlerInnen mit Kunstwerken in Beziehung setzt (siehe Abbildung 2). Basierend auf so einem Konzept werden dann Instanzen, also konkrete Beispiele für die Konzepte, festgehalten. "<i>Da Vinci ist ein Künstler, Mona Lisa ein Kunstwerk.</i>", sind jeweils Instanzen der Konzepte <i>KünstlerIn</i> und <i>Kunstwerk</i>. Vom Wissen aus unserem Konzept können wir nun ableiten, dass Da Vinci die Mona Lisa gemalt hat.
     <br /><br />
 
-    Dieses Vorgehen erlaubt es uns mittels Konzepten und Instanzen eine zusammenhängende Wissensbasis zu erstellen, die einen bestimmten Wirkungsraum beschreibt und währenddessen auch einfach maschinell verarbeitet werden kann. Die Verarbeitung erfolgt dabei durch den sogennanten Reasoner, welcher Anfragen verarbeiten und Zusammenhänge zwischen Instanzen von der Wissensbasis ableiten kann. 
+    Dieses Vorgehen erlaubt es uns mittels Konzepten und Instanzen eine zusammenhängende Wissensbasis zu erstellen, die einen bestimmten Wirkungsraum beschreibt und währenddessen auch einfach maschinell verarbeitet werden kann. Die Verarbeitung erfolgt dabei durch den sogenannten Reasoner, welcher Anfragen verarbeiten und Zusammenhänge zwischen Instanzen von der Wissensbasis ableiten kann. 
 
     <br /><br />
     Bekannte Konzepte und Instanzen werden in Form eines sogenannten <a href="https://towardsdatascience.com/how-knowledge-graphs-solve-machine-learning-problems-d2f0da031cd5">Knowledge Graphs dargestellt</a>, um die Wissensbasis einfach lesbar zu machen. Abbildung 2 stellt unser Beispiel als so einen Knowledge Graph dar.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung2OntologieBsp.jpg" width="500"/></p>
-<p><em>Abbildung 2: Wir stellen unsere Wissensbasis in form eines Knowledge Graphs dar, um sie einfach verständlich zu machen. Das Konzept <strong>Künstler malen Kunstwerke</strong> ist der Wissensbasis dabei bekannt. Da Da Vinci ein Künstler und Mona Lisa ein Kunstwerk ist, können wir aus der Wissensbasis ableiten, dass Da Vinci die Mona Lisa gemalt hat.</em></p>
+<p><em>Abbildung 2: Wir stellen unsere Wissensbasis in Form eines Knowledge Graphs dar, um sie einfach verständlich zu machen. Das Konzept <strong>KünstlerInnen malen Kunstwerke</strong> ist der Wissensbasis dabei bekannt. Da Da Vinci ein Künstler und Mona Lisa ein Kunstwerk ist, können wir aus der Wissensbasis ableiten, dass Da Vinci die Mona Lisa gemalt hat.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Logikprogrammierung">Logikprogrammierung<a class="anchor-link" href="#Logikprogrammierung">&#182;</a></h3><div style="text-align: justify">
-    <a href="https://www.python.org/">Python</a> oder <a href="https://de.wikipedia.org/wiki/C_(Programmiersprache)#:~:text=C%20ist%20eine%20imperative%20und,von%20C%20sind%20sehr%20verschieden.">C</a> sind gängige Beispiele für Programmiersprachen in denen auf künstlicher Intelligenz basierende Lösungen implementiert werden. Diese beiden Sprachen sind Teil der sogennanten <a href="https://de.wikipedia.org/wiki/Imperative_Programmierung">imperativen Programmiersprachen</a>, da man bei der Programmierung klare Anweisungen gibt, welche Aktionen das Programm durchführen soll. Dabei entscheidet der Programmierer wie das Programm vorgeht um ein Problem zu lösen.
+    <a href="https://www.python.org/">Python</a> oder <a href="https://de.wikipedia.org/wiki/C_(Programmiersprache)#:~:text=C%20ist%20eine%20imperative%20und,von%20C%20sind%20sehr%20verschieden.">C</a> sind gängige Beispiele für Programmiersprachen in denen auf künstlicher Intelligenz basierende Lösungen implementiert werden. Diese beiden Sprachen sind Teil der sogenannten <a href="https://de.wikipedia.org/wiki/Imperative_Programmierung">imperativen Programmiersprachen</a>, da man bei der Programmierung klare Anweisungen gibt, welche Aktionen das Programm durchführen soll. Dabei entscheidet der Programmierer wie das Programm vorgeht um ein Problem zu lösen.
     <br /><br />
 
     Analog zu den imperativen Programmiersprachen steht die <a href="https://towardsdatascience.com/logic-programming-rethinking-the-way-we-program-8706b2adc3f1">Logikprogrammierung</a> (siehe AIAV Video <a href="https://www.youtube.com/watch?v=ETW0_xcL3CM&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=6">Wissensrepräsentation und Logikprogrammierung</a>). Dabei formulieren wir das Problem in Form von Vorgaben, bestehend aus logischen Operatoren. Beispiele für solche Operatoren sind UND und ODER, welche zwei oder mehrere Eingänge miteinander verknüpfen. Sie können sich diese Vorgaben wie eine Art Spezifikation vorstellen; diese gibt an was erfüllt sein muss, sodass eine Lösung für das Problem vorhanden ist. Dabei schränkt jede Vorgabe die Menge an möglichen Lösungen weiter ein, bis eine Lösung vorhanden ist, die unseren gewünschten Zweck erfüllt. Aufgrund dieses Vorgehens nennt man die Vorgaben auch Einschränkungen oder Constraints.
     <br /><br />
 
-    Nach Festlegen der Einschränkungen werden diese in ein Lösungsprogramm, einem sogennanten Boolean Satisfiability (SAT) Solver, gegeben. Dieser vereinfacht zunächst die Gesamtheit der vorgegebenen Einschränkungen. Diese vereinfachte Form kann dann ausgegeben oder zur Suche nach spezifischen Lösungen verwendet werden. Ein gängiger SAT Solver ist Teil der Programmiersprache <a href="https://towardsdatascience.com/logic-programming-rethinking-the-way-we-program-8706b2adc3f1">Prolog</a>. Prolog erlaubt es, Einschränkungen in einer eigenen Sprache zu formulieren, zu vereinfachen und dynamisch Anfragen basierend auf den Einschränkungen zu verarbeiten. Neben dedizierten Logik Programmiersprachen, wie Prolog, gibt es aber auch Solver, welche die Formulierung der Einschränkungen in bestehenden Programmiersprachen erlauben. Ein Beispiel für so eine Bibliothek ist <a href="https://github.com/Z3Prover/z3">Z3</a>, ein offener SAT Solver von Microsoft. Dieser Unterstützt unter anderem C, C++, Java und Python.
+    Nach Festlegen der Einschränkungen werden diese in ein Lösungsprogramm, einem sogenannten Boolean Satisfiability (SAT) Solver, gegeben. Dieser vereinfacht zunächst die Gesamtheit der vorgegebenen Einschränkungen. Diese vereinfachte Form kann dann ausgegeben oder zur Suche nach spezifischen Lösungen verwendet werden. Ein gängiger SAT Solver ist Teil der Programmiersprache <a href="https://towardsdatascience.com/logic-programming-rethinking-the-way-we-program-8706b2adc3f1">Prolog</a>. Prolog erlaubt es, Einschränkungen in einer eigenen Sprache zu formulieren, zu vereinfachen und dynamisch Anfragen basierend auf den Einschränkungen zu verarbeiten. Neben dedizierten Logik Programmiersprachen, wie Prolog, gibt es aber auch Solver, welche die Formulierung der Einschränkungen in bestehenden Programmiersprachen erlauben. Ein Beispiel für so eine Bibliothek ist <a href="https://github.com/Z3Prover/z3">Z3</a>, ein offener SAT Solver von Microsoft. Dieser Unterstützt unter anderem C, C++, Java und Python.
    </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Praktische-Implementierung">Praktische Implementierung<a class="anchor-link" href="#Praktische-Implementierung">&#182;</a></h3><div style="text-align: justify">
     Nachdem wir nun Ontologien und Logikprogrammierung verstehen, kommen wir auf unser eigentliches Problem zurück.  Für die praktische Implementierung wollen wir, basierend auf Wissen über die verfügbaren Maschinen und den zu produzierenden Komponenten, den zeitlichen Produktionsablauf in der Fabrik planen. Also wollen wir wissen, wann welche Werkstücke in jeder Maschine bearbeitet werden.
     <br /><br />
 
-   Die Ontologie soll die Grundlage für die Planung sein, da diese einfach verändert werden kann, um den Produktionsablauf anzupassen. In dieser halten wir unser Wissen über die Maschinen und zu produzierenden Komponenten fest. Abbildung 3 zeigt dabei die für den Use Case definiterte Ontologie. Diese beinhaltet zwei Konzepte die beschreiben, dass Maschinen Werkstücke erzeugen und Werkstücke von Maschinen verarbeitet werden. Dabei definieren wir die einzelnen Maschinen als Instanzen des Konzepts <i>Maschine</i> und den Fertigstellungsgrad des Werkstücks als Instanzen des Konzepts <i>Werkstück</i>. Der Ablauf, in dem die Werkstücke bearbeitet werden, ergibt sich dann aus den Beziehungen der einzelnen Instanzen von Werkstücken und Maschinen.
+   Die Ontologie soll die Grundlage für die Planung sein, da diese einfach verändert werden kann, um den Produktionsablauf anzupassen. In dieser halten wir unser Wissen über die Maschinen und zu produzierenden Komponenten fest. Abbildung 3 zeigt dabei die für den Use Case definierte Ontologie. Diese beinhaltet zwei Konzepte die beschreiben, dass Maschinen Werkstücke erzeugen und Werkstücke von Maschinen verarbeitet werden. Dabei definieren wir die einzelnen Maschinen als Instanzen des Konzepts <i>Maschine</i> und den Fertigstellungsgrad des Werkstücks als Instanzen des Konzepts <i>Werkstück</i>. Der Ablauf, in dem die Werkstücke bearbeitet werden, ergibt sich dann aus den Beziehungen der einzelnen Instanzen von Werkstücken und Maschinen.
     <br /><br />
 
    Anhand der Ontologie in Abbildung 3 bearbeiten wir die Anfrage, in welcher Beziehung das unbearbeitete und fertige Werkstück zueinander stehen. Die Antwort auf diese Anfrage beinhaltet sowohl Werkstücke als auch Maschinen und repräsentiert den Produktionsablauf.
 </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="images/Abbildung3Ontologie.jpg" width="800"/></p>
+<p><img src="images/Abbildung3Ontologie.jpg" width="850"/></p>
 <p><em>Abbildung 3: Wir erstellen eine Ontologie, anhand derer die Produktion geplant wird. Dabei wissen wir aus zwei Konzepten, dass Maschinen Werkstücke erzeugen und Werkstücke von Maschinen verarbeitet werden. Durch Verknüpfung der verschiedenen Instanzen können wir so den Produktionsablauf beschreiben. Die benötigten Verarbeitungsschritte eines Werkstücks können mittels Anfragen ermittelt werden.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
-    Nach Festlegen der Ontologie wenden wir nun Logikprogrammierung an, um den zeitlichen Verlauf der Produktion zu planen. Dafür benötigen wir die aus der Ontologie ermittelte Produktionsabfolge sowie die Dauer der Bearbeitungsschritte jeder Maschine und die Anzhal der verfügbaren Maschinen (siehe Abbildung 1). Wir teilen zunächst die verfügbare Zeit in Zeitslots mit einer fixen Länge (z.B. 15 Minuten) ein und definieren die benötigte Zeit für jeden Produktionsschritt in Form dieser Slots. Wir betrachten die verfügbare Zeit in Form dieser Slots, um die Anzahl der resultierenden Einschränkungen zu verringern und damit die benötigte Rechenleistung beim Ermitteln des Plans so gering wie möglich zu halten. Anschließend definieren wir die Anzahl der Teile, die wir in den verfügbaren Zeitslots verplanen wollen.
+    Nach Festlegen der Ontologie wenden wir nun Logikprogrammierung an, um den zeitlichen Verlauf der Produktion zu planen. Dafür benötigen wir die aus der Ontologie ermittelte Produktionsabfolge sowie die Dauer der Bearbeitungsschritte jeder Maschine und die Anzahl der verfügbaren Maschinen (siehe Abbildung 1). Wir teilen zunächst die verfügbare Zeit in Zeitslots mit einer fixen Länge (z.B. 15 Minuten) ein und definieren die benötigte Zeit für jeden Produktionsschritt in Form dieser Slots. Wir betrachten die verfügbare Zeit in Form dieser Slots, um die Anzahl der resultierenden Einschränkungen zu verringern und damit die benötigte Rechenleistung beim Ermitteln des Plans so gering wie möglich zu halten. Anschließend definieren wir die Anzahl der Teile, die wir in den verfügbaren Zeitslots verplanen wollen.
     <br /><br />
 
     Die Einschränkung, dass allen Zeitslots keines oder ein einziges Teil zugeordnet werden muss, stellt die Grundlage der Einteilung dar und wird gespeichert. Sie legt die Zeitslots für jede Maschine fest. Anschließend werden die Einschränkungen pro zu verarbeitendem Teil aufgestellt. Dabei müssen wir beachten, dass jedes Teil nicht gleichzeitig an zwei Orten, also in mehreren Maschinen, sein kann und dass die Anzahl und Reihenfolge der Verarbeitungsschritte im Vorhinein nicht bekannt sind. Deswegen gehen wir wie folgt vor:
@@ -14608,7 +14720,7 @@ a.anchor-link {
 <li>Iteration über alle Verarbeitungsschritte:</li>
 <li>Iteration über alle Maschinen im aktuellen Verarbeitungsschritt:<ul>
 <li>Aufstellen der Einschränkung, dass das aktuelle Teil zur aktuellen Zeit in der aktuellen Maschine ist</li>
-<li>Aufstellen der Einschränkungen, dass das aktuelle Teil zur aktueleln Zeit in keiner anderen Maschine ist</li>
+<li>Aufstellen der Einschränkungen, dass das aktuelle Teil zur aktuellen Zeit in keiner anderen Maschine ist</li>
 <li>Aufstellen der Einschränkungen, dass das aktuelle Teil nie in einer Maschine gleichen Typs ist (da jeder Verarbeitungsschritt nur einmal ausgeführt wird)</li>
 </ul>
 </li>
@@ -14623,32 +14735,54 @@ a.anchor-link {
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="images/Abbildung4Plan.png" width="600"/></p>
+<p><img src="images/Abbildung4Plan.jpg" width="600"/></p>
 <p><em>Abbildung 4: Die anhand der Ontologie erstellten Einschränkungen werden in einen SAT Solver gegeben, welcher eine Lösung ermittelt, die alle Einschränkungen erfüllt. Für unser Problem kommt diese Lösung in Form einer Tabelle, welche die Werkstücke bestimmten Zeitslots in den Maschinen zuordnet. Hier wurden sechs Werkstücke über 16 Zeitslots für den in Abbildung 1 beschriebenen Produktionsablauf verplant.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><div style="text-align: justify">
     Ontologien erlauben es uns, Wissen über ein bestimmtes Umfeld effizient in eine für Maschinen verständliche Form zu bringen und dynamisch Anfragen zu verarbeiten. Umfangreiche Software Pakete zur Formulierung und Abfrage von Ontologien sind gratis verfügbar und ermöglichen die Verarbeitung von Ontologien mit nur wenig Rechenleistung. 
     <br /><br />
 
-    Mittels Logikprogrammierung können wir Planungsprobleme in Form von Einschränkungen formulieren und automatisch lösen lassen. In diesem Use Case wurden Ontologien mit Logikprogrammierung gekoppelt, um ein Planungsproblem in der Produktion autonom, auf Basis von Expertenwissen über den Produktionsablauf, zu planen. Die Kombination von Logikprogrammierung und Ontologien erlaubt es uns, den Produktionsablauf direkt aus den Informationen über die Produktionsschritte zu planen. Ändern sich also Aspekte der Produktion, können diese in die Ontologie eingespielt werden. Anschließend wird der Produktionsplan autonom überarbeitet.
+    Mittels Logikprogrammierung können wir Planungsprobleme in Form von Einschränkungen formulieren und automatisch lösen lassen. In diesem Use Case wurden Ontologien mit Logikprogrammierung gekoppelt, um ein Planungsproblem in der Produktion autonom, auf Basis von Expertenwissen über den Produktionsablauf, zu planen. Die Kombination von Logikprogrammierung und Ontologien erlaubt es uns, den Produktionsablauf direkt aus den Informationen über die Produktionsschritte zu planen. Hier liegt auch der große Vorteil gegenüber einer statischen Produktionsplanung: Ändern sich Aspekte der Produktion, können diese in die Ontologie eingespielt werden. Anschließend wird der Produktionsplan autonom überarbeitet.
     </div><P style="page-break-before: always">
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Codedokumentation">Codedokumentation<a class="anchor-link" href="#Codedokumentation">&#182;</a></h2><p>Die Implementierung basiert auf <a href="https://www.python.org/">Python 3</a> und verwendet <a href="">Z3</a> zur Logikprogrammierung, <a href="https://numpy.org/">Numpy</a> zur Datenverwaltung und <a href="https://matplotlib.org/">Matplotlib</a> zur Datenvisualisierung. Um die Lösung anschaulicher zu gestalten, wurden die Datenstrukturen zum Aufstellen der Ontologie und zum Verarbeiten von Anfragen manuell in Python Implementiert. Für komplexe Ontologien können hier alternativ der online <a href="https://protege.stanford.edu/">Protege Ontologie Editor</a> zur Erstellung der Ontologie und das Python Modul <a href="https://pypi.org/project/Owlready2/">Owlready</a> zum Laden und Verwenden der Ontologie verwendet werden.</p>
 <p>Die Applikation besteht aus dem Python Skript <a href="./produktionskette.py"><em>produktionskette.py</em></a>.</p>
 <h3 id="Formulierung-der-Ontologie">Formulierung der Ontologie<a class="anchor-link" href="#Formulierung-der-Ontologie">&#182;</a></h3><p>Zunächst importieren wir Z3, Numpy und Matplotlib und implementieren einige Hilfsfunktionen. Dabei halten die globalen Variablen <em>things</em> und <em>relations</em> alle bekannten Konzepte und Relationen zwischen Konzepten.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14730,13 +14864,21 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Anschließend formulieren wir die Ontologie in Abbildung 3. Dabei werden alle Konzepte und zugehörigen Instanzen instanziert und die Relationen zwischen den Instanzen gespeichert. Wir verwenden dann die <em>queryReason</em> Funktion, um den Zusammenhang zwischen <em>Obj_Raw</em> und <em>Obj_Finished</em> zu finden. Dieser Zusammenhang stellt unseren Produktionsablauf dar und beinhaltet Instanzen von Maschinen und Werkstücken.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14789,14 +14931,22 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Erstellen-des-Produktionsplans-mittels-Logikprogrammierung">Erstellen des Produktionsplans mittels Logikprogrammierung<a class="anchor-link" href="#Erstellen-des-Produktionsplans-mittels-Logikprogrammierung">&#182;</a></h3><p>Um den Produktionsplan aufstellen zu können, teilen wir zunächst die verfügbare Zeit in Zeitslots von fixer Länge auf. Wir legen fest, wie viele Zeitslots zur Verfügung stehen und wie viele Teile zu verplanen sind. Anschließend speichern wir wie lange jeder Produktionsschritt dauert und wie viele Maschinen des jeweiligen Maschinentyps verfügbar sind.</p>
 <p>Um die Erstellung der Einschränkungen zu vereinfachen, speichern wir die Informationen über die Zeitslots und Maschinen als globale Variablen.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14847,7 +14997,11 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Nach dem Festlegen der Zeitslots als Z3 Variablen, itierieren wir über jedes Teil und jeden Zeitslot an dem die Produktion des Teils starten kann. Die Verschachtelung der Iterationen erfolgt dabei so:</p>
 <ul>
@@ -14864,8 +15018,12 @@ a.anchor-link {
 </ul>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14983,13 +15141,21 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Die gespeicherten Einschränkungen werden dann einem Z3 Modell hinzugefügt. Z3 ermittelt dann eine spezifische Lösung, die alle Einschränkungen erfüllt.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -15020,13 +15186,21 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Die vom SAT Solver ermittelte Läsung wird anschließend mittels Matplotlib dargestellt.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -15084,9 +15258,15 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
+</div>
+</div>
 </div>
 </div>
 </body>
