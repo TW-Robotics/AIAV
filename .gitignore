@@ -1,3 +1,8 @@
 *.pkl
 variables.data-00000-of-00001
 Data
+gzip
+ubyte_converter/gzip
+output
+ubyte_converter/output
+*.csv
