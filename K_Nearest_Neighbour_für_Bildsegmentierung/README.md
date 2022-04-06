@@ -13,16 +13,16 @@ __Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Note
 
 Die Implementierung basiert auf [Python 3](https://docs.python.org/3/) und verwendet [OpenCV](https://opencv.org/), [Pillow](https://pillow.readthedocs.io/en/stable/) und [Skimage](https://scikit-image.org/) zum Einlesen und Vorverarbeitung der Bilder. Die kNN Klassifizierung wird mittels [NumPy](https://numpy.org/) und der [Scikit Learn Bibliothek](https://scikit-learn.org/stable/) durchgeführt.
 
-Das *buildandrun.sh* (*buildandrun.ps1* unter Windows) Skript erstellt ein Python Virtual Environment, installiert die benötigten Pakete in diesem und führt den Beispielcode aus. Folgende Systemvorraussetzungen müssen erfüllt sein, damit der Beispielcode ausgeführt werden kann:
+Das *buildandrun.sh* (*buildandrun.ps1* unter Windows) Skript erstellt ein Python Virtual Environment, installiert die benötigten Pakete in diesem und führt den Beispielcode aus. Folgende Systemvoraussetzungen müssen erfüllt sein, damit der Beispielcode ausgeführt werden kann:
 
-- Python 3, Pip und Python Virtual Environments müssen installiert sein. Unter Windows werden diese drei Komponenten durch den [Python 3 Installer](https://www.python.org/downloads/windows/) installiert. Unter Linux werden sie mittels dem Befehl *sudo apt install python3 python3-pip python3-venv* installiert.
+- Python 3, Pip und Python Virtual Environments müssen installiert sein. Unter Windows werden diese drei Komponenten durch den [Python 3 Installer](https://www.python.org/downloads/windows/) installiert. Unter Linux werden sie durch den  Befehl *sudo apt install python3 python3-pip python3-venv* installiert.
 
 - Eine Internetverbindung zum Download der benötigten Komponenten.
 
 
 # Ergebnisse
 
-Abbildung 1 zeigt die Verarbeitung eines Bespielbildes, auf dem ein Mitarbeiter vom Technikum Wien vor einem Roboter steht. Dabei wollen wir den Teil des Bildes auf dem der Mitarbeiter zu sehen ist ermitteln. Da der Vergleich zwischen neuem und Referenzbild in Graustufen durchgeführt wird, funktioniert die Hindergrundentfernung besonders gut, wenn ein hoher Kontrast zwischen Vorder- und Hintergrund vorhanden ist. Dieses Verhalten schreibt uns auch die Grenzen der Applikation vor. Haben Vorder- und Hintergrund an einer Stelle eine ähnliche Farbe, wird dieser Teil des Bildes eher als Hintergrund eingestuft.
+Abbildung 1 zeigt die Verarbeitung eines Bespielbildes, auf dem ein Mitarbeiter vom Technikum Wien vor einem Roboter steht. Dabei wollen wir den Teil des Bildes auf dem der Mitarbeiter zu sehen ist ermitteln. Da der Vergleich zwischen neuem und Referenzbild in Graustufen durchgeführt wird, funktioniert die Hintergrundentfernung besonders gut, wenn ein hoher Kontrast zwischen Vorder- und Hintergrund vorhanden ist. Dieses Verhalten schreibt uns auch die Grenzen der Applikation vor. Haben Vorder- und Hintergrund an einer Stelle eine ähnliche Farbe, wird dieser Teil des Bildes eher als Hintergrund eingestuft.
 
 ![Abbildung 1](images/Abbildung3Pipeline.png)
 

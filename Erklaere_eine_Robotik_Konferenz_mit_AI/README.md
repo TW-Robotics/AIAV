@@ -11,7 +11,7 @@ __Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Note
 
 # Der Use Case
 
-Die Implementierung benötigt neben [Python 3](https://docs.python.org/3/) und dessen eingebautem [re Modul](https://docs.python.org/3/library/re.html),[tika-python](https://github.com/chrismattmann/tika-python) zum Einlesen der PDF Dateien, sowie [NumPy](https://numpy.org/) und das [Natural Language Toolkit](https://www.nltk.org/). Da Tika Java Komponenten benötigt, wird ein Dockerfile zur Verfügung gestellt, welches die benötigten Software Pakete automatisch in einer abgekapselten Umgebung, dem Container, installiert. Bei Ausführung des *buildandrun.sh* Skriptes wird dieser Container erstellt, die Publikationen automatisch in den [app](./app) Ordner heruntergeladen und das Programm ausgeführt.
+Die Implementierung benötigt neben [Python 3](https://docs.python.org/3/) und dessen eingebautem [re Modul](https://docs.python.org/3/library/re.html), [tika-python](https://github.com/chrismattmann/tika-python) zum Einlesen der PDF Dateien, sowie [NumPy](https://numpy.org/) und das [Natural Language Toolkit](https://www.nltk.org/). Da Tika Java Komponenten benötigt, wird ein Dockerfile zur Verfügung gestellt, welches die benötigten Software Pakete automatisch in einer abgekapselten Umgebung, dem Container, installiert. Bei Ausführung des *buildandrun.sh* Skriptes wird dieser Container erstellt, die Publikationen automatisch in den [app](./app) Ordner heruntergeladen und das Programm ausgeführt.
 
 [Docker](https://www.docker.com/) erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
 
@@ -21,7 +21,7 @@ Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt s
 
 - Unter Linux muss Docker Berechtigungen haben, ohne _sudo_ ausgeführt zu werden. Diese Berechtigung gibt man, indem man _sudo groupadd docker && sudo usermod -aG docker $USER_ im Terminal eingibt und sich anschließend aus- und einloggt.
 
-- Unter Linux muss X11 forwarding erlaubt sein.
+- Unter Linux muss X11 Forwarding erlaubt sein.
 
 - Eine Internetverbindung zum Download der benötigten Komponenten.
 
