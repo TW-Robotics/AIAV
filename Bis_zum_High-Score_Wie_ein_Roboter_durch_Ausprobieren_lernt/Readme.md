@@ -2,9 +2,9 @@
 
 Hier finden Sie Programmcode und Beispiele wie man Pfadplanung mittels Reinforcement Learning umsetzt. 
 
-Dabei wurde eine Pick and Place Aufgabe mittels Reinforcement Learning und klassischer Bildverarbeitung für einen Dreiachsroboter implementiert. Der auf der [Hebi X-Series Platform](https://www.hebirobotics.com/x-series-smart-actuators) basierende Roboter soll dabei ein Werkstück auf einem Tisch erkennen, es aufheben und in eine Fräse legen. Dabei wird wie folgt vorgegangen:
+Dabei wurde eine Pick and Place Aufgabe mittels Reinforcement Learning und klassischer Bildverarbeitung für einen Dreiachsroboter implementiert. Der auf der [Hebi X-Series Plattform](https://www.hebirobotics.com/x-series-smart-actuators) basierende Roboter soll dabei ein Werkstück auf einem Tisch erkennen, es aufheben und in eine Fräse legen. Dabei wird wie folgt vorgegangen:
 
-- Der Roboter erfasst den Tisch mithilfe einer Kamera. Auf das Kamerabild wird klassische Bildberarbeitung angewendet, um die Position des Werkstücks im Kamerabild zu ermitteln. Da die Kamera vorab am Tisch eingemessen wurde, kann die Position des Werkstücks im Kamerabild in die globale Position auf dem Tisch umgewandelt werden.
+- Der Roboter erfasst den Tisch mithilfe einer Kamera. Auf das Kamerabild wird klassische Bildbearbeitung angewendet, um die Position des Werkstücks im Kamerabild zu ermitteln. Da die Kamera vorab am Tisch eingemessen wurde, kann die Position des Werkstücks im Kamerabild in die globale Position auf dem Tisch umgewandelt werden.
 
 - Der Roboter plant anschließend sowohl einen Pfad von seiner derzeitigen Pose zum Werkstück als auch vom Werkstück zur Ablegepose mittels [Reinforcement Learning](https://www.youtube.com/watch?v=gNjDBkJRRP0&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=13).
 
@@ -25,13 +25,13 @@ Das Skript _buildandrun.sh_ im neu erstellten Ordner _ros-ml-container_ erzeugt 
 
 - Unter Linux muss Docker Berechtigungen haben, ohne _sudo_ ausgeführt zu werden. Diese Berechtigung gibt man, indem man _sudo groupadd docker && sudo usermod -aG docker $USER_ im Terminal eingibt und sich anschließend aus- und einloggt.
 
-- Unter Linux muss X11 forwarding erlaubt sein.
+- Unter Linux muss X11 Forwarding erlaubt sein.
 
 - Eine Internetverbindung zum Download der benötigten Komponenten.
 
 Beschleunigung durch eine Grafikkarte wird unterstützt, damit die Simulation flüssig und in Echtzeit angezeigt werden kann. Bei der Ausführung des Skriptes (_./buildandrun.sh_) kann die Umgebungsvariable *GRAPHICS_PLATFORM* übergeben werden, um Grafikbeschleunigung zu verwenden. Folgende Parameter werden unterstützt:
 
-- *GRAPHICS_PLATFORM=cpu ./buildandrun.sh*: keine GPU beschleunigung. Gleiches Verhalten, wie wenn kein Wert für *GRAPHICS_PLATFORM* gesetzt wird.
+- *GRAPHICS_PLATFORM=cpu ./buildandrun.sh*: keine GPU Beschleunigung. Gleiches Verhalten, wie wenn kein Wert für *GRAPHICS_PLATFORM* gesetzt wird.
 
 - *GRAPHICS_PLATFORM=opensource ./buildandrun.sh*: Beschleunigung durch Open Source Treiber in Linux. Funktioniert für GPUs von Intel, Nvidia und AMD, sofern die offenen Treiber verwendet werden. Wenn Sie sich nicht sicher sind, welcher Treiber auf Ihrem PC installiert ist, funktioniert wahrscheinlich diese Art der Beschleunigung.
 
@@ -41,14 +41,14 @@ Beschleunigung durch eine Grafikkarte wird unterstützt, damit die Simulation fl
 
 Docker erzeugt ein Image, welches die vom Use Case benötigten Komponenten beinhaltet. Dieses Image kann mit dem *docker rmi -f ros-ml-container:latest* Befehl gelöscht werden. Die restlichen generierten Dateien können einfach entfernt werden, indem man den *ros-ml-container* Ordner löscht.
 
-__Das *buildandrun.sh* Skript muss im *ros-ml-container* augeführt werden, damit alle Dateien richtig gefunden werden.__
+__Das *buildandrun.sh* Skript muss im *ros-ml-container* ausgeführt werden, damit alle Dateien richtig gefunden werden.__
 
 
 # Ergebnisse
 
 Da die Winkelstellungen der Motoren bei dieser Lösung als diskret betrachtet werden, ist die Genauigkeit der Pfadplanung abhängig vom Grad mit dem die Winkelstellungen diskretisiert werden. Bei dieser Implementierung wurde die Diskretisierung auf 0,1 rad gestellt, um den benötigten Rechenaufwand der Pfadplanung gering zu lassen. Reicht eine solche Genauigkeit nicht aus, kann die Diskretisierung auf einen niedrigeren Wert gesetzt werden, was jedoch die benötigte Zeit zum berechnen des Pfades erheblich erhöht.
 
-Abbildung 1 zeigt einen solchen Pfad, welcher mittels Reinforcment Learning ermittelt wurde. Dabei stellen die Pfeile den geplanten Pfad zum Ziel dar.
+Abbildung 1 zeigt einen solchen Pfad, welcher mittels Reinforcement Learning ermittelt wurde. Dabei stellen die Pfeile den geplanten Pfad zum Ziel dar.
 
 ![Abbildung 1](images/Abbildung2StationMitPfad.jpg)
 
