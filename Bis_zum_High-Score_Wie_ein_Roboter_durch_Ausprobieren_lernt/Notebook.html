@@ -14454,25 +14454,79 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
+/* Misc */
 a.anchor-link {
-   display: none;
+  display: none;
 }
+
 .highlight  {
-    margin: 0.4em;
+  margin: 0.4em;
 }
 
 /* Input area styling */
 .jp-InputArea {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .jp-InputArea-editor {
-    overflow: hidden;
+  overflow: hidden;
+}
+
+.CodeMirror pre {
+  margin: 0;
+  padding: 0;
+}
+
+/* Using table instead of flexbox so that we can use break-inside property */
+/* CSS rules under this comment should not be required anymore after we move to the JupyterLab 4.0 CSS */
+
+
+.jp-CodeCell.jp-mod-outputsScrolled .jp-OutputArea-prompt {
+  min-width: calc(
+    var(--jp-cell-prompt-width) - var(--jp-private-cell-scrolling-output-offset)
+  );
+}
+
+.jp-OutputArea-child {
+  display: table;
+  width: 100%;
+}
+
+.jp-OutputPrompt {
+  display: table-cell;
+  vertical-align: top;
+  min-width: var(--jp-cell-prompt-width);
+}
+
+body[data-format='mobile'] .jp-OutputPrompt {
+  display: table-row;
+}
+
+.jp-OutputArea-output {
+  display: table-cell;
+  width: 100%;
+}
+
+body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
+  display: table-row;
+}
+
+.jp-OutputArea-output.jp-OutputArea-executeResult {
+  width: 100%;
 }
 
 @media print {
-  body {
-    margin: 0;
+  .jp-Collapser {
+    display: none;
+  }
+
+  .jp-Cell-inputWrapper,
+  .jp-Cell-outputWrapper {
+    display: block;
+  }
+
+  .jp-OutputArea-child {
+    break-inside: avoid-page;
   }
 }
 </style>
@@ -14513,17 +14567,33 @@ a.anchor-link {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Bis-zum-High-Score!-Wie-ein-Roboter-durch-Ausprobieren-lernt.">Bis zum High-Score! Wie ein Roboter durch Ausprobieren lernt.<a class="anchor-link" href="#Bis-zum-High-Score!-Wie-ein-Roboter-durch-Ausprobieren-lernt.">&#182;</a></h1>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Storyboard">Storyboard<a class="anchor-link" href="#Storyboard">&#182;</a></h2>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
     Eine der wichtigsten Aufgaben eines Roboters in der Automatisierung sind sogenannte <i>Pick and Place</i> Aufgaben. Dabei soll der Roboter ein Werkstück von einem Startpunkt zu einem Ziel bewegen und dort absetzen. Solche Aufgaben können relativ einfach gelöst werden, indem man dem Roboter die Bewegung mittels <i>Teach-in</i> beibringt. Beim Teach-in wird der Roboter händisch in wichtige Posen, wie z.B. die Aufhebe- und Absetzpose, gebracht und der Roboterzustand gespeichert. Bewegungen zwischen diesen Zuständen werden dann mittels klassischen Methoden der Robotik geplant und ebenfalls abgespeichert. So entsteht ein Bewegungsablauf, welcher abgespielt wird, um die Pick and Place Aufgabe durchzuführen. Der große Nachteil dieses Vorgehens ist, dass die Bewegung nicht dynamisch abgeändert werden kann. Kommen Variationen in Aufnahme- und Ablegeposen oder in den auszuweichenden Hindernissen vor, muss das Teach-in nochmals durchgeführt werden.
@@ -14533,31 +14603,55 @@ a.anchor-link {
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Reinforcement-Learning">Reinforcement Learning<a class="anchor-link" href="#Reinforcement-Learning">&#182;</a></h3><div style="text-align: justify">
     Reinforcement Learning (RL, siehe AIAV Video <a href="https://www.youtube.com/watch?v=gNjDBkJRRP0&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=13">Reinforcement Learning)</a> beschäftigt sich mit dem Lernen durch intelligentes Ausprobieren. Dabei beschreiben wir das zu lösende Problem als Interaktion zwischen einem Agenten, z.B. einem Roboter, und dessen Umfeld (Environment). Der Agent befindet sich in einem Zustand (State) im Umfeld und führt eine der möglichen Aktionen (Action) aus. Das Ausführen der Aktion verändert den Zustand des Umfeldes und der neue, aus dem vorherigen Zustand und der Aktion resultierende, Zustand (new State) wird zurückgegeben. Zusätzlich zum neuen Zustand gibt das Umfeld auch Feedback darüber, wie erfolgreich die durchgeführte Aktion im Erreichen eines Ziels war. Dieses Feedback kommt in Form einer Zahl, dem Reward. Der Reward funktioniert wie die Punkteanzahl in einem Spiel - je höher, desto besser. Ein positiver Reward heißt also, dass die durchgeführte Aktion dem Agenten geholfen hat, sein Ziel zu erreichen. Analog dazu kennzeichnet ein negativer Reward das Scheitern des Agenten und ein Reward von 0 eine neutrale Aktion. Dieser Ablauf, der <a href="https://towardsdatascience.com/understanding-the-markov-decision-process-mdp-8f838510f150">Markov Decision Process (MDP)</a>, ist in Abbildung 1 dargestellt.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung1MDP.jpg" alt="Drawing" style="width: 600px;"/></p>
 <p><em>Abbildung 1: Aufgaben werden als Markov Decision Process (MDP) dargestellt, damit sie mittels Reinforcement Learning gelöst werden können. Dabei beschreibt der MDP eine Interaktion zwischen dem Lerner (Agenten) und seinem Umfeld (Environment).</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
-    Haben wir eine Aufgabe nun als MDP dargestellt, können wir uns überlegen wie der Agent überhaupt lernen soll. Wärhend viele verschiedene Algorithmen zum Lösen von Reinforcment Learning Problemen eingesetzt werden, haben diese alle das gleiche Ziel: den Reward mit der Zeit zu maximieren. Also soll unser Agent abhängig vom aktuellen Zustand Aktionen wählen, welche den höchsten Reward bringen. Am Anfang des Trainings weiß der Agent allerdings noch nichts über das Umfeld und die zu erfüllende Aufgabe. Deshalb werden zunächst nur zufällige Aktionen durchgeführt, um das Umfeld zu erkunden. Mit der Zeit basieren dann die gewählten Aktionen immer weniger auf Zufall und immer mehr auf der gelernten Dynamik der Umgebung.
+    Haben wir eine Aufgabe nun als MDP dargestellt, können wir uns überlegen wie der Agent überhaupt lernen soll. Während viele verschiedene Algorithmen zum Lösen von Reinforcment Learning Problemen eingesetzt werden, haben diese alle das gleiche Ziel: den Reward mit der Zeit zu maximieren. Also soll unser Agent abhängig vom aktuellen Zustand Aktionen wählen, welche den höchsten Reward bringen. Am Anfang des Trainings weiß der Agent allerdings noch nichts über das Umfeld und die zu erfüllende Aufgabe. Deshalb werden zunächst nur zufällige Aktionen durchgeführt, um das Umfeld zu erkunden. Mit der Zeit basieren dann die gewählten Aktionen immer weniger auf Zufall und immer mehr auf der gelernten Dynamik der Umgebung.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Praktische-Implementierung">Praktische Implementierung<a class="anchor-link" href="#Praktische-Implementierung">&#182;</a></h3><div style="text-align: justify">
-    Um zu zeigen, wie ein praktisches Problem mittels Reinforcement Learning gelöst werden kann, wurde für diesen Usecase eine Pick and Place Aufgabe realisiert. Dabei werden Werkstücke durch einen Roboter mit drei Freiheitsgraden von einem Tisch aufgehoben. Das Werkstück kann an irgendeiner Position am Tisch, in Reichweite des Roboters, liegen. Zusätzlich dazu, gibt es noch Hindernisse im Arbeitsbereich des Roboters, die wir bei der Pfadplanung berücksichtigen müssen. Um Kollisionen mit Hindernissen zu vermeiden, wollen wir Reinforcement Learning verwenden, um den Pfad zwischen Start- und Zielpose zu planen.
+    Um zu zeigen, wie ein praktisches Problem mittels Reinforcement Learning gelöst werden kann, wurde für diesen Use Case eine Pick and Place Aufgabe realisiert. Dabei werden Werkstücke durch einen Roboter mit drei Freiheitsgraden von einem Tisch aufgehoben. Das Werkstück kann an irgendeiner Position am Tisch, in Reichweite des Roboters, liegen. Zusätzlich dazu, gibt es noch Hindernisse im Arbeitsbereich des Roboters, die wir bei der Pfadplanung berücksichtigen müssen. Um Kollisionen mit Hindernissen zu vermeiden, wollen wir Reinforcement Learning verwenden, um den Pfad zwischen Start- und Zielpose zu planen.
     <br /><br />
 
     Aber wie formuliert man so ein vorliegendes Problem als Markov Decision Process?
@@ -14566,7 +14660,7 @@ a.anchor-link {
     Zunächst legen wir fest, dass der Zustand (State) aus den Stellungen der drei Gelenke des Roboters besteht. Als mögliche Aktionen werden das Vergrößern oder Verkleinern der Stellung jedes Gelenks angenommen. Das heißt, dass der Roboter mit jedem Schritt eine von 6 Aktionen ausführen kann: Gelenk 1 erhöhen, Gelenk 1 vermindern, Gelenk 2 erhöhen, und so weiter. Da Zustand und Aktionen festgelegt sind, fehlt uns noch der Reward. Mit diesem signalisieren wir einerseits Erfolg und Versagen des Agenten, andererseits können wir aber auch, abhängig von der Komplexität der Reward Funktion, die Aufgabe schwerer oder einfacher für den Agenten gestalten. 
     <br /><br />
 
-    Der Agent bekommt Reward anhand einer, als Teil der Umgebung definierten, Rewardfunktion. Für die Implementierung des Usecases haben wir uns für eine sogenannte spärliche Rewardfunktion entschieden. Das heißt, dass immer ein Reward von 0 signalisiert wird, außer der Agent hat sein Ziel erreicht oder ist gescheitert. Erreicht der Roboter also seine Zielpose, bekommt er einen Reward von 1, kollidiert er hingegen mit sich selbst oder Hindernissen, bekommt er einen Reward von -1 und ansonsten einen Reward von 0.
+    Der Agent bekommt Reward anhand einer, als Teil der Umgebung definierten, Rewardfunktion. Für die Implementierung des Use Cases haben wir uns für eine sogenannte spärliche Rewardfunktion entschieden. Das heißt, dass immer ein Reward von 0 signalisiert wird, außer der Agent hat sein Ziel erreicht oder ist gescheitert. Erreicht der Roboter also seine Zielpose, bekommt er einen Reward von 1, kollidiert er hingegen mit sich selbst oder Hindernissen, bekommt er einen Reward von -1 und ansonsten einen Reward von 0.
     <br /><br />
 
     Um nun konkrete Bahnen zu planen, legen wir die Start- und Zielposen fest. Dabei ist die Startpose der anfängliche Zustand des Agenten, während die Zielpose der einzige Zustand ist, der einen positiven Reward gibt. Sind Start und Ziel festgelegt, wenden wir <a href="https://towardsdatascience.com/policy-iteration-in-rl-an-illustration-6d58bdcb87a7">Policy Iteration</a>, ein Verfahren zum Lösen von Reinforcement Learning Problemen, an. Policy Iteration liefert uns als Lösung ein Verhaltensmuster (Policy). Dieses gibt für jeden Zustand an, welche der Aktionen in diesem ausgeführt werden müssen, damit positiver Reward generiert wird. Da positiver Reward nur vom Zielzustand kommt, entsteht durch die Aktionen eine Bahn zum Ziel. Abbildung 2 zeigt die Station sowie einen dieser geplanten Pfade. Dabei entspricht jeder Pfeil einem Eintrag des Verhaltensmusters und zeigt an, in welche Richtung sich der Greifer beim Ausführen der jeweiligen Aktion bewegt. 
@@ -14576,14 +14670,26 @@ a.anchor-link {
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung2StationMitPfad.jpg" alt="Drawing" style="width: 650px;"/></p>
 <p><em>Abbildung 2: Durch Policy Iteration erhalten wir ein Verhaltensmuster, welchem der Roboter folgt um die Zielpose zu erreichen. Hier ist eines dieser Verhaltensmuster dargestellt. Dabei entspricht jeder Pfeil einem Zustand des Roboters, für den dieses Verhaltensmuster eine entsprechende Aktion vorgibt.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Computer-Vision">Computer Vision<a class="anchor-link" href="#Computer-Vision">&#182;</a></h3><div style="text-align: justify">
     Da wir nun Bewegungen automatisch mittels RL planen können, brauchen wir noch eine Möglichkeit, die Position des abgelegten Werkstücks zu bestimmen. Dafür montieren wir eine Kamera über dem Arbeitsbereich des Roboters und wenden klassische Bildverarbeitung an. Mittels dieser kann die Position des Werkstücks relativ zur Kamera bestimmt werden. Da die Position der Kamera vorab in der Station eingemessen wurde, haben wir einen Bezug zum Weltkoordinatensystem unserer Station und können die Position des Werkstücks durch Koordinatentransformation global nutzen. Die genaue Vorgehensweise bei der Objekterkennung ist in diesem <a href="https://www.daaam.info/Downloads/Pdfs/proceedings/proceedings_2021/077.pdf">Paper</a> beschrieben.
@@ -14593,14 +14699,26 @@ a.anchor-link {
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung3Pipeline.jpg" alt="Drawing" style="width: 750px;"/></p>
 <p><em>Abbildung 3: Um die Position des Werkstücks zu ermitteln, wenden wir klassische Bildverarbeitung an. Dabei quantisieren wir zunächst das Kamerabild und erkennen die Kanten. Anschließend ziehen wir eine Box rund um das Werkstück und berechnen aus dessen Position im Bild, die Position des Werkstücks in der echten Welt.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><div style="text-align: justify">
     Reinforcement Learning erlaubt es uns, Planungsprobleme vorab in Simulation zu lösen und die Lösung auf die echte Welt anzuwenden. Neben der Auswahl des Algorithmus, mit dem wir den Agenten implementieren und das Problem lösen, müssen wir uns auch darüber Gedanken machen, wie wir das Problem überhaupt formulieren. Festzulegen, wie Zustand, Aktionen und Reward aussehen, ist ein wesentlicher Schritt im Lösen eines Problems mittels Reinforcement Learning.
@@ -14613,7 +14731,13 @@ a.anchor-link {
     </div><P style="page-break-before: always">
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Code-Dokumentation">Code Dokumentation<a class="anchor-link" href="#Code-Dokumentation">&#182;</a></h2><p>Traditionelle Pfadplanungsverfahren benötigen typischerweise Wissen über die physikalischen Einschränkungen des Roboters, um einen effizienten Pfad zum Ziel zu planen <a href="https://doi.org/10.1007/BFb0036074">[1]</a>. Dabei stellt sich die Frage, ob künstliche Intelligenz verwendet werden kann, um ein System zu implementieren, welches die physikalischen Einschränkungen des zu steuernden Roboters eigenständig lernt.</p>
 <p>Im Zuge dieser Arbeit wurde eine Pick and Place Aufgabe mittels Reinforcement Learning zur Pfadplanung realisiert. Ein Werkstück wird auf einer Ablagefläche abgelegt und soll von einem Dreiachsroboter in eine Computergesteuerte Fräse gelegt werden. Die Position, an welcher das Werkstück abgelegt wird, sowie das Umfeld des Roboters sind dabei variabel. Damit kann kein Ansatz mit statischer Pfadplanung verwendet werden. Damit der Roboter das Werkstück automatisiert aufheben kann, muss seine Position erkannt werden. Diese Erkennung wird mittels farbbasierter Computer Vision umgesetzt. Wir haben uns für ein Vorgehen basierend auf künstlicher Intelligenz entschlossen, da die Ablageposition variabel ist und da sich potentielle Hindernisse um den Greifroboter ändern können. Der Roboter muss also in der Lage sein die Position des Werkstücks zu erkennen und einen Pfad von der Aufnahme- zur Ablageposition zu planen und dabei nicht mit Hindernissen zu kollidieren.</p>
@@ -14622,13 +14746,23 @@ a.anchor-link {
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Benötigte Software Pakete werden zunächst importiert. Neben bestehenden Bibliotheken wie <a href="https://numpy.org/">numpy</a>, <a href="https://www.ros.org/">ROS</a> und <a href="https://gym.openai.com/">OpenAI Gym</a>, werden auch für den Usecase implementierte Module geladen. <em>gym_fhtw3dof</em> startet eine Simulation des Roboters sowie seines Umfelds und erstellt ein Reinforcement Learning Environment auf Basis der OpenAI Gym API, in welchem die Pfadplanung vorgenommen wird. Das <em>hebi_publisher</em> Modul steuert die Motoren des Roboters. <em>fhtw3dof_usecase_tools</em> ist eine Implementierung der Policy Iteration, Value Iteration und Q-Learning Algorithmen basierend auf <a href="https://scholar.google.de/scholar?hl=de&amp;as_sdt=0%2C5&amp;q=sutton+barto+reinforcement+learning&amp;btnG=&amp;oq=sutton+bart">Sutton &amp; Barto's Reinforcement learning: An introduction</a>, sowie <a href="https://github.com/GiacomoFerro/Q_Learning_Games_v3">dieser</a> und <a href="https://medium.com/analytics-vidhya/solving-the-frozenlake-environment-from-openai-gym-using-value-iteration-5a078dffe438">dieser</a> Implementierung. <em>incaccuracy_compensation</em> verwendet inverse Kinematik, um durch die diskrete Darstellung des Roboters auftetende Ungenauigkeiten auszugleichen.</p>
+<p>Benötigte Software Pakete werden zunächst importiert. Neben bestehenden Bibliotheken wie <a href="https://numpy.org/">numpy</a>, <a href="https://www.ros.org/">ROS</a> und <a href="https://gym.openai.com/">OpenAI Gym</a>, werden auch für den Usecase implementierte Module geladen. <em>gym_fhtw3dof</em> startet eine Simulation des Roboters sowie seines Umfelds und erstellt ein Reinforcement Learning Environment auf Basis der OpenAI Gym API, in welchem die Pfadplanung vorgenommen wird. Das <em>hebi_publisher</em> Modul steuert die Motoren des Roboters. <em>fhtw3dof_usecase_tools</em> ist eine Implementierung der Policy Iteration, Value Iteration und Q-Learning Algorithmen basierend auf <a href="https://scholar.google.de/scholar?hl=de&amp;as_sdt=0%2C5&amp;q=sutton+barto+reinforcement+learning&amp;btnG=&amp;oq=sutton+bart">Sutton &amp; Barto's Reinforcement learning: An introduction</a>, sowie <a href="https://github.com/GiacomoFerro/Q_Learning_Games_v3">dieser</a> und <a href="https://medium.com/analytics-vidhya/solving-the-frozenlake-environment-from-openai-gym-using-value-iteration-5a078dffe438">dieser</a> Implementierung. <em>incaccuracy_compensation</em> verwendet inverse Kinematik, um durch die diskrete Darstellung des Roboters auftretende Ungenauigkeiten auszugleichen.</p>
 
+</div>
+</div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14668,7 +14802,11 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Hilfsfunktionen">Hilfsfunktionen<a class="anchor-link" href="#Hilfsfunktionen">&#182;</a></h3><p>Die Funktion <em>find_nearest_state()</em> sucht nach Zuständen des Environments, in welchen der TCP des Roboters innerhalb von <em>goalstate_distance</em> rund um den spezifizierten Zielpunkt liegt. Von diesen Zuständen wird der mit der kleinsten Distanz zum Zielpunkt <em>point</em> in kodierter Form zurückgegeben.</p>
 <p><em>get_object_position()</em>, lädt die Transformation vom Welt- zum Objektkoordinatensystem des erkannten Objektes. Diese Transformation wird vom Computer Vision System gesendet und dient zur Ermittlung der Objektposition relativ zum Roboter.</p>
@@ -14677,8 +14815,12 @@ a.anchor-link {
 <p><em>apply_policy</em> führt ein berechnetes Verhaltensmuster am realen und simulierten Roboter aus. Dafür wird der Anfangszustand des Roboters gespeichert und aus diesem heraus Aktionen anhand des Verhaltensmusters getätigt, was wiederum in einem neuen Zustand resultiert. Dies wird solange durchgeführt, bis eine maximale Anzahl an Schritten erreicht ist, oder das Ziel erreicht wurde. Am realen Roboter wird nur jeder zweite Zustand ausgeführt, um seine Bahn zu glätten.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14761,14 +14903,22 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Programmablauf">Programmablauf<a class="anchor-link" href="#Programmablauf">&#182;</a></h3><p>Zunächst wird das Gym Environment mit Parametern für den im Usecase verwendeten Roboter als <em>env</em> initialisiert. Das Environment erstellt eine Simulation des Usecases in ROS und verwendet diese zum Training der Verhaltensweisen um zu einem Zielpunkt zu gelangen.</p>
+<h3 id="Programmablauf">Programmablauf<a class="anchor-link" href="#Programmablauf">&#182;</a></h3><p>Zunächst wird das Gym Environment mit Parametern für den im Use Case verwendeten Roboter als <em>env</em> initialisiert. Das Environment erstellt eine Simulation des Use Cases in ROS und verwendet diese zum Training der Verhaltensweisen um zu einem Zielpunkt zu gelangen.</p>
 <p>Die definierten Argumente werden vom <em>gym.make()</em> Befehl an den Konstruktor des Environments übergeben. Eine genaue Beschreibung der Argumente ist in der technischen Dokumentation des FHTW3DOF Paketes zur Verfügung gestellt.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14796,13 +14946,21 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><em>TransformListener</em> und <em>iterations</em> Objekte werden Instanziert, um die Objektposition zu ermitteln und um Verhaltensmuster anhand von <em>env</em> zu berechnen.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14818,14 +14976,22 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Werden bereits trainierte Modelle verwendet, werden die entsprechenden Dateien geladen. Das Modell besteht aus bereits bekannten Zielzuständen und zugehörigen Verhaltensmustern. Verhaltensmuster zum erreichen des Warte- und Ablegzustandes werden in extra Dateien gespeichert.</p>
-<p>Falls keine vortrainierten Modelle verwendet werden (z.B. nach Änderung des Roboters) werden Verhaltensmuster zum erreichen des Ziel- und Wartezustandes wärhend des Initialisierungsvorgangs trainiert und gespeichert.</p>
+<p>Falls keine vortrainierten Modelle verwendet werden (z.B. nach Änderung des Roboters) werden Verhaltensmuster zum erreichen des Ziel- und Wartezustandes während des Initialisierungsvorgangs trainiert und gespeichert.</p>
 
+</div>
+</div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14862,13 +15028,21 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Wird der Usecase am echten Roboter ausgeführt, wird dessen Ansteuerung gestartet. Das <em>hebi_publisher</em> Modul synchronisiert den virtuellen und realen Roboter und erlaubt die Planung einer Bewegung anhand in der Simulation ausgeführter Bewegungen.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14882,9 +15056,13 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Der Ablauf der Usecase Steuerung erfolgt anhand folgender Schleife:</p>
+<p>Der Ablauf der Use Case Steuerung erfolgt anhand folgender Schleife:</p>
 <ol>
 <li>Warte auf Eingabe durch Aufsichtsperson</li>
 <li>Ermittlung von Zielpunkt und inverser Kinematik um diesen zu erreichen</li>
@@ -14910,8 +15088,12 @@ a.anchor-link {
 <p>Ist ein anzufahrender Zielzustand noch nicht bekannt, werden zunächst positive Rewards im Environment auf null gesetzt. Damit bleiben Informationen über Hindernisse, bei welchen der Reward -1 ist, erhalten, während Ziele zurückgesetzt werden. Das Reward-Signal für den Zielzustand wird dann auf 1 gesetzt; das Ziel des Algorithmus ist es, diesen Zustand zu erreichen. Das Verhaltensmuster zum Erreichen des Zielzustands wird anhand von Policy Iteration durch das Modul <em>fhtw3dof_usecase_tools</em> ermittelt und zu den bekannten Modellen hinzugefügt. Wenn ein Zielzustand bekannt ist, kann dieser durch das trainierte Verhaltensmuster von jedem validen Startzustand aus erreicht werden.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14976,13 +15158,21 @@ a.anchor-link {
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Ist die entsprechende Variable gesetzt, werden die trainierten Modelle zum Laden beim nächsten Programmdurchlauf gespeichert.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">

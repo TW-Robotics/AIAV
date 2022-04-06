@@ -14682,10 +14682,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     Nachdem wir nun Ontologien und Logikprogrammierung verstehen, kommen wir auf unser eigentliches Problem zurück.  Für die praktische Implementierung wollen wir, basierend auf Wissen über die verfügbaren Maschinen und den zu produzierenden Komponenten, den zeitlichen Produktionsablauf in der Fabrik planen. Also wollen wir wissen, wann welche Werkstücke in jeder Maschine bearbeitet werden.
     <br /><br />
 
-   Die Ontologie soll die Grundlage für die Planung sein, da diese einfach verändert werden kann, um den Produktionsablauf anzupassen. In dieser halten wir unser Wissen über die Maschinen und zu produzierenden Komponenten fest. Abbildung 3 zeigt dabei die für den Use Case definierte Ontologie. Diese beinhaltet zwei Konzepte die beschreiben, dass Maschinen Werkstücke erzeugen und Werkstücke von Maschinen verarbeitet werden. Dabei definieren wir die einzelnen Maschinen als Instanzen des Konzepts <i>Maschine</i> und den Fertigstellungsgrad des Werkstücks als Instanzen des Konzepts <i>Werkstück</i>. Der Ablauf, in dem die Werkstücke bearbeitet werden, ergibt sich dann aus den Beziehungen der einzelnen Instanzen von Werkstücken und Maschinen.
+   Die Ontologie soll die Grundlage für die Planung sein, da diese einfach verändert werden kann, um den Produktionsablauf anzupassen. In dieser halten wir unser Wissen über die Maschinen und zu produzierenden Komponenten fest. Abbildung 3 zeigt dabei die für den Use Case definierte Ontologie. Diese beinhaltet zwei Konzepte, die beschreiben, dass Maschinen Werkstücke erzeugen und Werkstücke von Maschinen verarbeitet werden. Dabei definieren wir die einzelnen Maschinen als Instanzen des Konzepts <i>Maschine</i> und den Fertigstellungsgrad des Werkstücks als Instanzen des Konzepts <i>Werkstück</i>. Der Ablauf, in dem die Werkstücke bearbeitet werden, ergibt sich dann aus den Beziehungen der einzelnen Instanzen von Werkstücken und Maschinen.
     <br /><br />
 
-   Anhand der Ontologie in Abbildung 3 bearbeiten wir die Anfrage, in welcher Beziehung das unbearbeitete und fertige Werkstück zueinander stehen. Die Antwort auf diese Anfrage beinhaltet sowohl Werkstücke als auch Maschinen und repräsentiert den Produktionsablauf.
+   Anhand der Ontologie in Abbildung 3 bearbeiten wir die Anfrage, in welcher Beziehung das unbearbeitete und fertige Werkstück zueinanderstehen. Die Antwort auf diese Anfrage beinhaltet sowohl Werkstücke als auch Maschinen und repräsentiert den Produktionsablauf.
 </div>
 </div>
 </div>
@@ -14757,7 +14757,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><div style="text-align: justify">
-    Ontologien erlauben es uns, Wissen über ein bestimmtes Umfeld effizient in eine für Maschinen verständliche Form zu bringen und dynamisch Anfragen zu verarbeiten. Umfangreiche Software Pakete zur Formulierung und Abfrage von Ontologien sind gratis verfügbar und ermöglichen die Verarbeitung von Ontologien mit nur wenig Rechenleistung. 
+    Ontologien erlauben es uns, Wissen über ein bestimmtes Umfeld effizient in eine für Maschinen verständliche Form zu bringen und dynamisch Anfragen zu verarbeiten. Umfangreiche Softwarepakete zur Formulierung und Abfrage von Ontologien sind gratis verfügbar und ermöglichen die Verarbeitung von Ontologien mit nur wenig Rechenleistung. 
     <br /><br />
 
     Mittels Logikprogrammierung können wir Planungsprobleme in Form von Einschränkungen formulieren und automatisch lösen lassen. In diesem Use Case wurden Ontologien mit Logikprogrammierung gekoppelt, um ein Planungsproblem in der Produktion autonom, auf Basis von Expertenwissen über den Produktionsablauf, zu planen. Die Kombination von Logikprogrammierung und Ontologien erlaubt es uns, den Produktionsablauf direkt aus den Informationen über die Produktionsschritte zu planen. Hier liegt auch der große Vorteil gegenüber einer statischen Produktionsplanung: Ändern sich Aspekte der Produktion, können diese in die Ontologie eingespielt werden. Anschließend wird der Produktionsplan autonom überarbeitet.
@@ -15003,13 +15003,13 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Nach dem Festlegen der Zeitslots als Z3 Variablen, itierieren wir über jedes Teil und jeden Zeitslot an dem die Produktion des Teils starten kann. Die Verschachtelung der Iterationen erfolgt dabei so:</p>
+<p>Nach dem Festlegen der Zeitslots als Z3 Variablen, iterieren wir über jedes Teil und jeden Zeitslot an dem die Produktion des Teils starten kann. Die Verschachtelung der Iterationen erfolgt dabei so:</p>
 <ul>
 <li>Iteration über alle möglichen Zeitpunkte an denen die Produktion eines Teils starten kann:<ul>
 <li>Iteration über alle Verarbeitungsschritte:</li>
 <li>Iteration über alle Maschinen im aktuellen Verarbeitungsschritt:<ul>
 <li>Aufstellen der Einschränkung, dass das aktuelle Teil zur aktuellen Zeit in der aktuellen Maschine ist</li>
-<li>Aufstellen der Einschränkungen, dass das aktuelle Teil zur aktueleln Zeit in keiner anderen Maschine ist</li>
+<li>Aufstellen der Einschränkungen, dass das aktuelle Teil zur aktuellen Zeit in keiner anderen Maschine ist</li>
 <li>Aufstellen der Einschränkungen, dass das aktuelle Teil nie in einer Maschine gleichen Typs ist (da jeder Verarbeitungsschritt nur einmal ausgeführt wird)</li>
 </ul>
 </li>

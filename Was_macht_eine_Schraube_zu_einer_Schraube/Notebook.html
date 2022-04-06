@@ -14454,25 +14454,79 @@ all of MD as it is not optimized for dense, information rich UIs.
 </style>
 
 <style type="text/css">
+/* Misc */
 a.anchor-link {
-   display: none;
+  display: none;
 }
+
 .highlight  {
-    margin: 0.4em;
+  margin: 0.4em;
 }
 
 /* Input area styling */
 .jp-InputArea {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .jp-InputArea-editor {
-    overflow: hidden;
+  overflow: hidden;
+}
+
+.CodeMirror pre {
+  margin: 0;
+  padding: 0;
+}
+
+/* Using table instead of flexbox so that we can use break-inside property */
+/* CSS rules under this comment should not be required anymore after we move to the JupyterLab 4.0 CSS */
+
+
+.jp-CodeCell.jp-mod-outputsScrolled .jp-OutputArea-prompt {
+  min-width: calc(
+    var(--jp-cell-prompt-width) - var(--jp-private-cell-scrolling-output-offset)
+  );
+}
+
+.jp-OutputArea-child {
+  display: table;
+  width: 100%;
+}
+
+.jp-OutputPrompt {
+  display: table-cell;
+  vertical-align: top;
+  min-width: var(--jp-cell-prompt-width);
+}
+
+body[data-format='mobile'] .jp-OutputPrompt {
+  display: table-row;
+}
+
+.jp-OutputArea-output {
+  display: table-cell;
+  width: 100%;
+}
+
+body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
+  display: table-row;
+}
+
+.jp-OutputArea-output.jp-OutputArea-executeResult {
+  width: 100%;
 }
 
 @media print {
-  body {
-    margin: 0;
+  .jp-Collapser {
+    display: none;
+  }
+
+  .jp-Cell-inputWrapper,
+  .jp-Cell-outputWrapper {
+    display: block;
+  }
+
+  .jp-OutputArea-child {
+    break-inside: avoid-page;
   }
 }
 </style>
@@ -14513,17 +14567,33 @@ a.anchor-link {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Was-macht-eine-Schraube-zu-einer-Schraube?">Was macht eine Schraube zu einer Schraube?<a class="anchor-link" href="#Was-macht-eine-Schraube-zu-einer-Schraube?">&#182;</a></h1>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Storyboard">Storyboard<a class="anchor-link" href="#Storyboard">&#182;</a></h2>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
     In der Technikum Digital Factory stellen wir zurzeit Roboter für Forschung- und Ausbildungszwecke her. Die Maschinen in der Fertigungsstraße werden dabei automatisch mit belieferten Komponenten wie z.B. Schrauben bestückt, damit die Produktion vollautomatisch abläuft. Durch diesen hohen Grad der Automatisierung fällt es aber oftmals erst spät auf, wenn fehlerhafte oder beschädigte Komponenten geliefert wurden. Beschädigungen fallen oft erst dadurch auf, dass das Teil nicht eingebaut werden kann; wodurch die ganze Maschine zum Stehen kommen kann. Also liegt es nahe, Schrauben und andere Teile vor dem Bestücken der Maschine zu kontrollieren. Da die händische Kontrolle bei großen Stückzahlen sehr zeitaufwändig ist, wollen wir diese automatisiert durchführen.
@@ -14535,84 +14605,144 @@ a.anchor-link {
     Um diese Frage zu beantworten, wollen wir mittels eines Kamerabilds Schrauben auf Beschädigungen überprüfen, bevor sie in eine Maschine eingelegt werden. Da die Produktion aber noch nicht in vollem Gange ist, haben wir nur einige wenige beschädigte Schrauben als Referenz zur Verfügung. Also können wir nur wenige Beispielbilder von beschädigten Schrauben aufnehmen, um unser System zu trainieren.
     <br /><br />
 
-    Wir benötigen also ein System welches lernt, visuell beschädigte von unbeschädigten Schrauben zu unterscheiden. Aber was macht eine Schraube überhaupt zu einer beschädigten Schraube?
+    Wir benötigen also ein System, welches lernt, visuell beschädigte von unbeschädigten Schrauben zu unterscheiden. Aber was macht eine Schraube überhaupt zu einer beschädigten Schraube?
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Generative-Adversarial-Networks">Generative Adversarial Networks<a class="anchor-link" href="#Generative-Adversarial-Networks">&#182;</a></h3><div style="text-align: justify">
     In den AIAV Videos <a href="https://www.youtube.com/watch?v=5dJyt0m5PJw&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=31">Classifier vs. Detector</a>, <a href="https://www.youtube.com/watch?v=cdVDMm5Wscc&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=35">CNN Classifier</a>, <a href="https://www.youtube.com/watch?v=ioDdAE6AOMQ&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=39">Multinomial Naive Bayes Classifier</a> und <a href="https://www.youtube.com/watch?v=yhY9O-5BW74&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=40">Gaussian Naive Bayes Classifier</a> haben wir uns bereits verschiedene Arten der Klassifizierung angesehen. Dabei lernen Modelle bestimmte Aufgaben, z.B. das Erkennen eines Hammers, mithilfe von Trainingsdaten.
     <br /><br />
 
-    Dabei stellt sich die Frage, wo diese Daten für die Trainingssequenzen herkommen. Will man z.B. einen Hammer erkennen, braucht man mehrere Bilder von dem Hammer, den man erkennen will. Sollen jetzt mehrere verschiedene Arten von Hammern erkannt werden, sind mehrere Bilder von allen zu erkennenden Hammerarten notwendig. Die Anforderungen an qualitative Trainingsdaten werden schnell sehr hoch; je genereller die Klassifizierung, desto mehr Trainingsdaten braucht man.
+    Dabei stellt sich die Frage, wo diese Daten für die Trainingssequenzen herkommen. Will man z.B. einen Hammer erkennen, braucht man mehrere Bilder von dem Hammer, den man erkennen will. Sollen jetzt mehrere verschiedene Arten von Hämmern erkannt werden, sind mehrere Bilder von allen zu erkennenden Hammerarten notwendig. Die Anforderungen an qualitative Trainingsdaten werden schnell sehr hoch; je genereller die Klassifizierung, desto mehr Trainingsdaten braucht man.
     <br /><br />
 
-    Dieses Problem kann man mit <a href="https://ieeexplore.ieee.org/abstract/document/8253599">Generative Adversarial Networks (GAN)</a> umgehen. Die Idee von GANs ist es, zwei neuronale Netzwerke (siehe AIAV Video <a href="https://www.youtube.com/watch?v=pmfIJ3XUw2c&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=37">Klassische Neuronale Netze</a>) gegeinander antreten zu lassen. Diese beiden Netzwerke heißen Generator und Diskriminator. Die Aufgabe des Generators ist es, aus Rauschen Daten zu generieren, welche zu einem vorgegebenen Datensatz passen. Der Diskriminator versucht dann, die echten von den genierierten Daten zu unterscheiden.
+    Dieses Problem kann man mit <a href="https://ieeexplore.ieee.org/abstract/document/8253599">Generative Adversarial Networks (GAN)</a> umgehen. Die Idee von GANs ist es, zwei neuronale Netzwerke (siehe AIAV Video <a href="https://www.youtube.com/watch?v=pmfIJ3XUw2c&list=PLfJEPw9Zb0EPLEZZlNCQc9F3F7RWG6EsK&index=37">Klassische Neuronale Netze</a>) gegeneinander antreten zu lassen. Diese beiden Netzwerke heißen Generator und Diskriminator. Die Aufgabe des Generators ist es, aus Rauschen Daten zu generieren, welche zu einem vorgegebenen Datensatz passen. Der Diskriminator versucht dann, die echten von den generierten Daten zu unterscheiden.
     <br /><br />
 
     Abbildung 1 zeigt echte sowie generierte Bilder von Schrauben. Die echten Bilder sind aus einem <a href="https://www.mvtec.com/company/research/datasets/mvtec-ad">offenen Datensatz</a>, während die generierten Bilder von einem, anhand diesen Datensatzes trainierten, GAN erzeugt wurden. Da das GAN anhand des Datensatzes trainiert wurde, erzeugt sein Generator Bilder, welche zu den bestehenden Bildern im Datensatz passen. Die echten Bilder wurden dabei auf die gleiche Auflösung (32x32 Pixel) skaliert, wie die Bilder aus dem GAN. Können Sie erkennen, welche Bilder echt sind und welche nicht?  
      </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung1Vergleich.jpg" width="600" /></p>
 <p><em>Abbildung 1: Hier sehen Sie echte sowie generierte Bilder von Schrauben. Die echten Bilder sind aus einem <a href="https://www.mvtec.com/company/research/datasets/mvtec-ad">offenen Datensatz</a>, während die generierten Bilder von einem, anhand diesen Datensatzes, trainierten Generative Adversarial Networks kommen. Können Sie erkennen, welche Bilder echt sind und welche nicht?</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
     Abbildung 2 zeigt den Ablauf, wie GANs trainiert werden. Zunächst erzeugt der Generator auf Basis eines rauschenden Signals eine Probe. Diese Probe entspricht einem Eintrag im Trainingsdatensatz. Danach wird eine weitere Probe, dieses Mal aus dem Trainingsdatensatz, genommen. Nun werden beide Proben in den Diskriminator gegeben, welcher für jede der Proben schätzt, ob diese echt, also aus dem Trainingsdatensatz ist, oder vom Generator erzeugt wurde. Während des Trainings wird dieser Ablauf mehrmals durchgeführt, mit dem Ziel, gleichzeitig Generator und Diskriminator zu optimieren.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung2KonzeptGAN.png" width="800" /></p>
 <p><em>Abbildung 2: Die Idee von Generative Adversarial Networks (GAN) ist es, gleichzeitig den Generator und einen Diskriminator zu trainieren. Der Generator versucht dabei aus Rauschen einen Ausgang zu erzeugen, welcher der Probe aus den Trainingsdaten ähnlich ist. Diese generierten Datenproben werden dann zusammen mit Proben aus dem Trainingsdatensatz dem Diskriminator übergeben. Die Aufgabe des Diskriminators ist dann zu unterscheiden, welche Proben echt und welche generiert sind. Der Ablauf von GAN ist hier mittels dem <a href="https://www.mvtec.com/company/research/datasets/mvtec-ad">Datensatz von Schraubenbildern</a> gezeigt.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify">
     Nach dieser Trainingssequenz können wir nun Generator und Diskriminator speichern und für andere Aufgaben verwenden. In unserem Beispiel kann der Generator nach genug Trainingsepisoden Bilder von Schrauben erzeugen, welche nicht von den Trainingsbildern unterscheidbar sind. Der Diskriminator hat währenddessen gelernt zu erkennen, ob das eingegebene Bild von einer Schraube ist, oder nicht.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Praktische-Implementierung">Praktische Implementierung<a class="anchor-link" href="#Praktische-Implementierung">&#182;</a></h3><div style="text-align: justify">
-    Für die praktische Implementierung des Usecases trainieren wir ein GAN anhand von aufgenommenen Bildern von unbeschädigten Schrauben. Dabei werden die Bilder zunächst als Graustufenbild eingelesen und auf eine Auflösung von 32 mal 32 Pixel skaliert. Die Skalierung auf so eine niedrige Auflösung ist notwendig, um den Rechenaufwand des Trainings gering zu halten. Nach dem Training werden Generator und Diskriminator zur Klassifizierung wiederverwendet. Dabei wird ein Modell zur <a href="https://arxiv.org/abs/1703.05921">Erkennung von Anomalien</a> basierend auf Generator und Diskriminator trainiert. Dieses entscheidet, ob neue und damit unbekannte Bilder die gleichen Merkmale aufweisen, wie die Bilder im Trainingsdatensatz.
+    Für die praktische Implementierung des Use Cases trainieren wir ein GAN anhand von aufgenommenen Bildern von unbeschädigten Schrauben. Dabei werden die Bilder zunächst als Graustufenbild eingelesen und auf eine Auflösung von 32 mal 32 Pixel skaliert. Die Skalierung auf so eine niedrige Auflösung ist notwendig, um den Rechenaufwand des Trainings gering zu halten. Nach dem Training werden Generator und Diskriminator zur Klassifizierung wiederverwendet. Dabei wird ein Modell zur <a href="https://arxiv.org/abs/1703.05921">Erkennung von Anomalien</a> basierend auf Generator und Diskriminator trainiert. Dieses entscheidet, ob neue und damit unbekannte Bilder die gleichen Merkmale aufweisen, wie die Bilder im Trainingsdatensatz.
     <br /><br />
 
-    Abbildung 3 zeigt den Ablauf der Lösung. Dabei führen wir die Trainingssequenz vorab anhand der Trainingsdaten durch und speichern die Trainierten Netzwerke ab, da der benötigte Rechenaufwand für das Training relativ hoch ist. Während des Betriebs lesen wir dann Schraubenbilder ein, bearbeiten sie genauso wie die Trainingsdaten vor und lassen das Modell entscheiden ob das Bild Anomalien aufweist. Anomalien sind in diesem Fall Beschädigungen an der Schraube.
+    Abbildung 3 zeigt den Ablauf der Lösung. Dabei führen wir die Trainingssequenz vorab anhand der Trainingsdaten durch und speichern die Trainierten Netzwerke ab, da der benötigte Rechenaufwand für das Training relativ hoch ist. Während des Betriebs lesen wir dann Schraubenbilder ein, bearbeiten sie genauso wie die Trainingsdaten vor und lassen das Modell entscheiden, ob das Bild Anomalien aufweist. Anomalien sind in diesem Fall Beschädigungen an der Schraube.
     </div>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/Abbildung3KonzeptImplementierung.png" width="700" /></p>
-<p><em>Abbildung 3: Wir verwenden Generator und Diskriminator aus dem GAN wieder, um zu erkenen ob unsere Schrauben beschädigt sind. Die beschädigten Schrauben passen sie nicht zu den Schrauben aus dem Trainingsdatensatz und werden daher als beschädigt erkannt.</em></p>
+<p><em>Abbildung 3: Wir verwenden Generator und Diskriminator aus dem GAN wieder, um zu erkennen ob unsere Schrauben beschädigt sind. Die beschädigten Schrauben passen sie nicht zu den Schrauben aus dem Trainingsdatensatz und werden daher als beschädigt erkannt.</em></p>
 
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><div style="text-align: justify">
 Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug Daten für das Training von anderen Arten von Modellen vorhanden sind. Obwohl wir mit kleinen Neuronalen Netzwerken und in einer niedrigen Auflösung von 32x32 Pixeln gearbeitet haben, war die benötigte Rechenleistung für das Training relativ hoch. Dafür sind GANs aber eine sehr flexible Lösung. Vor allem in Kombination mit anderen Verfahren aus AI erlauben sie es uns, praktische Probleme zu lösen, ohne zuerst eine große Menge an Trainingsdaten aufnehmen zu müssen.
     </div><P style="page-break-before: always">
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Codedokumentation">Codedokumentation<a class="anchor-link" href="#Codedokumentation">&#182;</a></h2>
 </div>
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Die Implementierung wurde mit <a href="https://github.com/plaidml/plaidml">PlaidML</a> als Machine Learning Bibliothek und <a href="https://keras.io/">Keras</a> als Anwenderinterface für die Bibliothek in <a href="https://www.python.org/">Python 3</a> realisiert. <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> und <a href="https://pypi.org/project/opencv-python/">opencv-python</a> wurden für allgemeine Bildverarbeitung und <a href="https://matplotlib.org/">Matplotlib</a> sowie <a href="https://numpy.org/">Numpy</a> für Visualisierung und Datenmanagement genutzt. PlaidML wurde für die Implementierung gewählt, da mit dieser Bibliothek das Training mit Grafikkarten von allen gängigen Herstellern beschleunigt werden kann. Dadurch, dass relativ viele Trainingsepisoden (70000 im Beispiel oben) durchgeführt werden müssen, benötigt diese Lösung zum Training die Beschleunigung durch eine Grafikkarte. Als Basis für die Implementierung wurden zwei Paper zu <a href="https://arxiv.org/pdf/1511.06434.pdf">Representation Learning mit GANs</a> und <a href="https://link.springer.com/chapter/10.1007/978-3-319-59050-9_12">Anomalieerkennung mittels GANs</a> sowie zwei Implementierungen auf Github <a href="https://github.com/tkwoo/anogan-keras">[1]</a>, <a href="https://github.com/neverrop/anogan_1">[2]</a> verwendet.</p>
 <h3 id="Aufbau-der-Applikation">Aufbau der Applikation<a class="anchor-link" href="#Aufbau-der-Applikation">&#182;</a></h3><p>Das Skript <a href="./app/prepareWorkspace.sh"><em>prepareWorkspace.sh</em></a> installiert automatisch alle benötigten Software Komponenten in einem Python 3 Virtual Environment, lädt die Trainingsdaten herunter und bearbeitet die Trainingsbilder vor. Das Skript führt dabei auch die Konfiguration von PlaidML durch, bei welcher Sie einfach den Anweisungen am Terminal folgen können. Dabei kann die Grafikkarte als Methode zur Beschleunigung des Trainings ausgewählt werden. Bitte beachten Sie, dass das Training selbst mit Grafikkarte mehrere Stunden dauert.</p>
@@ -14620,11 +14750,15 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 <p>Nach erfolgreichem Training können sie das <a href="./app/anomalyDetection.py">anomalyDetection.py</a> Skript ausführen, um ein Bild aus den Testdaten zu laden und auf Beschädigungen zu untersuchen. Die Ergebnisse werden vom Programm visualisiert.</p>
 <p>Das Skript <a href="./app/deleteWorkspace.sh"><em>deleteWorkspace.sh</em></a> löscht den Workspace sowie alle heruntergeladenen und generierten Dateien.</p>
 <h3 id="Vorbereitung-der-Bilder">Vorbereitung der Bilder<a class="anchor-link" href="#Vorbereitung-der-Bilder">&#182;</a></h3><p>Zunächst werden alle benötigten Module importiert und einige Funktionen zur Bildverarbeitung implementiert. <em>readImageDir</em> liest alle Bilder in einem Verzeichnis ein, <em>clusterImage</em> wendet <a href="https://docs.opencv.org/4.5.2/d1/d5c/tutorial_py_kmeans_opencv.html">K-Means Clustering</a> auf ein Bild an um ein Bild in eine Bestimmte Anzahl an Bereichen aufzuteilen, <em>getBiggestContour</em> ermittelt die größte durchgehende Kontur in einem Bild, <em>getMask</em> ermittelt die Maske zur Hintergrundentfernung und <em>removeBackground</em> wendet diese Maske an, um den Hintergrund zu entfernen.</p>
-<p><em>preProcessImages</em> führt die Konvertierung zu Graustufen, Skalierung und optionale Hintergrundentfernung für alle eingelesenen Bilder durch. Skalierung und Konvertierung zu Graustufen werden dabei mittels OpenCV durchgeführt. Für die Hintergrundentfernung wird das skalierte Graustufenbild zunächst auf Konturen im Bild untersucht. Diese werden eingezeichnet und gefüllt, um die Schraube grob vom Hintergrund zu tennen. Da dabei aber durch die Belichtung einige Artefakte entstehen, wenden wir Unschärfe auf das Bild an und verwenden K-Means Clustering, um das Bild in zwei Bereiche aufzuteilen. Diese Bereiche werden mittels Konturerkennung noch einmal klar getrennt, um den Hintergrund bestmöglich von der Schraube zu unterscheiden.</p>
+<p><em>preProcessImages</em> führt die Konvertierung zu Graustufen, Skalierung und optionale Hintergrundentfernung für alle eingelesenen Bilder durch. Skalierung und Konvertierung zu Graustufen werden dabei mittels OpenCV durchgeführt. Für die Hintergrundentfernung wird das skalierte Graustufenbild zunächst auf Konturen im Bild untersucht. Diese werden eingezeichnet und gefüllt, um die Schraube grob vom Hintergrund zu trennen. Da dabei aber durch die Belichtung einige Artefakte entstehen, wenden wir Unschärfe auf das Bild an und verwenden K-Means Clustering, um das Bild in zwei Bereiche aufzuteilen. Diese Bereiche werden mittels Konturerkennung noch einmal klar getrennt, um den Hintergrund bestmöglich von der Schraube zu unterscheiden.</p>
 
+</div>
+</div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14757,13 +14891,21 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Wir lesen nun die Trainingsbilder ein und bereiten diese mittels den oben vorgestellten Bildverarbeitungsfunktionen vor. Dabei werden die Bilder auf eine Auflösung von 32x32 Pixel skaliert. Diese Skalierung ist notwendig um die Benötigte Rechenleistung für das Training so gering zu halten, dass es auf normalen PCs mit Grafikkarte durchfürhbar ist. Anschließend werden die Bilder als numpy Datei abgespeichert, damit sie im Trainingsskript verwendet werden können.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14789,13 +14931,21 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Training-des-Generative-Adversarial-Networks">Training des Generative Adversarial Networks<a class="anchor-link" href="#Training-des-Generative-Adversarial-Networks">&#182;</a></h3><p>Nach Vorbearbeitung der Bilder werden Generator, Diskriminator und ein kombiniertes Modell aus den beiden mittels Keras definiert. Der Generator nimmt dabei einen Vektor der Länge 128 als Eingang und ein Graustufenbild mit einer Auflösung von 32x32 Pixeln als Ausgang. Dieser Eingangsvektor wird auch latente Variable genannt und mit zufälligen Werten aus einer Gleichverteilung gefüllt. Aus diesen Werten soll der Generator Bilder erzeugen.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14835,13 +14985,21 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Der Diskriminator nimmt ein 32x32 Graustufenbild als Eingang und hat einen einzigen Wert als Ausgang. Dieser Ausgangswert gibt an, ob der Diskriminator das eingegebene Bild als echt oder unecht einschätzt.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14876,13 +15034,21 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Das Kombinierte Modell setzt Generator und Diskriminator zusammen. Damit nimmt es die latente Variable als Eingang und die Einschätzung, ob das Bild echt oder unecht ist, als Ausgang.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -14902,14 +15068,22 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Anschließend implementieren wir die GAN Klasse. Diese instanziert und trainiert die oben gezeigten Modelle. Die durchgeführten Schritte sind dabei in jeder Trainingsepoche gleich: Zufällige Werte für die latente Variable werden ermittelt. Aus diesen erzeugt der Generator Bilder. Diese werden dann gemeinsam mit Bildern aus dem Trainingsdatensatz zum training des Diskriminators verwendet. Dabei markieren wir die generierten Bilder als unecht (0) und die Bilder aus den Trainingsdaten als echt (1).</p>
-<p>Dannach nehmen wir die Gewichte des Diskriminator als nicht trainierbar an, um mittels des kombinierten Modells den Generator zu trainieren. Dabei geben wir die zufälligen Werte der latenten Variable als Eingang und die Einschätzung, das Bild sei echt, als Ausgang an. Da der Diskriminator im gemeinsamen Modell nicht trainierbar ist, muss der Generator also lernen realistischere Bilder zu erzeugen, damit der gewünschte Ausgangswert erreicht wird.</p>
+<p>Anschließend implementieren wir die GAN Klasse. Diese instanziiert und trainiert die oben gezeigten Modelle. Die durchgeführten Schritte sind dabei in jeder Trainingsepoche gleich: Zufällige Werte für die latente Variable werden ermittelt. Aus diesen erzeugt der Generator Bilder. Diese werden dann gemeinsam mit Bildern aus dem Trainingsdatensatz zum Training des Diskriminators verwendet. Dabei markieren wir die generierten Bilder als unecht (0) und die Bilder aus den Trainingsdaten als echt (1).</p>
+<p>Danach nehmen wir die Gewichte des Diskriminator als nicht trainierbar an, um mittels des kombinierten Modells den Generator zu trainieren. Dabei geben wir die zufälligen Werte der latenten Variable als Eingang und die Einschätzung, das Bild sei echt, als Ausgang an. Da der Diskriminator im gemeinsamen Modell nicht trainierbar ist, muss der Generator also lernen realistischere Bilder zu erzeugen, damit der gewünschte Ausgangswert erreicht wird.</p>
 
+</div>
+</div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -15031,13 +15205,21 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Da alle benötigten Komponenten implementiert sind, kann das Training starten. Dazu werden die Trainingsdaten geladen und die GAN Klasse instanziert. Die GAN Klasse speichert dann eine Visualisierung der Trainingsdaten als Bild ab, bevor das Training gestartet wird. Wir trainieren das GAN für 70000 Episoden und erzeugen in jeder Episode 64 Bilder. Eine Visualisierung der generierten Bilder, sowie die aktuellen Modelle werden alle 5000 Episoden abgespeichert.</p>
+<p>Da alle benötigten Komponenten implementiert sind, kann das Training starten. Dazu werden die Trainingsdaten geladen und die GAN Klasse instanziiert. Die GAN Klasse speichert dann eine Visualisierung der Trainingsdaten als Bild ab, bevor das Training gestartet wird. Wir trainieren das GAN für 70000 Episoden und erzeugen in jeder Episode 64 Bilder. Eine Visualisierung der generierten Bilder, sowie die aktuellen Modelle werden alle 5000 Episoden abgespeichert.</p>
 
+</div>
+</div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -15064,13 +15246,21 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Erkennung-von-Anomalien">Erkennung von Anomalien<a class="anchor-link" href="#Erkennung-von-Anomalien">&#182;</a></h3><p>Nach erfolgreichem Training können Generator und Diskriminator zur Erkennung von beschädigten Schrauben eingesetzt werden. Dazu importieren wir zunächst die benötigten Module und implementieren einige Hilfsfunktionen.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
@@ -15153,14 +15343,22 @@ Generative Adversarial Networks erlauben es uns zu lernen, auch wenn nicht genug
 </div>
 
 </div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Anschließend öffnen wir die Testbilder, bearbeiten diese vor und laden die trainieren Modelle. Dabei wird auf Basis von Generator und Diskriminator ein neues Modell trainiert, welches verschiedenen Bildbereichen einen Anomalie Score zuweist.</p>
 <p>Die Einschätzung, ob es sich bei bestimmten Bildbereichen um Anomalien handelt, wird anschließend mittels Matplotlib visualisiert.</p>
 
 </div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
