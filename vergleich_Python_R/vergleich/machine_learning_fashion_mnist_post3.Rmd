@@ -1,0 +1,364 @@
+---
+title: Vergleich von verschiedenen KI-Klassifizierungsmethoden am Beispiel des Fashion
+  MNIST-Datensatzes in RStudio und Python (Teil 3)
+author: "Lars Mehnen"
+date: "11/03/2022"
+output:
+  pdf_document: default
+  html_document:
+    mathjax: default
+---
+
+In dieser Reihe werde wir verschiedene maschinelle und Deep-Learning-Methoden vergleichen, um Kleidungsklassen anhand von Bildern des Fashion MNIST-Datensatzes zu erstellen bzw. mit dem erstellten Modellen zu klassifizieren. 
+Wir haben die Hauptkomponentenanalyse (PCA) verwendet, um die Datendimensionalität zu reduzieren, und eine Funktion geschrieben, um die Leistung der Modelle zu bewerten, die wir in diesem Beitrag schätzen werden, nämlich baumbasierte Methoden (Random Forests und Boosting).
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, load library install keras}
+library(devtools)
+devtools::install_github("rstudio/keras")
+library(keras)        
+#install_keras()  
+fashion_mnist = keras::dataset_fashion_mnist()
+library(magrittr)
+c(train.images, train.labels) %<-% fashion_mnist$train
+c(test.images, test.labels) %<-% fashion_mnist$test
+train.images = data.frame(t(apply(train.images, 1, c))) / max(fashion_mnist$train$x)
+test.images = data.frame(t(apply(test.images, 1, c))) / max(fashion_mnist$train$x)
+pixs = ncol(fashion_mnist$train$x)
+names(train.images) = names(test.images) = paste0('pixel', 1:(pixs^2))
+train.labels = data.frame(label = factor(train.labels))
+test.labels = data.frame(label = factor(test.labels))
+train.data = cbind(train.labels, train.images)
+test.data = cbind(test.labels, test.images)
+cloth_cats = c('Top', 'Trouser', 'Pullover', 'Dress', 'Coat',  
+                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Boot')
+train.classes = factor(cloth_cats[as.numeric(as.character(train.labels$label)) + 1])
+test.classes = factor(cloth_cats[as.numeric(as.character(test.labels$label)) + 1])
+```
+
+
+```{r, load stats}
+library(stats)
+cov.train = cov(train.images)                      
+pca.train = prcomp(cov.train)
+plotdf = data.frame(index = 1:(pixs^2), 
+                    cumvar = summary(pca.train)$importance["Cumulative Proportion", ])
+pca.dims = which(plotdf$cumvar >= .995)[1]
+pca.rot = pca.train$rotation[, 1:pca.dims]  
+train.images.pca = data.frame(as.matrix(train.images) %*% pca.rot)
+test.images.pca  = data.frame(as.matrix(test.images) %*% pca.rot)
+train.data.pca = cbind(train.images.pca, label = factor(train.data$label))
+test.data.pca = cbind(test.images.pca, label = factor(test.data$label))
+```
+
+
+```{r, work with the preconditioned data}
+model_performance = function(fit, trainX, testX, trainY, testY, model_name){
+  
+  # Predictions on train and test data for different types of models
+  if (any(class(fit) == "rpart")){
+    
+    library(rpart)
+    pred_train = predict(fit, newdata = trainX, type = "class")
+    pred_test = predict(fit, newdata = testX, type = "class")
+    
+  } else if (any(class(fit) == "train")){
+    
+    library(data.table)
+    pred_dt = as.data.table(fit$pred[, names(fit$bestTune)]) 
+    names(pred_dt) = names(fit$bestTune)
+    index_list = lapply(1:ncol(fit$bestTune), function(x, DT, tune_opt){
+      return(which(DT[, Reduce(`&`, lapply(.SD, `==`, tune_opt[, x])), .SDcols = names(tune_opt)[x]]))
+    }, pred_dt, fit$bestTune)
+    rows = Reduce(intersect, index_list)
+    pred_train = fit$pred$pred[rows]
+    pred_test = predict(fit, newdata = testX)
+    trainY = fit$pred$obs[rows]
+    
+  } else {
+    
+    print(paste0("Error: Function evaluation unknown for object of type ", class(fit)))
+    break
+    
+  }
+  
+  # Performance metrics on train and test data
+  library(MLmetrics)
+  df = data.frame(accuracy_train = Accuracy(trainY, pred_train),
+                  precision_train = Precision(trainY, pred_train),
+                  recall_train = Recall(trainY, pred_train),
+                  F1_train = F1_Score(trainY, pred_train), 
+                  accuracy_test = Accuracy(testY, pred_test),
+                  precision_test = Precision(testY, pred_test),
+                  recall_test = Recall(testY, pred_test),
+                  F1_test = F1_Score(testY, pred_test),
+                  model = model_name)
+  
+  print(df)
+  
+  return(df)
+}
+```
+
+# Entscheidungsbaum basierte Methoden
+¸
+In diesem ersten Unterabschnitt werden wir verschiedene baumbasierte Methoden vergleichen: `Random Forests` und `Gradient-Boosted Trees`. 
+Baumbasierte Verfahren segmentieren den Prädiktorraum in eine Anzahl einfacherer Teile unter Verwendung einiger Entscheidungsregeln, die in einem Entscheidungsbaum zusammengefasst werden können. Der Fokus liegt hier auf `Klassifikationsbäumen`, da die Ergebnisvariable des Fashion MNIST Datensatzes kategorial ist und 10 Klassen beinhaltet. Leider haben Einzelbäume im Vergleich zu anderen Klassifikationsansätzen wie der `logistischen Regression` oder der `Diskriminanzanalyse` eine relativ geringe Vorhersagekraft. Um die Vorhersagegenauigkeit zu verbessern, aggregieren Ensemble-Methoden viele einzelne Entscheidungsbäume. Dadurch bieten sie eine einfache Möglichkeit, die Vorhersagegüte zu verbessern und gleichzeitig die Varianz zu verringern. Im Folgenden werden wir `Random Forests` und `Gradient-Boosted Trees` als Ensemble-Methoden anwenden. Erstere sind einfacher zu implementieren, da sie robuster gegenüber Überanpassung sind und weniger Abstimmung erfordern, während letztere im Allgemeinen andere baumbasierte Methoden in Bezug auf Vorhersagegenauigkeit übertreffen. Die Modelle werden hier im überwachten Modus (`supervides learning`) eingesetzt, da `gelabelte` Daten verfügbar sind und das Ziel darin besteht, Klassen vorherzusagen. 
+Der Vorteil von Entscheidungsbäumen besteht darin, dass sie leicht zu interpretieren und zu visualisieren sind. Der Nachteil besteht darin, dass sie tendenziell unter einer hohen Varianz leiden. Das heißt, wenn wir einen Datensatz in zwei Hälften teilen und einen Entscheidungsbaum auf beide Hälften anwenden, können die Ergebnisse sehr unterschiedlich sein.
+
+Eine Möglichkeit, die Varianz von Entscheidungsbäumen zu verringern, besteht in der Verwendung einer als Bagging bezeichneten Methode, die wie folgt funktioniert:
+
+1. Nehmen Sie $b$ Bootstrap-Proben aus dem Originaldatensatz.
+
+2. Erstellen Sie einen Entscheidungsbaum für jedes Bootstrap-Beispiel.
+
+3. Berechnen Sie den Durchschnitt der Vorhersagen jedes Baums, um ein endgültiges Modell zu erhalten.
+
+Der Vorteil dieses Ansatzes besteht darin, dass ein Bagged-Modell in der Regel eine Verbesserung der Testfehlerrate im Vergleich zu einem einzelnen Entscheidungsbaum bietet.
+
+Der Nachteil ist, dass die Vorhersagen aus der Sammlung von Bagged-Trees stark korreliert sein können, wenn der Datensatz zufällig einen sehr starken Prädiktor enthält. In diesem Fall verwenden die meisten Bagged-Trees genau diesen Prädiktor für die erste Aufteilung, was zu Bäumen führt, die einander ähnlich sind und stark korrelierte Vorhersagen aufweisen.
+
+Wenn wir also die Vorhersagen jedes Baums mitteln, um ein endgültiges Bagged-Modell zu erhalten, ist es möglich, dass dieses Modell die Varianz, im Vergleich zu einem einzelnen Entscheidungsbaum, nicht wesentlich reduziert.
+
+Eine Möglichkeit, dieses Problem zu umgehen, ist die Verwendung einer Methode, die als `zufällige Gesamtstrukturen` bezeichnet wird.
+
+## Random Forest
+
+Einzelne nicht beschnittene und beschnittene (`pruned`) Klassifikationsbäume schneiden oft nicht sehr gut ab (64 % Genauigkeit auf dem Testsatz). `Random Forests` verwenden `Bootstrap-Aggregation`, um die Varianz der Ergebnisse zu reduzieren. 
+
+Ähnlich wie beim Bagging nehmen Random Forests auch $b$ Bootstrap-Proben aus einem Originaldatensatz.
+
+Wenn jedoch ein Entscheidungsbaum für jede Bootstrap-Stichprobe erstellt wird, wird jedes Mal, wenn eine Teilung in einem Baum berücksichtigt wird, nur eine zufällige Stichprobe von $m$ Prädiktoren als Teilungskandidaten aus dem vollständigen Datensatz von $p$ Prädiktoren betrachtet.
+
+Hier ist die vollständige Methode, mit der zufällige Gesamtstrukturen ein Modell erstellen:
+
+1. Nehmen Sie $b$ Bootstrap-Proben aus dem Originaldatensatz.
+
+2. Erstellen Sie einen Entscheidungsbaum für jedes Bootstrap-Beispiel. Beim Erstellen des Baums wird jedes Mal, wenn eine Teilung berücksichtigt wird, nur eine zufällige Stichprobe von $m$ Prädiktoren als Teilungskandidaten aus dem vollständigen Datensatz von $p$ Prädiktoren betrachtet. 
+
+3. Danach bilden des Durchschnitts der Vorhersagen jedes Baums, um ein endgültiges Modell zu erhalten.
+
+Mit dieser Methode wird die Menge von Bäumen in einem Random Forest, im Vergleich zu den durch Bagging erzeugten Bäume, dekorreliert.
+
+Wenn wir also die durchschnittlichen Prädikationen jedes Baums verwenden, um ein endgültiges Modell zu erhalten, weisen diese tendenziell eine geringere Variabilität auf und führen zu einer geringeren Testfehlerrate im Vergleich zu einem der vorhergendenden Modelle.
+
+Bei der Verwendung zufälliger Gesamtstrukturen betrachten wir normalerweise m = √ p-Prädiktoren, jedes Mal als Kandidaten, wenn wir einen Entscheidungsbaum teilen.
+
+Wenn wir beispielsweise p = 16 Gesamtprädiktoren in einem Datensatz haben, betrachten wir normalerweise nur m = √16 = 4 Prädiktoren als potenzielle Split-Kandidaten bei jedem Split.
+
+    Technischer Hinweis: Es ist interessant festzustellen, dass wenn wir m = p wählen 
+    (d.h. alle Prädiktoren bei jedem Split als Split-Kandidaten betrachten), 
+    dies der einfachen Verwendung von Bagging entspricht.
+
+Out-of-Bag-Fehlerschätzung
+
+Ähnlich wie beim Bagging können wir den Testfehler eines Random Forest-Modells mithilfe der Out-of-Bag-Schätzung berechnen.
+
+Es kann gezeigt werden, dass jedes Bootstrap-Beispiel etwa 2/3 der Beobachtungen aus dem Originaldatensatz enthält. Das verbleibende Drittel der Beobachtungen, die nicht zur Anpassung an den Baum verwendet wurden, werden als OOB-Beobachtungen (Out-of-Bag) bezeichnet.
+
+Wir können den Wert für die i-te Beobachtung im Originaldatensatz vorhersagen, indem wir die durchschnittliche Vorhersage von jedem der Bäume nehmen, in denen diese Beobachtung OOB war.
+
+Mit diesem Ansatz können wir eine Vorhersage für alle n Beobachtungen im Originaldatensatz erstellen und so eine Fehlerrate berechnen, die eine gültige Schätzung des Testfehlers darstellt.
+
+Der Vorteil dieses Ansatzes zur Schätzung des Testfehlers besteht darin, dass er viel schneller als die k-fache Kreuzvalidierung ist, insbesondere wenn der Datensatz groß ist.
+
+Die Vor- und Nachteile von Random Forests
+
+Vorteile:
+
+    In den meisten Fällen bieten Random Forests eine Verbesserung der Genauigkeit 
+    im Vergleich zu Bagging-Modellen und insbesondere im Vergleich zu Einzelentscheidungsbäumen.
+    Random Forests sind robust gegenüber Ausreißern.
+    Für die Verwendung zufälliger Gesamtstrukturen ist keine Vorverarbeitung erforderlich.
+
+Nachteile:
+
+    Sie sind schwer zu interpretieren.
+    Sie können rechenintensiv (d.h. langsam) sein, um auf großen Datenmengen aufzubauen. 
+    In der Praxis verwenden Datenwissenschaftler normalerweise zufällige Gesamtstrukturen, 
+    um die Vorhersagegenauigkeit zu maximieren, sodass die Tatsache, dass sie nicht leicht 
+    zu interpretieren sind, normalerweise kein Problem darstellt.
+
+Wir beginnen damit, die Anzahl der Variablen zu optimieren, die zufällig als Kandidaten bei jedem Split (`mtry`) ausgewählt werden, wofür wir das `caret`-Framework verwenden. Der Vorteil des `caret`-Frameworks besteht darin, dass wir eine große Anzahl (zum Zeitpunkt des Schreibens 238) verschiedener Modelltypen mithilfe von Kreuzvalidierung mit ähnlichen Codezeilen und Daten-Strukturen leicht trainieren und evaluieren können. Für unsere `random-forest` lassen wir die Methode `repeatedcv` eine fünffache Kreuzvalidierung mit fünf Wiederholungen durchführen. Im Moment bauen wir einen `random-forest` mit 200 Bäumen auf, da frühere Analysen mit diesen Daten gezeigt haben, dass der Fehler nicht wesentlich abnimmt, wenn die Anzahl der Bäume größer als 200 ist, während eine größere Anzahl von Bäumen mehr Rechenleistung erfordert. Wir werden später sehen, dass 200 Bäume für diese Analyse tatsächlich ausreichen. Wir lassen den Algorithmus bestimmen, welches das beste Modell ist (basierend auf der Genauigkeitsmetrik), und lassen den Algorithmus, das Modell für pca.dims (=17) verschiedene Werte von `mtry` ausprobieren. Wir spezifizieren zunächst die Parameter in `rf_rand_control`: Wir führen eine 5-fache Kreuzvalidierung mit 5 Wiederholungen durch (`method = "cv"`, `number = 5` and `repeats = 5`), erlauben eine parallele Berechnung (`allowParallel = TRUE`) und speichern die vorhergesagten Werte (`savePredictions = TRUE`).
+
+```{r , load caret and train random forest}
+library(caret)
+rf_rand_control = trainControl(method = "repeatedcv", 
+                             search = "random", 
+                             number = 5, 
+                             repeats = 5, 
+                             allowParallel = TRUE, 
+                             savePredictions = TRUE)
+set.seed(815)
+rf_rand = train(x = train.images.pca, 
+                 y = train.data.pca$label,
+                 method = "rf", 
+                 ntree = 200,
+                 metric = "Accuracy", 
+                 trControl = rf_rand_control, 
+                 tuneLength = pca.dims
+                ) 
+```
+
+```{r, print rand}
+print(rf_rand)
+```
+
+```{r, find out performance}
+mp.rf.rand = model_performance(rf_rand, train.images.pca, test.images.pca, 
+                               train.data.pca$label, test.data.pca$label, "random_forest_random")
+```
+
+Wir können auch das `caret`-Framework verwenden, um eine Rastersuche mit vordefinierten Werten für `mtry` anstelle einer zufälligen Suche wie oben durchzuführen.
+
+```{r, grid search}
+rf_grid_control = trainControl(method = "repeatedcv", 
+                             search = "grid", 
+                             number = 5, 
+                             repeats = 5, 
+                             allowParallel = TRUE, 
+                             savePredictions = TRUE)
+set.seed(815)
+rf_grid = train(x = train.images.pca, 
+                 y = train.data.pca$label,
+                 method = "rf", 
+                 ntree = 200,
+                 metric = "Accuracy", 
+                 trControl = rf_grid_control,
+                 tuneGrid = expand.grid(.mtry = c(1:pca.dims)))
+```
+
+```{r , plot grid}
+plot(rf_grid)
+```
+
+```{r, model performance of grid}
+mp.rf.grid = model_performance(rf_grid, train.images.pca, test.images.pca, 
+                               train.data.pca$label, test.data.pca$label, "random_forest_grid")
+```
+
+Wie die Ergebnisse zeigen, wählt die Zufallssuche "mtry=4" als optimalen Parameter aus, was zu 85 % Trainings- und Testsatzgenauigkeit führt. Die Grid-Suche wählt `mtry=5` aus und erreicht ähnliche Genauigkeiten für beide Werte von 4 und 5 für `mtry`. Wir können den Ergebnissen entnehmen, dass laut `rf_rand` `mtry`-Werte von 4 und 5 zu sehr ähnlichen Ergebnissen führen, was auch für `mtry`-Werte von 5 und 6 für `rf_grid` gilt. Obwohl die Ergebnisse von `rf_rand` und `rf_grid` sehr ähnlich sind, wählen wir anhand der Genauigkeit das beste Modell aus und speichern dieses in `rf_best`. Für dieses Modell betrachten wir die Beziehung zwischen dem Fehler und der `random forest` Größe sowie die Receiver Operating Characteristic (ROC)-Kurven für jede Klasse. Beginnen wir damit, das beste Modell von `rf_rand` und `rf_grid` zu subtrahieren.
+
+```{r, show the best performing model}
+rf_models = list(rf_rand$finalModel, rf_grid$finalModel)
+rf_accs = unlist(lapply(rf_models, function(x){ sum(diag(x$confusion)) / sum(x$confusion) }))
+rf_best = rf_models[[which.max(rf_accs)]]
+```
+
+Als nächstes zeigen wir die Beziehung zwischen der Größe des `random forest` und dem Fehler mit der Funktion `plot()` aus dem Paket `randomForest` auf.
+
+```{r, load library randforest and plot best rf}
+library(randomForest)
+plot(rf_best, main = "Relation between error and random forest size")
+```
+
+Wir beobachten in diesem Diagramm, dass der Fehler für keine der Klassen nach etwa 100 Bäumen mehr abnimmt. Wir können daraus schließen, dass unsere `randomForest`-Größe von 200 ausreichend ist. Wir können auch die `varImpPlot()`-Funktion aus dem `randomForest`-Paket verwenden, um die Relevanz für jede Variable darzustellen. Wir werden das hier nicht vorzeigen, da es nicht so aussagekräftig ist, da unsere Variablen ja Hauptkomponenten der tatsächlichen Pixel sind, es is aber immer gut daran zu denken, wenn diese Analysen auf andere Daten ausgedehnt werden. Schließlich zeichnen wir die ROC-Kurven für jede Klasse. Die Fläche unter dieser Kurve ist der Anteil der korrekten Klassifikationen für diese bestimmte Klasse, je weiter also die Kurve von der 45-Grad-Linie nach oben links "gezogen" wird, desto besser ist die Klassifikation für diese Klasse. Auf der x-Achse eines ROC-Diagramms haben wir normalerweise die Falsch-Positiv-Rate (false positive / (true negative + false positive)) und auf der y-Achse die Richtig-Positiv-Rate (true positive / (true positive + false negative)). Im Wesentlichen hilft uns das ROC-Diagramm, die Leistung unseres Modells in Bezug auf die Vorhersage verschiedener Klassen zu vergleichen. Wir müssen zuerst die Daten für die ROC-Kurve für jede Klasse (oder Kleidungskategorie) in unseren Daten erhalten, die wir alle zeilenweise zusammen führen, einschließlich der Label für die Klassen.
+
+```{r, load ROCR  plyr plot ROC diagram}
+library(ROCR)
+library(plyr)
+pred_roc = predict(rf_best, test.images.pca, type = "prob")
+classes = unique(test.data.pca$label)
+classes = classes[order(classes)]
+plot_list = list()
+for (i in 1:length(classes)) { 
+  actual = ifelse(test.data.pca$label == classes[i], 1, 0)
+  pred = prediction(pred_roc[, i], actual)
+  perf = performance(pred, "tpr", "fpr")
+  plot_list[[i]] = data.frame(matrix(NA, nrow = length(perf@x.values[[1]]), ncol = 2))
+  plot_list[[i]]['x'] = perf@x.values[[1]]
+  plot_list[[i]]['y'] = perf@y.values[[1]]
+}
+plotdf = rbind.fill(plot_list)
+plotdf["Class"] = rep(cloth_cats, unlist(lapply(plot_list, nrow)))
+```
+
+Als nächstes zeichnen wir die ROC-Kurven für jede Klasse.
+
+```{r, plot ROC curve}
+library(ggplot2)
+my_theme = function () { 
+  theme_bw() + 
+    theme(axis.text = element_text(size = 14),
+          axis.title = element_text(size = 14),
+          strip.text = element_text(size = 14),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          panel.background = element_blank(), 
+          legend.position = "bottom",
+          strip.background = element_rect(fill = 'white', colour = 'white'))
+}
+ggplot() +
+  geom_line(data = plotdf, aes(x = x, y = y, color = Class)) + 
+  labs(x = "False positive rate", y = "True negative rate", color = "Class") +
+  ggtitle("ROC curve per class") + 
+  theme(legend.position = c(0.85, 0.35)) +
+  coord_fixed() + 
+  my_theme()
+```
+
+Wir beobachten anhand der ROC-Kurven, dass Hemden und Pullover am häufigsten falsch klassifiziert werden (wie wir zuvor anhand der Konfusionsmatrix gesehen haben), während Hosen, Taschen, Stiefel und Turnschuhe am häufigsten korrekt klassifiziert werden. Dies entspricht auch dem, was wir zuvor anhand der aufgetragenen Konfusionsmatrix beobachtet haben. Eine mögliche Erklärung könnte sein, dass Hemden und Pullover in ihrer Form anderen Kategorien wie Oberteilen, Mänteln und Kleidern sehr ähnlich sehen können, wohingegen Taschen, Hosen, Stiefel und Turnschuhe sich von anderen Kategorien doch mehr unterscheiden.
+
+## Gradient-Boosted Trees
+
+Während in `random forest`'s jeder Baum mithilfe einer zufälligen Datenstichprobe eigenständig erstellt und unabhängig trainiert wird, enthält jeder neu erstellte Baum beim Boosten den Fehler des zuvor erstellten Baums. Das heißt, die Bäume werden sequentiell auf einer angepassten Version der Anfangsdaten erstellt, die kein Bootstrap-Sampling erfordert. Aus diesem Grund sind `boost`-Bäume normalerweise kleiner und flacher als die Bäume in `random forest`'s, wodurch der Baum dort verbessert wird, wo er noch nicht gut genug funktioniert. Boosting wird oft nachgesagt, dass es Random Forests übertrifft, was hauptsächlich daran liegt, dass der Ansatz langsam lernt. Dies kann noch weiter durch einen seiner Parameter (z. B. shrinkage) gesteuert werden, den wir später anpassen werden.
+
+Beim Boosten ist es wichtig, die Parameter gut abzustimmen und mit verschiedenen Werten der Parameter herumzuspielen, was mit dem `caret`-Framework leicht erreicht werden kann. Diese Parameter umfassen die Lernrate (`eta`), die minimal erforderliche Verlustreduzierung zur weiteren Partitionierung auf einem Blattknoten des Baums (`gamma`), die maximale Tiefe eines Baums (`max_depth`), die Anzahl der Bäume (`nrounds`), die minimale Anzahl von Beobachtungen in den Knoten der Bäume (`min_child_weight`), der Anteil der Beobachtungen des Trainingssatzes, die zufällig ausgewählt wurden, um Bäume wachsen/erstellen zu lassen (`subsample`), und der Anteil der unabhängigen Variablen, die für jeden Baum verwendet werden soll (`colsample_bytree`).
+Eine Übersicht aller Parameter finden Sie [hier](https://xgboost.readthedocs.io/en/latest/parameter.html#parameters-for-tree-booster).
+Auch hier verwenden wir das `caret`-Framework, um unser Boosting-Modell abzustimmen.
+
+```{r, gradient boosted trees}
+xgb_control = trainControl(
+  method = "cv",
+  number = 5,
+  classProbs = TRUE,
+  allowParallel = TRUE,
+  savePredictions = TRUE
+)
+```
+
+Als nächstes definieren wir die möglichen Kombinationen der Tuning-Parameter in Form eines Rasters namens „xgb_grid“.
+
+```{r, create xgb_grid}
+xgb_grid = expand.grid(
+  nrounds = c(50, 50), 
+  max_depth = seq(5, 15, 5),
+  eta = c(0.002, 0.02, 0.2),
+  gamma = c(0.1, 0.5, 1.0), 
+  colsample_bytree = 1, 
+  min_child_weight = c(1, 2, 3),
+  subsample = c(0.5, 0.75, 1)
+)
+```
+
+Wir setzen den Seed und trainieren dann das Modell auf die transformierten Hauptkomponenten der Trainingsdaten unter Verwendung von `xgb_control` and `xgb_grid`, wie vorher angegeben. Bitte beachten Sie, dass dies aufgrund der relativ großen Anzahl von Tuning-Parametern und damit größeren Anzahl möglicher Parameter-Kombinationen ziemlich lange dauern kann.
+
+```{r, set seed and train}
+set.seed(815)
+xgb_tune = train(x = train.images.pca, 
+                 y = train.classes,
+                 method = "xgbTree",
+                 trControl = xgb_control,
+                 tuneGrid = xgb_grid,
+                 verbosity = 0
+)
+xgb_tune
+```
+
+Werfen wir mal einen Blick auf die Tunig-Parameter, die zur höchsten Genauigkeit führen, und auf die Modellleistung insgesamt.
+
+```{r, look at tuning parameter}
+xgb_tune$results[which.max(xgb_tune$results$Accuracy), ]
+
+```
+
+
+```{r, train and test image performance}
+mp.xgb = model_performance(xgb_tune, train.images.pca, test.images.pca, 
+                           train.classes, test.classes, "xgboost")
+```
+
+Die optimale Kombination von Tuning-Parameterwerten führte zu 85,8 % Trainings- und 85,2 % Testgenauigkeit. Obwohl es zu einer leichten Überanpassung kommen kann, schneidet das Modell erwartungsgemäß etwas besser ab als der Random Forest. 

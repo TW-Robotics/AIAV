@@ -1,0 +1,95 @@
+---
+title: "PCA mit anschließender Logistik Regression AIAV"
+author: "Lars Mehnen"
+date: "11/03/2022"
+output:
+  html_document:
+    mathjax: default
+---
+Zuerst laden wir die notwendigen Bibliotheken, keras wird benötigt um das Datenset unkompliziert zur Verfügung zu stellen. nnet enthält eine Implementierung der Modelle die notwendig sind um Multinominelle Logistische Regression durchzuführen.
+
+```{r, load library}
+rm(list=ls()) #Remove anythingfrom workspace
+library(tensorflow)
+library(keras)        
+library(nnet)
+# theme_set(theme_bw())
+```
+
+Fallweise kann es notwendig sein, keras auch explizit zu installieren, dies kann über folgenden Befehl erfolgen.
+
+```{r, inst keras}
+#install_keras()  
+```
+
+Nun laden wir das "MNIST Fashion dataset" in die Variable "fashion_mnist"
+
+```{r, load MNIST fashin dataset}
+fashion_mnist <- keras::dataset_fashion_mnist()
+```
+
+Anschließend werden die Daten auf test und training set aufgeteilt, sowie die dazugehörigen Kategorie-labels
+
+```{r, spit dataset}
+c(train.images, train.labels) %<-% fashion_mnist$train
+c(test.images, test.labels) %<-% fashion_mnist$test
+```
+
+Wir überprüfen kurz die Daten, und sehen das hier ein Kleidungsstücke zu sehen sind
+
+```{r, look}
+image(t(train.images[6,,]))
+image(t(test.images[6,,]))
+```
+
+Um die PCA zu erleichtern, wird die Dimension der Daten geändert. Die Pixel der Bilder werden zu einem Vektor, das heißt statt 28 Pixel (in X-Richtung) x 28 Pixel (in Y-Richtung) hat jedes Bild nun 1 x 784 Pixel.
+
+```{r, reshape}
+# change dimension of train images, as well as test images
+dim(train.images) <- c(dim(train.images)[1], dim(train.images)[2]*dim(train.images)[3])
+dim(test.images) <- c(dim(test.images)[1], dim(test.images)[2]*dim(test.images)[3])
+
+```
+
+Wir kommen zu der PCA, mit der wir die Dimensionalität verringern, und trainieren sie auf die Trainings-Daten
+
+```{r, PCA}
+pca <- prcomp(train.images, scale. = TRUE, center = TRUE, rank = 98)
+```
+
+Anschließend nehmen wir das resultierende Modell, und wenden es auf unsere Daten an, um die Dimensionalität zu verringern. Nach dem nächsten Schritt haben wir die 10 Komponenten die wir für die Regression verwenden werden, anstatt der 784 Pixel.
+
+```{r, reshape again}
+train.components <- predict(pca, newdata = train.images)
+test.components  <- predict(pca, newdata = test.images)
+```
+
+Nun erstellen wir das Model, und übergeben hierbei unsere Labels für die Gewandstücke, sowie die Prinzipal Components. Multinomiale Logistic Regression
+# https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/
+
+```{r, Log_Reg}
+model <- multinom(train.labels ~ ., family = "multinomial", 
+                  data = data.frame(train.components), maxit=10000);
+```
+
+Nun nehmen wir die Test Daten und lassen das Modell versuchen, uns zu sagen welcher Kategorie die jeweiligen Daten zugehören.
+
+```{r, test}
+summary(model)
+results <- predict(model, newdata=test.components, type='probs')
+
+```
+
+Nun werden aus den prädiktierten Resultaten die Spalten ausgewählt, an denen die Wahrscheinlichkeit am höchsten ist. Dies wird als prädiktierte Kategorie angenommen.
+
+```{r, select}
+prediction <- max.col(results)
+prediction <- prediction - 1
+```
+
+Zu guter letzt werden die Daten mit den Test-Labels verglichen, und gezählt wie oft die Daten übereinstimmen. Wenn die Klasse richtig ist, erhält sie den Wert 1, wenn sie falsch ist den Wert 0, dies wird über alle Fälle gemittelt und ergibt die Accuracy.
+
+```{r, compare}
+cl <- mean(prediction == test.labels)
+print(paste('Accuracy', cl))
+```
