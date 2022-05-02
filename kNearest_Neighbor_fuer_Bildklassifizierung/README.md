@@ -2,7 +2,7 @@
 
 Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für das Implementieren einer k-Nearest Neighbor Klassifizierung. Der Use Case befasst sich mit der Klassifizierung von Bildern. 
 
-Genauer gesagt wollen wir handgeschriebene Buchstaben klassifizieren. Die Theorie des kNN Models ist im beiliegenden [Storyboard]() beschrieben.
+Genauer gesagt, wollen wir handgeschriebene Buchstaben klassifizieren. Die Theorie des kNN Models ist im beiliegenden [Storyboard]() beschrieben.
 
 # Bibliotheken
 Die Implementierung ist erneut mittels der [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können mithilfe dieser installiert werden. Wie das genau funktioniert ist in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) beschrieben. 
