@@ -1,14 +1,16 @@
 ---
-title: "Vergleich von verschiedenen KI-Klassifizierungsmethoden am Beispiel des Fashion MNIST-Datensatzes in RStudio und Python (Teil 1)"
+title: Vergleich von verschiedenen KI-Klassifizierungsmethoden am Beispiel des Fashion
+  MNIST-Datensatzes in RStudio und Python (Teil 1)
 author: "Lars Mehnen"
-date: "11/03/2022"
+date: "`r Sys.Date()`"
 output:
+  word_document: default
+  pdf_document: default
   html_document:
     mathjax: default
 ---
   
-In dieser Reihe werden wir verschiedene maschinelle und Deep-Learning-Methoden vergleichen, um Kleidungsklassen anhand von Bildern des Fashion MNIST-Datensatzes zu erstellen bzw. mit dem erstellten Modellen zu klassifizieren. In diesem ersten Beitrag werden wir Daten untersuchen und für die Analyse aufbereiten. Um Ihnen zu zeigen, wie Sie eine der Funktionen von RStudios verwenden, um Python von RStudio aus auszuführen, erstelle ich ein neuronales Netzwerk in Python innerhalb der R-Umgebung. 
-
+In dieser Reihe werden wir verschiedene maschinelle und Deep-Learning-Methoden vergleichen, um Kleidungsklassen anhand von Bildern des Fashion MNIST-Datensatzes zu erstellen bzw. mit dem erstellten Modellen zu klassifizieren. In diesem ersten Beitrag werden wir Daten untersuchen und für die Analyse aufbereiten. Um Ihnen zu zeigen, wie Sie eine der Funktionen von RStudios verwenden, um Python von RStudio aus auszuführen, erstelle ich ein neuronales Netzwerk in Python innerhalb der R-Umgebung. Die Ideen und codes wurden teilweise von dieser [Seite](https://www.r-bloggers.com/2019/11/a-comparison-of-methods-for-predicting-clothing-classes-using-the-fashion-mnist-dataset-in-rstudio-and-python-part-1/) entnommen
 
 ```{r setup, setup python path, message = FALSE, warning = FALSE, results = 'hide', echo = FALSE}
 # Change python_path according to your Python path (see detailed explanation further in this post)
@@ -125,7 +127,7 @@ In diesem Beitrag wir gezeigt, wie künstliche neuronale Netze mit einer untersc
 
 Obwohl neuronale Netze mit TensorFlow und Keras problemlos in RStudio erstellt werden können, werden wir hier Funktionen von RStudio verwenden, mit der Sie Python in RStudio ausführen können. Dies kann auf zwei Arten erfolgen: Entweder wir wählen „Terminal“ in der Ausgabekonsole in RStudio und führen Python über das Terminal aus, oder wir verwenden die Basisfunktion `system2()`, um Python in RStudio auszuführen. 
 
-Um den Befehl `system2()` zu verwenden, ist es wichtig, zuerst zu prüfen, welche Version von Python verwendet werden soll. Sie können überprüfen, welche Versionen von Python auf Ihrem Computer installiert sind, indem Sie `python --version` in Terminal ausführen. Beachten Sie, dass Sie mit RStudio 1.1 (1.1.383 oder höher) Terminal direkt von RStudio aus auf der Registerkarte „Terminal“ ausführen können. Sie können auch `python3 --version` ausführen, um zu überprüfen, ob Sie Python Version 3 installiert haben. Auf meinem Computer gibt `python3 --version` Python 3.8.10 zurück. Sie können auch `which python` (oder `which python3`, wenn Sie Python Version 3 installiert haben) in Terminal ausführen, wobei hier der Pfad zurückgegeben wird, in dem Ihre Version Python installiert ist. (In meinem Fall `/usr/bin/python3`). Da wir in diesen Beispielen Python Version 3 verwenden werden, geben wir dies als Pfad zu Python in der Funktion `use_python()` aus dem `reticulate` Paket an. Ob die gewünschte Python-Version verwendet wird, können wir mit dem `sys`-Paket von Python überprüfen. Stellen Sie bitte sicher, dass Sie im folgenden Code den Pfad auf die Version von Python ändern, die Sie verwenden möchten, und wo diese Version letztendlich installiert ist. 
+Um den Befehl `system2()` zu verwenden, ist es wichtig, zuerst zu prüfen, welche Version von Python verwendet werden soll. Sie können überprüfen, welche Versionen von Python auf Ihrem Computer installiert sind, indem Sie `python --version` in Terminal ausführen. Beachten Sie, dass Sie mit RStudio 1.1 (1.1.383 oder höher) Terminal direkt von RStudio aus auf der Registerkarte „Terminal“ ausführen können. Sie können auch `python3 --version` ausführen, um zu überprüfen, ob Sie Python Version 3 installiert haben. Auf meinem Computer gibt `python3 --version` Python 3.8.10 zurück. Sie können auch `which python` (oder `which python3`, wenn Sie Python Version 3 installiert haben) in Terminal ausführen, wobei hier der Pfad zurückgegeben wird, in dem Ihre Version Python installiert ist. Da wir in diesen Beispielen Python Version 3 verwenden werden, geben wir dies als Pfad für Python in der Funktion `use_python()` aus dem `reticulate` Paket an. Ob die gewünschte Python-Version verwendet wird, können wir mit dem `sys`-Paket von Python überprüfen. Stellen Sie bitte sicher, dass Sie im folgenden Code den Pfad auf die Version von Python ändern, die Sie verwenden möchten, und wo diese Version letztendlich installiert ist. 
 
 ```{r, set path for python}
 Sys.setenv(RETICULATE_PYTHON = "/usr/bin/python3")
@@ -402,10 +404,4 @@ for i in range(10):
   print("Prediction " + str(i) + ": " + str(np.argmax(np.round(predictions[i]))))
   print("Actual " + str(i) + ": " + str(test_labels[i]))
 ```
-
-Beim Vergleich dieser Klassifizierung mit den ersten zehn Label im Datensatz stellen wir fest, dass diese ersten zehn richtig sind! 
-
-
-
-
-
+Beim Vergleich dieser Klassifizierung mit den ersten zehn Label im Datensatz stellen wir fest, dass diese ersten zehn richtig sind!

@@ -2,8 +2,9 @@
 title: Vergleich von verschiedenen KI-Klassifizierungsmethoden am Beispiel des Fashion
   MNIST-Datensatzes in RStudio und Python (Teil 3)
 author: "Lars Mehnen"
-date: "11/03/2022"
+date: "`r Sys.Date()`"
 output:
+  word_document: default
   pdf_document: default
   html_document:
     mathjax: default
@@ -145,9 +146,9 @@ Mit dieser Methode wird die Menge von Bäumen in einem Random Forest, im Verglei
 
 Wenn wir also die durchschnittlichen Prädikationen jedes Baums verwenden, um ein endgültiges Modell zu erhalten, weisen diese tendenziell eine geringere Variabilität auf und führen zu einer geringeren Testfehlerrate im Vergleich zu einem der vorhergendenden Modelle.
 
-Bei der Verwendung zufälliger Gesamtstrukturen betrachten wir normalerweise m = √ p-Prädiktoren, jedes Mal als Kandidaten, wenn wir einen Entscheidungsbaum teilen.
+Bei der Verwendung zufälliger Gesamtstrukturen betrachten wir normalerweise m =  sqrt(p)-Prädiktoren, jedes Mal als Kandidaten, wenn wir einen Entscheidungsbaum teilen.
 
-Wenn wir beispielsweise p = 16 Gesamtprädiktoren in einem Datensatz haben, betrachten wir normalerweise nur m = √16 = 4 Prädiktoren als potenzielle Split-Kandidaten bei jedem Split.
+Wenn wir beispielsweise p = 16 Gesamtprädiktoren in einem Datensatz haben, betrachten wir normalerweise nur m = sqrt(16) = 4 Prädiktoren als potenzielle Split-Kandidaten bei jedem Split.
 
     Technischer Hinweis: Es ist interessant festzustellen, dass wenn wir m = p wählen 
     (d.h. alle Prädiktoren bei jedem Split als Split-Kandidaten betrachten), 
@@ -361,4 +362,11 @@ mp.xgb = model_performance(xgb_tune, train.images.pca, test.images.pca,
                            train.classes, test.classes, "xgboost")
 ```
 
-Die optimale Kombination von Tuning-Parameterwerten führte zu 85,8 % Trainings- und 85,2 % Testgenauigkeit. Obwohl es zu einer leichten Überanpassung kommen kann, schneidet das Modell erwartungsgemäß etwas besser ab als der Random Forest. 
+Die optimale Kombination von Tuning-Parameterwerten führte zu 85,8 % Trainings- und 85,2 % Testgenauigkeit. Obwohl es zu einer leichten Überanpassung kommen kann, schneidet das Modell erwartungsgemäß etwas besser ab als der Random Forest. Werfen wir einen Blick auf die Konfusionsmatrix für die Vorhersagen des Testsets, um zu sehen, welche Kleidungskategorien am häufigsten richtig oder falsch klassifiziert werden.
+
+```{r, results}
+table(pred = predict(xgb_tune, test.images.pca),
+      true = test.classes)
+```
+
+Wie wir bei den Random Forest's gesehen haben, werden Pullover, Hemden und Mäntel am häufigsten verwechselt, während Hosen, Stiefel, Taschen und Turnschuhe am häufigsten richtig klassifiziert werden.

@@ -1,8 +1,11 @@
 ---
-title: "Vergleich von verschiedenen KI-Klassifizierungsmethoden am Beispiel des Fashion MNIST-Datensatzes in RStudio und Python (Teil 4)"
+title: Vergleich von verschiedenen KI-Klassifizierungsmethoden am Beispiel des Fashion
+  MNIST-Datensatzes in RStudio und Python (Teil 4)
 author: "Lars Mehnen"
-date: "11/03/2022"
+date: "`r Sys.Date()`"
 output:
+  word_document: default
+  pdf_document: default
   html_document:
     mathjax: default
 ---
