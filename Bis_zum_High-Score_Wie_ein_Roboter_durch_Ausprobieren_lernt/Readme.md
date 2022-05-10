@@ -10,7 +10,7 @@ Dabei wurde eine Pick and Place Aufgabe mittels Reinforcement Learning und klass
 
 Die Grundlagen von Reinforcement Learning sowie das genaue Vorgehen sind Schritt für Schritt im [Notebook](./Notebook.ipynb) präsentiert. Wenn Sie den Beispielcode selbst testen wollen, finden Sie hier ein Skript (*buildandrun.sh*), welches erforderliche Softwarekomponenten installiert und die Demoapplikation ausführt.
 
-__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den [AIAV Ordner](https://github.com/TW-Robotics/AIAV/archive/refs/heads/main.zip) herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
 
 
 # Der Use Case

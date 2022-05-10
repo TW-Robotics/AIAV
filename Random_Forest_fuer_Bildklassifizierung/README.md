@@ -2,6 +2,8 @@
 
 Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für das Implementieren einer Support Vector Machine. Der Use Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden, ob auf einem Bild eine Stiefelette oder ein Sneaker abgebildet ist. Hierzu verwenden wir den [MNIST Fashion Datensatz](https://github.com/zalandoresearch/fashion-mnist). Die Theorie zum Random Forest Model ist im [Storyboard](15_Storyboard_Random_Forest.pdf) zu finden. 
 
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den [AIAV Ordner](https://github.com/TW-Robotics/AIAV/archive/refs/heads/main.zip) herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
+
 # Bibliotheken
 Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt.
 

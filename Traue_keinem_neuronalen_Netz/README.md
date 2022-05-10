@@ -8,7 +8,7 @@ Sie finden eine Schritt für Schritt Anleitung in dem Jupyter [Notebook](Noteboo
 
 **Achtung** Die Software wurde unter Ubuntu 18 und mit **Python 2** support getestet. Falls Sie Python 3 nutzen, müssen Sie die Software dementsprechend anpassen.
 
-__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den AIAV Ordner herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den [AIAV Ordner](https://github.com/TW-Robotics/AIAV/archive/refs/heads/main.zip) herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
 
 ## Der Use Case
 

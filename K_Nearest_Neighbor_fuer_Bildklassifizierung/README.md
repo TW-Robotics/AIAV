@@ -4,8 +4,10 @@ Hier befindet sich der [Beispielcode](./miniUsecase15_RandomForest.ipynb) für d
 
 Genauer gesagt, wollen wir handgeschriebene Buchstaben klassifizieren. Die Theorie des kNN Models ist im beiliegenden [Storyboard]() beschrieben.
 
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den [AIAV Ordner](https://github.com/TW-Robotics/AIAV/archive/refs/heads/main.zip) herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
+
 # Bibliotheken
-Die Implementierung ist erneut mittels der [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können mithilfe dieser installiert werden. Wie das genau funktioniert ist in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) beschrieben. 
+Die Implementierung ist erneut mittels der [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. Alle benötigten Bibliotheken sind in der [requirements-Datei](./requirements.txt) aufgelistet und können mithilfe dieser installiert werden. Wie das genau funktioniert, ist in diesem [Tutorial](https://note.nkmk.me/en/python-pip-install-requirements/) beschrieben. 
 
 # Ordnerstruktur
  Das kNN Model benötigt - wie auch die anderen Modelle - zum Trainieren einen Datensatz an Bildern. Der Beispielcode ist so aufgebaut, dass innerhalb der vorgegebenen Ordnerstruktur einfach die Fotos getauscht werden können. So können individuelle Datensätze Trainiert werden. Im Ordner [data](./data) befinden die Unterordner, die gleichzeitig auch die Klassen vorgeben. Diese sind in unserem Fall die Buchstaben 'a' bis 'z'. Soll der Code für einen anderen Use Case angepasst werden, so können einfach Ordnernamen und Bilder getauscht werden. 

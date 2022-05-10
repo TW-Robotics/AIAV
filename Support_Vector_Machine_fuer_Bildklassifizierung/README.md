@@ -2,6 +2,7 @@
 
 Hier befindet sich der [Beispielcode](./miniUsecase12_SVM.ipynb) für das Implementieren einer Support Vector Machine. Der Use Case befasst sich mit der Klassifizierung von Bildern. Genauer gesagt, wollen wir herausfinden, ob sich in einem Bild – beziehungsweise einem Kamerastream – ein Hammer befindet oder nicht. Diese Problemstellung wurde schon im vorherigen [Use Case](https://github.com/TW-Robotics/AIAV/tree/master/Logistische_Regression_fuer_Bildklassifizierung) behandelt. Allerdings befassen wir uns diesmal mit der angesprochenen SVM, anstatt einer logistischen Regression. Die Theorie und der Aufbau ist im [Storyboard](12_Storyboard_SVM.pdf) genau beschrieben.
 
+__Durch Probleme in der Onlineansicht kann es vorkommen, dass die Bilder im Notebook hier auf Github nicht angezeigt werden. Sollte dies der Fall sein, können Sie sich den [AIAV Ordner](https://github.com/TW-Robotics/AIAV/archive/refs/heads/main.zip) herunterladen und [Notebook.html](Notebook.html) lokal im Browser anzeigen lassen.__
 
 # Bibliotheken
 Die Implementierung ist mittels der [scikit-learn](https://scikit-learn.org/stable/modules/svm.html) Bibliothek in der Programmiersprache [Python](https://docs.python.org/3/) umgesetzt. 
