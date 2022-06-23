@@ -2,6 +2,11 @@
 
 Das vorliegende Github Repo zeigt die implementierung zu dem Use-Case der CNN Detektion. Wir werden ein CNN implementieren mit dem wir einen mobilen Roboter detektieren wollen. Die Theorie und das Storyboard ist [hier](https://www.aiav.technikum-wien.at/ai-anwenden) zu finden.  
 
+![Output Example](/output/output.png)
+
+
+# Tensorflow EfficientDet-Lite2 Test Platform
+https://tfhub.dev/tensorflow/efficientdet/lite2/detection/1
 
 
 ## Bibliotheken
@@ -44,8 +49,7 @@ Weiters gibt es noch die requirements-Datei welche alle notwendigen Bibliotheken
 
 
 ## Ergebnisse
-
-
+![MiR Tracker](output/MiR_Tracker_2.gif)
 
 
 ## Was nun? 
