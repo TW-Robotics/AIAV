@@ -14688,7 +14688,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <p>Um das Schiff während der Beladung im Gleichgewicht zu halten, dürfen bei der Generierung nur Zustände in Betracht gezogen werden, bei welchen sich das Schiff durch die Ladung nicht mehr als 5 Grad entlang seiner Länge neigt.
 Dafür wurde eine Methode in die Graphgenerierung eingebaut, welche den Schwerpunkt der Ladung und den Auftriebsschwerpunkt des Schiffs annähert und überprüft, ob der maximale Winkel in einem der Folgezustände überschritten wird. Resultiert der Folgezustand in einem zu großen Winkel, wird er übersprungen. So simulieren wir fiktive Beladungen in der Reihenfolge, die der Suchalgorithmus vorschlägt.
 <br /><br /></p>
-<p>Abbildung 5 zeigt den Ablauf der Schiffsbeladung mittels Tiefensuche (links) und Breitensuche (rechts). Dabei wird eine Ebene des Schiffs mit einer zufällig generierten Anzahl an Containern aus jeder Gewichtsklasse (a-d) beladen. Dabei simulieren wir für jede Ebene den vom Suchalgorithmus vorgesehenen Beladungsschritt und überprüfen, ob dieser das Schiff zu weit neigen würde</p>
+<p>Abbildung 5 zeigt den Ablauf der Schiffsbeladung mittels Tiefensuche (links) und Breitensuche (rechts). Dabei wird eine Ebene des Schiffs mit einer zufällig generierten Anzahl an Containern aus jeder Gewichtsklasse (a-d) beladen. Wir simulieren für jede Ebene den vom Suchalgorithmus vorgesehenen Beladungsschritt und überprüfen, ob dieser das Schiff zu weit neigen würde.</p>
 <p>Dadurch, dass die Suchalgorithmen in einer unterschiedlichen Reihenfolge vorgehen, resultieren sie in verschiedenen Lösungen für das gleiche Problem.</p>
 
 </div>
