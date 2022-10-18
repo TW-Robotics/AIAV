@@ -14465,6 +14465,10 @@ a.anchor-link {
   display: none;
 }
 
+.highlight  {
+  margin: 0.4em;
+}
+
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14474,26 +14478,9 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror.cm-s-jupyter .highlight pre {
-/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
-  padding: var(--jp-code-padding) 4px;
+.CodeMirror pre {
   margin: 0;
-
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-
-}
-
-.jp-OutputArea-output pre {
-  line-height: inherit;
-  font-family: inherit;
-}
-
-.jp-RenderedText pre {
-  color: var(--jp-content-font-color1);
-  font-size: var(--jp-code-font-size);
+  padding: 0;
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14609,7 +14596,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<img src="images/Abbildung1Problem.jpg" width="750"/>
+<p><img src="images/Abbildung1Problem.jpg" width="750"/></p>
 <p><em>Abbildung 1: Ein Containerschiff soll in unserem Scheduling Problem mit Containern verschiedener Gewichtsklassen beladen werden. Dabei müssen die Container aber in der richtigen Reihenfolge an bestimmten freien Positionen abgelegt werden, sodass das Schiff nicht kippt.</em></p>
 
 </div>
@@ -14622,12 +14609,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Suche-auf-einem-Graphen">Suche auf einem Graphen<a class="anchor-link" href="#Suche-auf-einem-Graphen">&#182;</a></h3><p>Um ein Problem mittels Suchen lösen zu können, müssen wir dieses in eine Form bringen, die ein Suchalgorithmus verarbeiten kann. Wir beschreiben das Problem durch einen Graphen, welcher aus Knotenpunkten (Nodes) und Verbindungen zwischen diesen (Edges) besteht. Ausgehend von der Start-Node werden dann alle Verbindungen und Folgeknoten abgesucht, bis die Ziel-Node gefunden wurde. Dabei bestimmt der verwendete Suchalgorithmus die Reihenfolge, in der die Nodes und Edges verarbeitet werden. Was Nodes und Egdes nun in der realen Welt darstellen, hängt von der Art des zu lösenden Problems ab. Allgemein beschreibt eine Node den Zustand der Umwelt, während die Edges Veränderungen dieses Zustands bewirken. 
+<h3 id="Suche-auf-einem-Graphen">Suche auf einem Graphen<a class="anchor-link" href="#Suche-auf-einem-Graphen">&#182;</a></h3><p>Um ein Problem mittels Suchen lösen zu können, müssen wir dieses in eine Form bringen, die ein Suchalgorithmus verarbeiten kann. Wir beschreiben das Problem durch einen Graphen, welcher aus Knotenpunkten (Nodes) und Verbindungen zwischen diesen (Edges) besteht. Ausgehend von der Start-Node werden dann alle Verbindungen und Folgeknoten abgesucht, bis die Ziel-Node gefunden wurde. Dabei bestimmt der verwendete Suchalgorithmus die Reihenfolge, in der die Nodes und Edges verarbeitet werden. Was Nodes und Edges nun in der realen Welt darstellen, hängt von der Art des zu lösenden Problems ab. Allgemein beschreibt eine Node den Zustand der Umwelt, während die Edges Veränderungen dieses Zustands bewirken. 
 <br /><br /></p>
 <p>Ein Beispiel für so eine Darstellung ist das Labyrinth im Use Case <a href="https://www.aiav.technikum-wien.at/post/pfadplanung-f%C3%BCr-autonome-systeme">Pfadplanung für autonome Systeme</a>. Hier wird das Labyrinth durch einen Graphen dargestellt, indem alle Knotenpunkte mögliche Roboterpositionen repräsentieren. Diese Positionen werden durch Edges verbunden, um die Verzweigungen im Labyrinth darzustellen.
 <br /><br /></p>
 <p>Abhängig von der Komplexität des Problems kann es sein, dass das komplette Erstellen des Graphen vor der Suche, z.B. durch zu lange Rechendauer, nicht durchführbar ist. In diesem Fall bietet es sich an, während der Generierung des Graphen bereits die Suche durchzuführen und abzubrechen, wenn ein Ziel gefunden wurde (siehe Abbildung 2). Nicht alle Suchalgorithmen eignen sich für diese explizite Form der Suche, da Teile der Suche auf einem unvollständigen Graphen durchgeführt werden müssen.</p>
-<img src="images/Abbildung2Graph.jpg" width="750"/>
+<p><img src="images/Abbildung2Graph.jpg" width="750"/></p>
 <p><em>Abbildung 2: Das Problem wird als Graph dargestellt, um es für einen Suchalgorithmus lösbar zu machen. Da der vollständige Graph zu Umfangreich für die Weiterverarbeitung ist, wird bereits beim Erstellen des Graphs gesucht. Die Erstellung wird abgebrochen, sobald ein Zielzustand gefunden wurde.</em></p>
 
 </div>
@@ -14640,12 +14627,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Breiten--und-Tiefensuche">Breiten- und Tiefensuche<a class="anchor-link" href="#Breiten--und-Tiefensuche">&#182;</a></h3><p>Die Generierung eines kompletten Graphen mit allen Möglichen Zuständen des Containerschiffs wäre bei wachsender Schiffsgröße sehr rechenintensiv. Deshalb wird die Suche während der Generierung des Graphen durchgeführt und frühzeitig abgebrochen, wenn eine mögliche Lösung gefunden wurde. Zur Suche wurden hier Breiten- und Tiefensuche eingesetzt, da sich die beiden Verfahren für diese explizite Form der Suche eignen.
+<h3 id="Breiten--und-Tiefensuche">Breiten- und Tiefensuche<a class="anchor-link" href="#Breiten--und-Tiefensuche">&#182;</a></h3><p>Die Generierung eines kompletten Graphen mit allen möglichen Zuständen des Containerschiffs wäre bei wachsender Schiffsgröße sehr rechenintensiv. Deshalb wird die Suche während der Generierung des Graphen durchgeführt und frühzeitig abgebrochen, wenn eine mögliche Lösung gefunden wurde. Zur Suche wurden hier Breiten- und Tiefensuche eingesetzt, da sich die beiden Verfahren für diese explizite Form der Suche eignen.
 <br /><br /></p>
 <p>Bei Breiten- und Tiefensuche wird jeweils auf einem baumförmigen Graphen von einem Startknoten aus gesucht. Die beiden Algorithmen suchen dabei nach und nach benachbarte Knotenpunkte ab und überprüfen, ob es sich beim Nachbarn um den Zielknoten handelt. Wurde der Zielknoten gefunden, wird die Suche abgebrochen und eine Liste der bereits abgesuchten Knoten zurückgegeben. Aus dieser Liste kann dann der Pfad von Start zum Ziel ermittelt werden.
 <br /><br /></p>
-<p>Der Unterschied zwischen Breitensuche und Tiefensuche liegt dabei in der Reihenfolge, in der Nachbarknoten überprüft werden (siehe Abbildung 3). Breitensuche geht, wie der Name schon sagt, zuerst in die Breite und sucht nach und nach alle Ebenen des Baums ab. Tiefensuche sucht hingegen in die Tiefe; hier werden nach und nach alle Äste überprüft. Dadurch, dass die beiden Algorithmen Knoten in unterschiedlichen Reihenfolgen abarbeiten, können sie bei Problemen mit mehreren Lösungen unterschiedliche Lösungen finden. Je nach Aufbau des Graphen kann auch einer der Algorithmen wesentlich schneller zu einer Lösung finden, als der Andere.</p>
-<img src="images/Abbildung3Suchalgorithmen.jpg" width="700"/>
+<p>Der Unterschied zwischen Breitensuche und Tiefensuche liegt dabei in der Reihenfolge, in der Nachbarknoten überprüft werden (siehe Abbildung 3). Breitensuche geht, wie der Name schon sagt, zuerst in die Breite und sucht nach und nach alle Ebenen des Baums ab. Tiefensuche sucht hingegen in die Tiefe; hier werden nach und nach alle Äste überprüft. Dadurch, dass die beiden Algorithmen Knoten in unterschiedlichen Reihenfolgen abarbeiten, können sie bei Problemen mit mehreren Lösungen unterschiedliche Lösungen finden. Je nach Aufbau des Graphen kann auch einer der Algorithmen wesentlich schneller zu einer Lösung finden als der Andere.</p>
+<p><img src="images/Abbildung3Suchalgorithmen.jpg" width="700"/></p>
 <p><em>Abbildung 3: Breiten- und Tiefensuche eignen sich zum Absuchen von baumförmigen Graphen. Dabei überprüfen sie die Nachbarknoten jeder Node in einer unterschiedlichen Reihenfolge (siehe die Nummerierung der Knoten).</em></p>
 
 </div>
@@ -14658,7 +14645,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Praktische-Implementierung">Praktische Implementierung<a class="anchor-link" href="#Praktische-Implementierung">&#182;</a></h3><p>Die praktische Implementierung wurde anhand des in Hamburg gebauten <a href="https://upload.wikimedia.org/wikipedia/de/f/f4/ConceiverElbe.jpg">Conceiver Feederschiffs</a> (siehe Abbildung 4) durchgeführt. Auf diesem können die Container aus verschiedenen Gewichtsklassen auf sechs mal sechs möglichen Positionen abgeladen werden. Jede Node repräsentiert dabei einen möglichen Zustand des Schiffs. Das heißt, dass es es für jede Kombination aus zu verladenen Containern und möglichen Positionen auf dem Schiff einen Knoten gibt, der dieser Kombination eindeutig zuordenbar ist. Dieses Konzept kann in der Praxis einfach umgesetzt werden, indem man den Schiffszustand als Ziffernfolge darstellt und diese Ziffernfolge den Namen der Node darstellt. So entspricht z.B. die Node &quot;aa  &quot; einem Schiff mit vier Plätzen für Container (siehe die zwei Leerzeichen). Auf zwei dieser Plätze sind Container der Gewichtsklasse <em>a</em> verladen, während die anderen beiden frei sind.</p>
+<h3 id="Praktische-Implementierung">Praktische Implementierung<a class="anchor-link" href="#Praktische-Implementierung">&#182;</a></h3><p>Die praktische Implementierung wurde anhand des in Hamburg gebauten <a href="https://upload.wikimedia.org/wikipedia/de/f/f4/ConceiverElbe.jpg">Conceiver Feederschiffs</a> (siehe Abbildung 4) durchgeführt. Auf diesem können die Container aus verschiedenen Gewichtsklassen auf sechs mal sechs möglichen Positionen abgeladen werden. Jede Node repräsentiert dabei einen möglichen Zustand des Schiffs. Das heißt, dass es für jede Kombination aus zu verladenen Containern und möglichen Positionen auf dem Schiff einen Knoten gibt, der dieser Kombination eindeutig zuordenbar ist. Dieses Konzept kann in der Praxis einfach umgesetzt werden, indem man den Schiffszustand als Ziffernfolge darstellt und diese Ziffernfolge den Namen der Node darstellt. So entspricht z.B. die Node "aa  " einem Schiff mit vier Plätzen für Container (siehe die zwei Leerzeichen). Auf zwei dieser Plätze sind Container der Gewichtsklasse <em>a</em> verladen, während die anderen beiden frei sind.</p>
 
 </div>
 </div>
@@ -14670,8 +14657,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<img src="https://upload.wikimedia.org/wikipedia/de/f/f4/ConceiverElbe.jpg" width="750"/>
-<p><em>Abbildung 4: Wir verwenden das Conveiver Feederschiff mit 6x6 Containerplätzen für unsere Implementierung des Schedulings (Bildquelle: <a href="https://de.wikipedia.org/wiki/Datei:ConceiverElbe.jpg">Das Container-Zubringeschiff (Feeder) Conceiver auf der Außenelbe mit Kurs Hamburg</a>).</em></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/de/f/f4/ConceiverElbe.jpg" width="750"/></p>
+<p><em>Abbildung 4: Wir verwenden das Conceiver Feederschiff mit 6x6 Containerplätzen für unsere Implementierung des Schedulings (Bildquelle: <a href="https://de.wikipedia.org/wiki/Datei:ConceiverElbe.jpg">Das Container-Zubringeschiff (Feeder) Conceiver auf der Außenelbe mit Kurs Hamburg</a>).</em></p>
 
 </div>
 </div>
@@ -14701,7 +14688,7 @@ Dafür wurde eine Methode in die Graphgenerierung eingebaut, welche den Schwerpu
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<img src="images/Abbildung5Animation.gif" width="750"/>
+<p><img src="images/Abbildung5Animation.gif" width="750"/></p>
 <p><em>Abbildung 5: Um das unterschiedliche Vorgehen der Suchalgorithmen zu zeigen, werden Tiefensuche (links) und Breitensuche(rechts) gleichzeitig zur Ermittlung der Beladungsreihenfolge des Schiffes eingesetzt. Dabei Repräsentieren die verschiedenen Farben der Container die definierten Gewichtsklassen.</em></p>
 
 </div>
@@ -14716,7 +14703,6 @@ Dafür wurde eine Methode in die Graphgenerierung eingebaut, welche den Schwerpu
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><p>Um ein Problem mittels Suche zu lösen, werden Zustände als Knotenpunkte und Zustandsänderungen als Verbindungen zwischen den Knotenpunkten gespeichert. Der resultierende Graph erlaubt es Suchalgorithmen Pfade zwischen Knoten zu finden und so das Problem zu lösen. Breiten- und Tiefensuche sind dabei einfach implementierbare Suchalgorithmen, welche eine Lösung finden, aber nicht abschätzen können, welche von mehreren Lösungen die günstigste ist. Um z.B. die Ladung so gleichmäßig wie möglich zu verteilen, könnte die Implementierung um einen informierten Suchalgorithmus erweitert werden, welcher die gefundenen Lösungen bewertet und sich die Beste aussucht.</p>
 <P style="page-break-before: always">
-
 </div>
 </div>
 </div>
@@ -15113,7 +15099,9 @@ Dafür wurde eine Methode in die Graphgenerierung eingebaut, welche den Schwerpu
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15275,7 +15263,9 @@ Resultierende Beladung nach Tiefensuche:
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
