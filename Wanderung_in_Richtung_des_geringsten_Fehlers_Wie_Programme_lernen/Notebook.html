@@ -14465,10 +14465,6 @@ a.anchor-link {
   display: none;
 }
 
-.highlight  {
-  margin: 0.4em;
-}
-
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14478,9 +14474,26 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror pre {
+.CodeMirror.cm-s-jupyter .highlight pre {
+/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
+  padding: var(--jp-code-padding) 4px;
   margin: 0;
-  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
+}
+
+.jp-OutputArea-output pre {
+  line-height: inherit;
+  font-family: inherit;
+}
+
+.jp-RenderedText pre {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-code-font-size);
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14524,6 +14537,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 /* Hiding the collapser by default */
 .jp-Collapser {
   display: none;
+}
+
+@page {
+    margin: 0.5in; /* Margin for each printed piece of paper */
 }
 
 @media print {
@@ -14583,26 +14600,21 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <h1 id="Wanderung-in-Richtung-des-geringsten-Fehlers:-Wie-Programme-lernen">Wanderung in Richtung des geringsten Fehlers: Wie Programme lernen<a class="anchor-link" href="#Wanderung-in-Richtung-des-geringsten-Fehlers:-Wie-Programme-lernen">&#182;</a></h1><div style="text-align: justify; max-width:1080px">
 Es haben sich bereits viele unserer AIAV Use Cases damit befasst, wie verschiedene Modelle lernen können, eine Aufgabe zu lösen. Beispiele für solche von uns eingesetzten Modelle sind neuronale Netze (siehe AIAV Use Case <a href="https://www.aiav.technikum-wien.at/post/traue-keinem-neuronalen-netz-wissenschaftliche-bildanalysen">Traue keinem neuronalen Netz: wissenschaftliche Bildanalysen</a>), naive Bayes (siehe AIAV Use Case <a href="https://www.aiav.technikum-wien.at/post/einsatz-des-naive-bayes-zur-filterung-von-spam">Einsatz des Naive Bayes zur Filterung von Spam</a>) oder sogar einfache Tabellen (siehe AIAV Use Case <a href="https://www.aiav.technikum-wien.at/post/bis-zum-high-score-wie-ein-roboter-durch-ausprobieren-lernt">Bis zum High-Score! Wie ein Roboter durch Ausprobieren lernt</a>). Auch wenn sich diese Modelle in ihrer Struktur und mathematischen Beschreibung stark unterscheiden, folgt das Vorgehen beim Einsatz immer einem ähnlichen Prinzip: Ein Modell wird initialisiert, es wird mittels Trainingsdaten trainiert und anschließend in seiner trainierten Form für eine Aufgabe eingesetzt.
     </div><br>
-
-<b>Dabei stellt sich die Frage, was während des Trainingsvorgangs passiert, um den Modellen das <i>Lernen</i> zu ermöglichen.</b>
-
+<p><b>Dabei stellt sich die Frage, was während des Trainingsvorgangs passiert, um den Modellen das <i>Lernen</i> zu ermöglichen.</b></p>
 <div style="text-align: justify; max-width:1080px">
 Um aufzuarbeiten, wie Modelle lernen, müssen wir uns zunächst bewusst sein, anhand welcher Information gelernt wird. Dabei unterscheiden wir zwischen drei großen Feldern im maschinellen Lernen: Supervised Learning, Unsupervised Learning und Reinforcement Learning. Beim Supervised Learning lernt ein Modell aus händisch beschrifteten Trainingsdaten (siehe AIAV Video <a href="https://youtu.be/Wk0ogTsuZeA">Supervised Learning</a>). Wenn Modelle eigenständig Strukturen in Daten finden, spricht man von Unsupervised Learning (siehe AIAV Video <a href="https://youtu.be/mZDmTZiCqus">Unsupervised Learning</a>), während beim Reinforcement Learning Modelle aus Beobachtungen der Umwelt sowie einem Feedback-Signal lernen (siehe AIAV Video <a href="https://youtu.be/gNjDBkJRRP0">Reinforcement Learning</a>).
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
-Während die Theorie hinter Lernen auf alle drei Gruppen anwendbar ist, werden wir im Zuge diese Use Cases Neuronale Netze (siehe AIAV Video <a href="https://youtu.be/pmfIJ3XUw2c">Klassische Neuronale Netze</a>) mittels Supervised Learning trainieren, da die Theorie bei diesem Vorgehen sehr gut veranschaulicht werden kann. Neuronale Netze werden in der <a href="https://link.springer.com/book/9780387310732">Fachliteratur</a> in der Regel als Funktion beschrieben, welche aus Schichten besteht. Dabei besteht jede Schicht wiederum aus linearen Regressionsmodellen, sowie einer nichtlinearen Aktivierungsfunktion. Das ganze klingt auf den ersten Blick etwas furchteinflößend - schlüsseln wir die Theorie also etwas auf.
+Während die Theorie hinter Lernen auf alle drei Gruppen anwendbar ist, werden wir im Zuge diese Use Cases Neuronale Netze (siehe AIAV Video <a href="https://youtu.be/pmfIJ3XUw2c">Klassische Neuronale Netze</a>) mittels Supervised Learning trainieren, da die Theorie bei diesem Vorgehen sehr gut veranschaulicht werden kann. Neuronale Netze werden in der <a href="https://link.springer.com/book/9780387310732">Fachliteratur</a> in der Regel als Funktion beschrieben, welche aus Schichten besteht. Dabei besteht jede Schicht wiederum aus linearen Regressionsmodellen, sowie einer nichtlinearen Aktivierungsfunktion. Das Ganze klingt auf den ersten Blick etwas furchteinflößend - schlüsseln wir die Theorie also etwas auf.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Ein neuronales Netz nähert eine Funktion an. Das heißt, es liest eine Liste an Eingangsgrößen und gibt eine Liste an Ausgangsgrößen aus. Das Ziel des Netzes ist es also, Eingang und Ausgang so zu verknüpfen, dass bestimmte Werte am Eingang bestimmte Werte am Ausgang auslösen. Diese Verknüpfung ist in Schichten organisiert. Eingangsgrößen werden in der Ersten Schicht übergeben, deren Ausgang wiederum der zweiten Schicht übergeben wird. Diese Kette wird fortgesetzt, bis wir von der letzten Schicht die Ausgangsgrößen des Netzwerks erhalten (siehe Abbildung 1).
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 <center><img src="images/Abbildung1KonzeptNeuronalesNetz.png" alt="Konzept Neuronales Netz" style="width: 750px;"/></center>
+<p><i>Abbildung 1: Ein neuronales Netz ist eine Funktion, welche eine Liste an Eingangsgrößen zu Ausgangsgrößen verarbeitet. Dafür gliedert man neuronale Netze in Schichten, welche aus sogenannten Neuronen bestehen. Jedes Neuron hat dabei jeden Ausgang der vorhergehenden Schicht als Eingang.</i>
+    </div></p>
 
-<i>Abbildung 1: Ein neuronales Netz ist eine Funktion, welche eine Liste an Eingangsgrößen zu Ausgangsgrößen verarbeitet. Dafür gliedert man neuronale Netze in Schichten, welche aus sogenannten Neuronen bestehen. Jedes Neuron hat dabei jeden Ausgang der vorhergehenden Schicht als Eingang.</i>
-    </div>
 </div>
 </div>
 </div>
@@ -14613,9 +14625,9 @@ Ein neuronales Netz nähert eine Funktion an. Das heißt, es liest eine Liste an
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><div style="text-align: justify; max-width:1080px">
+<div style="text-align: justify; max-width:1080px">
 Jede Schicht besteht dabei aus mehreren sogenannten Neuronen. Diese spiegeln die Inspiration, die Neuronale Netze vom menschlichen Hirn nehmen, wieder. In seiner einfachsten Form ist Neuron dabei mit jedem der Ausgänge der vorherigen Schicht verbunden und summiert diese auf. Diese Summe wird dann im Neuron einer linearen Transformation unterzogen.
-    </div><br></p>
+    </div><br>
 
 </div>
 </div>
@@ -14630,20 +14642,17 @@ Jede Schicht besteht dabei aus mehreren sogenannten Neuronen. Diese spiegeln die
 <h3 id="Ein-Exkurs-in-die-Lineare-Algebra">Ein Exkurs in die Lineare Algebra<a class="anchor-link" href="#Ein-Exkurs-in-die-Lineare-Algebra">&#182;</a></h3><div style="text-align: justify; max-width:1080px">
 Um zu erklären, was genau im Neuron passiert, machen wir einen Exkurs zur linearen Algebra. Stellen Sie sich eine lineare Funktion vor. Bei dieser wird jeder Punkt auf der Funktion f(x) abhängig vom Eingangswert x durch folgende Gleichung beschrieben:
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 $$ f(x) = kx + d $$
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Eine Visualisierung der Gleichung ergibt eine Gerade mit Steigung <i>k</i>, die die Y-Achse im Punkt <i>(0,d)</i> schneidet. Abbildung 2 zeigt dabei, wie Parameter <i>k</i> und <i>d</i> das Aussehen der resultierenden Linie einstellen.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 <center><img src="images/Abbildung2LineareFunktion.png" alt="Lineare Funktion" style="width: 750px;"/></center>
+<p><i>Abbildung 2: Eine lineare Funktion hat zwei einstellbare Parameter: k beschreibt die Steigung, während d die Gerade entlang der abhängigen Achse verschiebt.</i>
+    </div></p>
 
-<i>Abbildung 2: Eine lineare Funktion hat zwei einstellbare Parameter: k beschreibt die Steigung, während d die Gerade entlang der abhängigen Achse verschiebt.</i>
-    </div>
 </div>
 </div>
 </div>
@@ -14655,22 +14664,20 @@ Eine Visualisierung der Gleichung ergibt eine Gerade mit Steigung <i>k</i>, die 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div style="text-align: justify; max-width:1080px">
-Stellen Sie sich jetzt eine zweidimensionale Punktwolke, also eine Ansammlung an Punkten auf einer Ebenem vor. Diese Punktwolke können wir nun mithilfe unserer linearen Funktion nun modellieren, indem wir k und d so einstellen, dass die Gerade die Punktwolke so gut wie möglich darstellt.
+Stellen Sie sich jetzt eine zweidimensionale Punktwolke, also eine Ansammlung an Punkten auf einer Ebene, vor. Diese Punktwolke können wir nun mithilfe unserer linearen Funktion nun modellieren, indem wir k und d so einstellen, dass die Gerade die Punktwolke so gut wie möglich darstellt.
     </div><br>
-
-<b>Aber was heißt in diesem Kontext <i>so gut wie möglich</i>?</b>
-
+<p><b>Aber was heißt in diesem Kontext <i>so gut wie möglich</i>?</b></p>
 <div style="text-align: justify; max-width:1080px">
 Um diese Frage zu beantworten, definieren wir einen Fehler. Dieser gibt uns eine numerische Einschätzung, wie weit unsere Soll- (aus dem Datensatz) und Ist-Werte (Voraussagen unseres Modells) voneinander entfernt sind. Diese Einschätzung wird von der sogenannten <i>Loss-Funktion</i> bestimmt (siehe Kapitel 1.1.5 in <a href="https://books.google.at/books?id=mjVKEAAAQBAJ&lpg=PR9&ots=AfdYvGVG2j&lr&pg=PR9#v=onepage&q&f=false">diesem Buch</a>). Wir können die Loss-Funktion auf Abweichungen zwischen Punkten in der Punktwolke und den entsprechenden Punkten in unserem Modell anwenden, um Aussage darüber zu treffen, wie gut die Gerade die Punktwolke widerspiegelt.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
-Da wir nun einschätzen können, wie sehr unsere Gerade die Punktwolke, also unseren Datensatz, widerspiegelt, müssen wir uns noch überlegen, wie wir die Parameter k und d setzen, sodass unser gesamter Fehler so klein wie möglich ist. Dazu nutzen wir ein Vorgehen namens <i>Gradient Descent</i>. Die Idee dahinter ist einfach: Wir initialisieren zunächst beide Parameter <i>k</i> und <i>d</i> mit zufälligen Werten. Anschließend betrachten wir jeden Eintrag in unserem Datensatz und ermitteln für jeden unserer Parameter die Richtung, in welcher der Loss für diesen Eintrag kleiner wird; für unsere lineare Funktion müssen wir also für jeden Datenpunkt zwei Richtungen, eine für <i>k</i> und eine für <d>d</d>, berechnen. Wir optimieren dann die Funktion, indem wir jeden Parameter leicht in die vorgegebene Richtung verändern. Die Schritte von Berechnung der Richtung und Optimierung werden dann für jeden Punkt in der Punktwolke in mehreren Durchgängen (sogenannten <i>Epochen</i>) nacheinander durchgeführt, um den Loss über die gesamten Trainingsdaten zu minimieren. Diesen Vorgang nennt man <i>Training</i> oder <i>Fitting</i>. Abbildung 3 zeigt diesen für mehrere pseudo-zufällig generierte Punktwolken.
-    </div><div style="text-align: justify; max-width:1080px">
-<center><img src="images/Abbildung3LineareRegression.gif" alt="Konzept Lineare Regression" style="width: 500px;"/></center>
-
-<i>Abbildung 3: Die Parameter k und d von zufällig initialisierten Geraden werden mittels Gradient Descent so gesetzt, dass der Loss minimiert wird.</i>
+Da wir nun einschätzen können, wie sehr unsere Gerade die Punktwolke, also unseren Datensatz, widerspiegelt, müssen wir uns noch überlegen, wie wir die Parameter k und d setzen, sodass unser gesamter Fehler so klein wie möglich ist. Dazu nutzen wir ein Vorgehen namens <i>Gradient Descent</i>. Die Idee dahinter ist einfach: Wir initialisieren zunächst beide Parameter <i>k</i> und <i>d</i> mit zufälligen Werten. Anschließend betrachten wir jeden Eintrag in unserem Datensatz und ermitteln für jeden unserer Parameter die Richtung, in welcher der Loss für diesen Eintrag kleiner wird; für unsere lineare Funktion müssen wir also für jeden Datenpunkt zwei Richtungen, eine für <i>k</i> und eine für <i>d</i>, berechnen. Wir optimieren dann die Funktion, indem wir jeden Parameter leicht in die vorgegebene Richtung verändern. Die Schritte von Berechnung der Richtung und Optimierung werden dann für jeden Punkt in der Punktwolke in mehreren Durchgängen (sogenannten <i>Epochen</i>) nacheinander durchgeführt, um den Loss über die gesamten Trainingsdaten zu minimieren. Diesen Vorgang nennt man <i>Training</i> oder <i>Fitting</i>. Abbildung 3 zeigt diesen für mehrere pseudo-zufällig generierte Punktwolken.
     </div>
+<div style="text-align: justify; max-width:1080px">
+<center><img src="images/Abbildung3LineareRegression.gif" alt="Konzept Lineare Regression" style="width: 500px;"/></center>
+<p><i>Abbildung 3: Die Parameter k und d von zufällig initialisierten Geraden werden mittels Gradient Descent so gesetzt, dass der Loss minimiert wird.</i>
+    </div></p>
+
 </div>
 </div>
 </div>
@@ -14681,19 +14688,19 @@ Da wir nun einschätzen können, wie sehr unsere Gerade die Punktwolke, also uns
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><div style="text-align: justify; max-width:1080px">
+<div style="text-align: justify; max-width:1080px">
 Die Richtung, in welche die Parameter verändert werden sollen, wird dabei auf mithilfe eines einfachen Tricks ermittelt. Die Loss-Funktion gibt an, wie nahe die Gerade und die Punktwolke zueinander sind. Da wir die Loss-Funktion einfach mathematisch beschreiben können, können wir diese auch ableiten. Die Ableitung stellt dann direkt die Richtung dar. Dabei fällt Ihnen sicher auf, dass der Loss nur eine Richtung vorgibt, wir aber zwei Parameter, <i>k</i> und <i>d</i>, setzen können. Hier bedienen wir uns eines weiteren Tricks: wir teilen den vom Loss vorgegebenen Fehler auf. <i>d</i> wird dabei direkt in die vom Loss vorgegebene Richtung optimiert, während <i>k</i> noch mit der Eingangsgröße multipliziert wird. Mathematisch können wir den Unterschied zwischen den beiden Parametern einfach formulieren:
-    </div><br></p>
-<p><div style="text-align: justify; max-width:1080px">
+    </div><br>
+<div style="text-align: justify; max-width:1080px">
 $$ Fehler_{k} = \dot{Loss}(Beschriftung - Ausgang) \cdot Eingang $$
 $$ Fehler_{d} = \dot{Loss}(Beschriftung - Ausgang) $$
-    </div><br></p>
-<p><div style="text-align: justify; max-width:1080px">
+    </div><br>
+<div style="text-align: justify; max-width:1080px">
 Mithilfe des Fehlers können wir nun die Parameter in kleinen Schritten in Richtung des Fehlers anpassen. Wenn wie diese Anpassung Stück für Stück über die vorhandenen Trainingsdaten mehrmals durchführen, bewegen sich die Parameter immer weiter in Richtung des geringsten Fehlers!
-    </div><br></p>
-<p><div style="text-align: justify; max-width:1080px">    
-Die in diesem Abschnitt besprochene Modellart nennt man <a href="https://towardsdatascience.com/linear-regression-detailed-view-ea73175f6e86">Lineare Regression</a>. In neuronalen Netzen stellen sie ein einzelnes Neuron dar; wir setzen also Gruppen von diesen einfachen linearen Modellen parallel ein, um Schichten zu formen, die wir wiederum hintereinander anordnen. Die angewandten Konzepte bleiben dabei gleich; in der Fachliteratur bezeichnet man hier <k> als <i>Weight</i> und <i>d</i> als <i>Bias</i>.
-    </div><br></p>
+    </div><br>
+<div style="text-align: justify; max-width:1080px">    
+Die in diesem Abschnitt besprochene Modellart nennt man <a href="https://towardsdatascience.com/linear-regression-detailed-view-ea73175f6e86">Lineare Regression</a>. In neuronalen Netzen stellen sie ein einzelnes Neuron dar; wir setzen also Gruppen von diesen einfachen linearen Modellen parallel ein, um Schichten zu formen, die wir wiederum hintereinander anordnen. Die angewandten Konzepte bleiben dabei gleich; in der Fachliteratur bezeichnet man hier <i>k</i> als <i>Weight</i> und <i>d</i> als <i>Bias</i>.
+    </div><br>
 
 </div>
 </div>
@@ -14708,18 +14715,15 @@ Die in diesem Abschnitt besprochene Modellart nennt man <a href="https://towards
 <h3 id="Vom-Neuron-zum-Netz-mittels-Nichtlinearit%C3%A4ten">Vom Neuron zum Netz mittels Nichtlinearit&#228;ten<a class="anchor-link" href="#Vom-Neuron-zum-Netz-mittels-Nichtlinearit%C3%A4ten">&#182;</a></h3><div style="text-align: justify; max-width:1080px">
 Leider könnte ein neuronales Netz, welches nur aus solchen linearen Bausteinen besteht, keine komplexen Funktionen darstellen; eine Kombination aus linearen Modellen ergibt nämlich wiederum nur ein lineares Modell. Deshalb fügen wir nach jeder Schicht noch eine nicht-lineare <a href="https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6">Aktivierungs-Funktion</a> ein. Diese Funktion wird auf den Ausgang jeder Schicht angewandt und erlaubt dem neuronalen Netz, nichtlineare Funktionen abzubilden.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
-Unser Vorgehen beim Optimieren durch Gradient Descent kann grundsätzlich wie oben beschrieben angewandt werden, obwohl wir jetzt mehrere Neuronen sowie nicht-lineare Funktionen vorliegen haben. Wichtig ist jetzt nur die Reihenfolge, in der wir die Parameter verändern: Der Loss beschreibt die Diskrepanz zwischen Modell-Ausgang und Trainingsdaten. Das heißt, er gibt uns lediglich Auskunft über die Richtung zum Überarbeiten der Parameter der letzten Schicht. Diese können wir auch wie oben beschrieben direkt verändern. Damit wir dennoch die Parameter der übrigen Schichten auch optimieren können, müssen wir abschätzen, welcher Loss am Ausgang der vorderen Schichten vorhanden ist. Diese Schätzung erzielen wir, indem wir uns nach vorne hanteln und den Fehler am Eingang der hinteren Schicht dem Fehler am Ausgang der vorderen Schicht gleichsetzen. Da wir sowohl die Aktivierungsfunktion, als auch die hintere Schicht mathematisch beschreiben und leicht ableiten können, nehmen wir sie quasi in unseren Loss mit auf und optimieren so die Parameter der vorderen Schicht. Dieses Vorgehen ist im Code relativ einfach umzusetzen und skaliert auf beliebig viele Schichten. 
+Unser Vorgehen beim Optimieren durch Gradient Descent kann grundsätzlich wie oben beschrieben angewandt werden, obwohl wir jetzt mehrere Neuronen sowie nicht-lineare Funktionen vorliegen haben. Wichtig ist jetzt nur die Reihenfolge, in der wir die Parameter verändern: Der Loss beschreibt die Diskrepanz zwischen Modell-Ausgang und Trainingsdaten. Das heißt, er gibt uns lediglich Auskunft über die Richtung zum Überarbeiten der Parameter der letzten Schicht. Diese können wir auch wie oben beschrieben direkt verändern. Damit wir dennoch die Parameter der übrigen Schichten optimieren können, müssen wir abschätzen, welcher Loss am Ausgang der vorderen Schichten vorhanden ist. Diese Schätzung erzielen wir, indem wir uns nach vorne hanteln und den Fehler am Eingang der hinteren Schicht dem Fehler am Ausgang der vorderen Schicht gleichsetzen. Da wir sowohl die Aktivierungsfunktion als auch die hintere Schicht mathematisch beschreiben und leicht ableiten können, nehmen wir sie quasi in unseren Loss mit auf und optimieren so die Parameter der vorderen Schicht. Dieses Vorgehen ist im Code relativ einfach umzusetzen und skaliert auf beliebig viele Schichten. 
     </div><br>
-
-Abbildung 4 zeigt unser resultierendes Verständnis vom neuronalen Netz mit den diskutierten Komponenten.
-
+<p>Abbildung 4 zeigt unser resultierendes Verständnis vom neuronalen Netz mit den diskutierten Komponenten.</p>
 <div style="text-align: justify; max-width:1080px">
 <center><img src="images/Abbildung4KomplettesNetzwerk.png" alt="Komplettes Neuronales Netzwerk" style="width: 750px;"/></center>
+<p><i>Abbildung 4: Mit unserem mathematischen Verständnis von neuronalen Netzen wissen wir nun, dass Schichten aus linearen Regressionsmodellen (also Geraden) bestehen. Nach jeder versteckten Schicht fügen wir noch eine nicht-lineare Aktivierungsfunktion hinzu, um nicht-lineare Funktionen annähern zu können (gezeichnet basierend auf Abbildung 1.6 in <a href="https://books.google.at/books?id=mjVKEAAAQBAJ&lpg=PR9&ots=AfdYvGVG2j&lr&pg=PR9#v=onepage&q&f=false">diesem Buch</a>).</i>
+    </div></p>
 
-<i>Abbildung 4: Mit unserem mathematischen Verständnis von neuronalen Netzen wissen wir nun, dass Schichten aus linearen Regressionsmodellen (also Geraden) bestehen. Nach jeder versteckten Schicht fügen wir noch eine nicht-lineare Aktivierungsfunktion hinzu, um nicht-lineare Funktionen annähern zu können (gezeichnet basierend auf Abbildung 1.6 in <a href="https://books.google.at/books?id=mjVKEAAAQBAJ&lpg=PR9&ots=AfdYvGVG2j&lr&pg=PR9#v=onepage&q&f=false">diesem Buch</a>.</i>
-    </div>
 </div>
 </div>
 </div>
@@ -14733,44 +14737,47 @@ Abbildung 4 zeigt unser resultierendes Verständnis vom neuronalen Netz mit den 
 <h3 id="Praktische-Implementierung">Praktische Implementierung<a class="anchor-link" href="#Praktische-Implementierung">&#182;</a></h3><div style="text-align: justify; max-width:1080px">
 Für die praktische Implementierung wollen wir mithilfe eines neuronalen Netzwerks handgeschriebene Ziffern im <a href="http://yann.lecun.com/exdb/mnist/">MNIST Datensatz</a> erkennen. Dieser Datensatz bietet einen einfachen Weg, um Implementierungen von Modellen anschaulich zu evaluieren. Er besteht aus 28 mal 28 Pixel großen Graustufenbildern, die handgeschriebene Ziffern von null bis neun darstellen. Die 70.000 beschrifteten Bilder im Datensatz sind dabei frei zugänglich und können direkt mithilfe der <a href="https://keras.io/">Keras API</a> heruntergeladen werden. Nach dem Herunterladen müssen wir die Daten vorverarbeiten, damit sie in einer Form sind, die unsere Implementierung des neuronalen Netzes versteht.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Anders als bei typischen Aufgaben in der Bildverarbeitung setzen wir kein <i>Convolutional Neural Network</i> (CNN, siehe AIAV Video <a href="https://youtu.be/cdVDMm5Wscc">CNN Classifier</a>) ein, da wir ausschließlich die oben diskutierte Theorie umsetzen wollen. Schichten, welche aus den oben beschriebenen Neuronen bestehen, nennt man voll-vernetzt oder <i>fully connected</i>. Das resultierende Netzwerk fällt in eine der einfachsten Kategorien an neuronalen Netzen, den sogenannten <i>Feed-Forward Neural Networks</i>, bei denen Information direkt vom Eingang zum Ausgang, also immer von vorne nach hinten, fließt. Andere Netzwerkarten, wie z.B. CNNs oder die sogenannten <i>Recurrent Neural Networks</i> (siehe AIAV Video <a href="https://youtu.be/A000HMZ5Yco">Recurrent Neural Networks Part 1</a>) setzen bei der Optimierung ähnliche Prinzipien ein, weisen aber Eigenheiten im Aufbau und der darunterliegenden Mathematik auf.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Während wir die Bilder aus dem Datensatz direkt in ein CNN geben könnten, müssen wir für unser neuronales Netz die Bilder zunächst als eindimensionalen Vektor formatieren. Hier können wir die Werte aus jedem Bild einfach direkt übernehmen, aber anstatt in einer 28 mal 28 großen Matrix speichern wir sie in einer Liste mit 784 (= 28 $\cdot$ 28) Einträgen. Diese Liste können wir dem neuronalen Netz direkt übergeben.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Anschließend müssen wir noch die Beschriftungen der Bilder formatieren. Diese liegen im Datensatz als ganzzahlige Beschriftung vor. Da das neuronale Netz aber für jede mögliche Ziffer einen Ausgang hat, müssen wir die Beschriftung zu einem Vektor der Länge zehn, also einem Eintrag pro Ziffer, formatieren. Die Keras Funktion <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical"><i>to_categorical</i></a> übernimmt das automatisch. Abschließend teilen wir den Datensatz noch in einen Trainings- und einen Testteil auf. Das ist notwendig, um die Leistung des trainierten Netzes anhand von Bildern zu evaluieren, die dem Netz unbekannt sind.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Für die Implementierung des Trainings verwenden wir die mittlere quadratische Abweichung als Loss und die tanh-Funktion als Aktivierungsfunktion. Beide Funktionen basieren auf der Vektor- und Matrix Bibliothek <a href="https://numpy.org/">NumPy</a>. Dabei müssen wir beachten, dass wir nicht nur die Funktionen selbst darstellen müssen, sondern für die Optimierung auch die erste Ableitung beider Funktionen benötigen.
     </div><br>
-
 <div style="text-align: justify; max-width:1080px">
 Nun ist die Vorbereitung erledigt und wir müssen lediglich die Trainingsschleife implementieren. In dieser gehen wir wie folgt vor:
-    </div><ul>
+    </div>
+<ul>
 <li>Zufälliges Einlesen von mehreren Einträgen (= Bilder und Beschriftung) im Datensatz</li>
 <li>Netz trifft Voraussage über jeden Eintrag</li>
 <li>Ermittlung der Ableitung des Losses von <em>Beschriftung-Voraussage</em></li>
 <li>Iteration von hinten nach vorne über alle Schichten und Anpassung der Parameter</li>
 </ul>
 <div style="text-align: justify; max-width:1080px">
-Abbildung 5 visualisiert die Voraussagen der resultierenden Implementierung. Die hier gezeigten Bilder sind Teil des Test-Datensatzes, das heißt, dass das trainierte Netzwerk diese noch nie gesehen hat und nicht "aus dem Gedächtnis" arbeiten kann.
-    </div><div style="text-align: justify; max-width:1080px">
-<center><img src="images/Abbildung5MNISTKlassifizierung.gif" alt="Konzept Lineare Regression" style="width: 500px;"/></center>
-
-<i>Abbildung 5: Die direkte Umsetzung der voll vernetzten Schichten und des oben beschriebenen Trainings resultiert in einem neuronalen Netz, welches handgeschriebene Ziffern erkennt.</i>
-    </div><h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><div style="text-align: justify; max-width:1080px">
-Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwenden intern lineare Modelle mit einstellbaren Parametern, sowie nicht-lineare Aktivierungsfunktionen. Das Training passiert dabei vom Ausgang des Netzes ausgehend nach vorne anhand einer ableitbaren Fehlerfunktion. Die dabei resultierende Implementierung ist leicht verständlich und weist, unter Mithilfe von bestehenden Bibliotheken wie <a href="">NumPy</a>, einen relativ kurzen Code auf.
-    </div><br>
-
-<div style="text-align: justify; max-width:1080px">
-    Wir haben uns in diesem Use Case mit neuronalen Netzen beschäftigt, welche nur aus voll Vernetzten Schichten bestehen. In der Praxis werden aber auch Netze mit anderen Schichtarten, wie z.B. <i>Convolutional Neural Networks</i> (CNN, siehe AIAV Video <a href="https://youtu.be/cdVDMm5Wscc">CNN Classifier</a>) eingesetzt. Zusätzlich dazu ist unsere Trainingsfunktion vergleichsweise einfach gestaltet; in der Praxis werden komplexere Optimierungsverfahren, wie z.B. der <a href="https://arxiv.org/abs/1412.6980">Adam Optimiser</a> für das Training von neuronalen Netzen eingesetzt. Diese beiden Faktoren limitieren die Genauigkeit, die mit unserem trainierten Netz erzielt werden kann. Nach dem Training erreicht unser neuronales Netz eine Genauigkeit von 99% beim Klassifizieren von Ziffern im MNIST Datensatz.
+Abbildung 5 visualisiert die Voraussagen der resultierenden Implementierung. Die hier gezeigten Bilder sind Teil des Test-Datensatzes, das heißt, dass das trainierte Netzwerk diese noch nie gesehen hat und nicht "aus dem Gedächtnis" arbeiten kann. Über den gesamten Testdatensatz erzielt unser Neuronales Netz eine Genauigkeit von 93,64%.
     </div>
+<div style="text-align: justify; max-width:1080px">
+<center><img src="images/Abbildung5MNISTKlassifizierung.gif" alt="Konzept Lineare Regression" style="width: 500px;"/></center>
+<p><i>Abbildung 5: Die direkte Umsetzung der voll vernetzten Schichten und des oben beschriebenen Trainings resultiert in einem neuronalen Netz, welches handgeschriebene Ziffern erkennt.</i>
+    </div></p>
+<h3 id="Fazit">Fazit<a class="anchor-link" href="#Fazit">&#182;</a></h3><div style="text-align: justify; max-width:1080px">
+Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwenden intern lineare Modelle mit einstellbaren Parametern, sowie nicht-lineare Aktivierungsfunktionen. Das Training passiert dabei vom Ausgang des Netzes ausgehend nach vorne anhand einer ableitbaren Fehlerfunktion. Die dabei resultierende Implementierung ist leicht verständlich und weist, unter Mithilfe von bestehenden Bibliotheken wie <a href="https://numpy.org/">NumPy</a>, einen relativ kurzen Code auf.
+    </div><br>
+<div style="text-align: justify; max-width:1080px">
+    Wir haben uns in diesem Use Case mit neuronalen Netzen beschäftigt, welche nur aus voll Vernetzten Schichten bestehen. In der Praxis werden aber auch Netze mit anderen Schichtarten, wie z.B. <i>Convolutional Neural Networks</i> (CNN, siehe AIAV Video <a href="https://youtu.be/cdVDMm5Wscc">CNN Classifier</a>) eingesetzt. Zusätzlich dazu ist unsere Trainingsfunktion vergleichsweise einfach gestaltet; in der Praxis werden komplexere Optimierungsverfahren, wie z.B. der <a href="https://arxiv.org/abs/1412.6980">Adam Optimiser</a> für das Training von neuronalen Netzen eingesetzt. Diese beiden Faktoren limitieren die Genauigkeit, die mit unserem trainierten Netz erzielt werden kann. Nach dem Training erreicht unser neuronales Netz eine Genauigkeit von 93,64% beim Klassifizieren von Ziffern im MNIST Datensatz.
+    </div>
+<h3 id="Weiterf%C3%BChrende-AIAV-Inhalte">Weiterf&#252;hrende AIAV Inhalte<a class="anchor-link" href="#Weiterf%C3%BChrende-AIAV-Inhalte">&#182;</a></h3><div style="text-align: justify; max-width:1080px">
+Der Beitrag <a href="https://www.aiav.technikum-wien.at/post/auf-der-suche-nach-dem-besten-ai-algorithmus-oder-auch-nicht">Auf der Suche nach dem "besten" AI-Algorithmus, oder auch nicht</a> erklärt das No-Free-Lunch Theorem und zeigt, warum Modelle nur lernen können, was wir ihnen auch zeigen.
+    </div><br>
+<div style="text-align: justify; max-width:1080px">
+Der Beitrag <a href="https://www.aiav.technikum-wien.at/post/ai-und-computerhardware">AI und Computerhardware</a> zeigt Ihnen, mithilfe welcher Arten von Computern Modelle, wie sie in diesem Use Case vorgestellt wurden, trainiert werden können und welche Vorteile die richtige Hardware für AI bietet. 
+</div>
+
 </div>
 </div>
 </div>
@@ -14784,6 +14791,7 @@ Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwe
 <div style="page-break-after: always;"></div>
 <div>&nbsp;
 </div>
+
 </div>
 </div>
 </div>
@@ -14829,12 +14837,12 @@ Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwe
 
 <span class="c1"># Festlegen der Plot Farben</span>
 <span class="n">colours</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"darkblue"</span><span class="p">:</span> <span class="s2">"#143049"</span><span class="p">,</span>
-    <span class="s2">"twblue"</span><span class="p">:</span> <span class="s2">"#00649C"</span><span class="p">,</span>
-    <span class="s2">"lightblue"</span><span class="p">:</span> <span class="s2">"#8DA3B3"</span><span class="p">,</span>
-    <span class="s2">"lightgrey"</span><span class="p">:</span> <span class="s2">"#CBC0D5"</span><span class="p">,</span>
-    <span class="s2">"twgrey"</span><span class="p">:</span> <span class="s2">"#72777A"</span><span class="p">,</span>
-    <span class="s2">"yellow"</span><span class="p">:</span> <span class="s2">"#E3A049"</span>
+    <span class="s2">&quot;darkblue&quot;</span><span class="p">:</span> <span class="s2">&quot;#143049&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;twblue&quot;</span><span class="p">:</span> <span class="s2">&quot;#00649C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lightblue&quot;</span><span class="p">:</span> <span class="s2">&quot;#8DA3B3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lightgrey&quot;</span><span class="p">:</span> <span class="s2">&quot;#CBC0D5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;twgrey&quot;</span><span class="p">:</span> <span class="s2">&quot;#72777A&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;yellow&quot;</span><span class="p">:</span> <span class="s2">&quot;#E3A049&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14850,7 +14858,7 @@ Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Training-eines-einzelnen-Neurons">Training eines einzelnen Neurons<a class="anchor-link" href="#Training-eines-einzelnen-Neurons">&#182;</a></h3><p>Anschließend erstellen wir eine zweidimensionale Punktwolke, die grob um eine lineare Funktion liegt. Die Generierung ist nur pseudo-zufällig um schönere Visualisierungen zu erhalten. Der nächste Codeblock instanziiert und visualisiert die Punktwolke basierend auf <a href="https://towardsdatascience.com/gradient-descent-in-python-a0d07285742f">diesem Blogpost</a>.</p>
+<h3 id="Training-eines-einzelnen-Neurons">Training eines einzelnen Neurons<a class="anchor-link" href="#Training-eines-einzelnen-Neurons">&#182;</a></h3><p>Anschließend erstellen wir eine zweidimensionale Punktwolke, die grob um eine lineare Funktion liegt. Die Generierung ist nur pseudo-zufällig, um schönere Visualisierungen zu erhalten. Der nächste Codeblock instanziiert und visualisiert die Punktwolke basierend auf <a href="https://towardsdatascience.com/gradient-descent-in-python-a0d07285742f">diesem Blogpost</a>.</p>
 
 </div>
 </div>
@@ -14868,12 +14876,12 @@ Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwe
 <span class="n">y</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
 <span class="c1">## Eingangsdaten Plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Trainingsdaten"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"twblue"</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Eingangs-Sample"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Eingangs-Label"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Zu lernender Datensatz"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trainingsdaten&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;twblue&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Eingangs-Sample&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Eingangs-Label&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Zu lernender Datensatz&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -14888,9 +14896,7 @@ Neuronale Netze erlauben es uns, nicht-lineare Funktionen anzunähern. Sie verwe
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -14946,13 +14952,13 @@ class="
 <span class="n">xloss</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">xLossPlot</span> <span class="p">]</span>
 <span class="n">xprime</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mse_prime</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">xLossPlot</span> <span class="p">]</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xLossPlot</span><span class="p">,</span> <span class="n">xloss</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Loss-Funktion"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"twblue"</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xLossPlot</span><span class="p">,</span> <span class="n">xprime</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Ableitung Loss-Funktion"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"yellow"</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Voraussage-Fehler"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Anpassugsrichtung"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Loss Funktion und ihre Ableitung"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xLossPlot</span><span class="p">,</span> <span class="n">xloss</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss-Funktion&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;twblue&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xLossPlot</span><span class="p">,</span> <span class="n">xprime</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ableitung Loss-Funktion&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;yellow&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Voraussage-Fehler&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Anpassugsrichtung&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Loss Funktion und ihre Ableitung&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14969,9 +14975,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15019,7 +15023,7 @@ class="
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Neuron</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">""" Klassenkonstruktor """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Klassenkonstruktor &quot;&quot;&quot;</span>
         <span class="c1"># Platzhalter für den letzten Aus- und Eingang</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
@@ -15031,17 +15035,17 @@ class="
         <span class="bp">self</span><span class="o">.</span><span class="n">lossPrime</span> <span class="o">=</span> <span class="n">mse_prime</span>
     
     <span class="k">def</span> <span class="nf">forwardPropagation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputData</span><span class="p">):</span>
-        <span class="sd">""" Sagt den Ausgang basierend auf dem Eingang voraus """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Sagt den Ausgang basierend auf dem Eingang voraus &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">inputData</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span>
     
     <span class="k">def</span> <span class="nf">backwardPropagation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputError</span><span class="p">,</span> <span class="n">learningRate</span><span class="p">):</span>
-        <span class="sd">""" Passt Parameter basierend auf dem Ausgangs-Fehler an.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Passt Parameter basierend auf dem Ausgangs-Fehler an.</span>
 <span class="sd">        Der resultierende Eingangsfehler wird auch ausgegeben.</span>
 <span class="sd">        Dieser ist später beim vollen Netz erst notwendig, um vorhergehende Schichten zu optimieren.</span>
-<span class="sd">        """</span>
-        <span class="c1"># Aufteilen der "Quellen" des Ausgangsfehlers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Aufteilen der &quot;Quellen&quot; des Ausgangsfehlers</span>
         <span class="n">inputError</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="n">outputError</span>
         <span class="n">weightError</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">*</span> <span class="n">outputError</span>
         
@@ -15051,7 +15055,7 @@ class="
         <span class="k">return</span> <span class="n">inputError</span>
     
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">learningRate</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">""" Führt Gradient Descent über einen Trainingsdatensatz mit X Eingängen und y Beschriftungen durch """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Führt Gradient Descent über einen Trainingsdatensatz mit X Eingängen und y Beschriftungen durch &quot;&quot;&quot;</span>
         <span class="c1"># Platzhalter für Visualisierung des Trainings-Losses</span>
         <span class="n">trainingLoss</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Speichern der Anzahl an Datenpunkten im Trainings-Datensatz</span>
@@ -15076,7 +15080,7 @@ class="
             <span class="n">trainingLoss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
             <span class="c1">#</span>
             <span class="c1"># Ausgabe von Infos über die Epoche</span>
-            <span class="k">if</span> <span class="n">debug</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"Epoche </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">: Loss = </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">debug</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoche </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">: Loss = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">))</span>
         <span class="c1">#</span>
         <span class="c1"># Rückgabe des Loss-Verlaufs nach Training</span>
         <span class="k">return</span> <span class="n">trainingLoss</span>
@@ -15112,24 +15116,24 @@ class="
 <span class="n">losses</span> <span class="o">=</span> <span class="n">neur</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1">## Plot des Trainierten Modells und des Trainings Losses</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="c1">#Default = [6.4, 4.8]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="c1">#Default = [6.4, 4.8]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Loss Plot</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Loss"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"twgrey"</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Epoche"</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Loss"</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Loss Verlauf während des Trainings"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;twgrey&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epoche&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Loss Verlauf während des Trainings&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="c1"># Fitted Plot</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Trainingsdaten"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"twblue"</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trainingsdaten&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;twblue&quot;</span><span class="p">])</span>
 <span class="n">pltx</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">plty</span> <span class="o">=</span> <span class="p">(</span><span class="n">neur</span><span class="o">.</span><span class="n">forwardPropagation</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">neur</span><span class="o">.</span><span class="n">forwardPropagation</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pltx</span><span class="p">,</span> <span class="n">plty</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Trainiertes Neuron"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"yellow"</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Eingangs-Sample"</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Eingangs-Label"</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Trainiertes Neuron im Datensatz"</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pltx</span><span class="p">,</span> <span class="n">plty</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trainiertes Neuron&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;yellow&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Eingangs-Sample&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Eingangs-Label&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Trainiertes Neuron im Datensatz&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -15145,9 +15149,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15201,13 +15203,13 @@ class="
 <span class="n">yTanh</span> <span class="o">=</span> <span class="p">[</span> <span class="n">tanh</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">xLossPlot</span> <span class="p">]</span>
 <span class="n">yTanhPrime</span> <span class="o">=</span> <span class="p">[</span> <span class="n">tanh_prime</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">xLossPlot</span> <span class="p">]</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xTanhPlot</span><span class="p">,</span> <span class="n">yTanh</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Aktivierungsfunktion"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"twblue"</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xTanhPlot</span><span class="p">,</span> <span class="n">yTanhPrime</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Ableitung Aktivierungsfunktion"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"yellow"</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Schicht-Eingang"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Schicht-Ausgang"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Aktivierungsfunktion und ihre Ableitung"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xTanhPlot</span><span class="p">,</span> <span class="n">yTanh</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Aktivierungsfunktion&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;twblue&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xTanhPlot</span><span class="p">,</span> <span class="n">yTanhPrime</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ableitung Aktivierungsfunktion&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;yellow&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Schicht-Eingang&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Schicht-Ausgang&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Aktivierungsfunktion und ihre Ableitung&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -15224,9 +15226,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15270,16 +15270,16 @@ class="
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Erstellen einer abstrakten Basisklasse für Schichten</span>
 <span class="k">class</span> <span class="nc">Layer</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">""" Klassenkonstruktor """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Klassenkonstruktor &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
         
     <span class="k">def</span> <span class="nf">forwardPropagation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
-        <span class="sd">""" Berechnet die Aktivierung einer Schicht basierend auf dem Eingang """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Berechnet die Aktivierung einer Schicht basierend auf dem Eingang &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
         
     <span class="k">def</span> <span class="nf">backwardPropagation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputError</span><span class="p">,</span> <span class="n">learningRate</span><span class="p">):</span>
-        <span class="sd">""" Berechnet die Ableitung des Errors nach dem Eingang (dE/dX) und aktualisiert trainierbare Parameter """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Berechnet die Ableitung des Errors nach dem Eingang (dE/dX) und aktualisiert trainierbare Parameter &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </pre></div>
 
@@ -15296,7 +15296,7 @@ class="
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Basierend auf der Basisklasse können dann die voll vernetzten und Aktivierungsschichten implementiert werden. Die Funktionen für Forward und Backward Propagation führen die gleiche Funktionalität aus, wie im oben gezeigten Beispiel. Der Unterschied hier ist aber, dass die jeweilige Funktion jetzt nicht mehr nur an einem Neuron durchgeführt, sondern gleich auf eine ganze Schicht angewandt wird. Die mathematische Herleitung der Funktionen für beide Schichten finden Sie in <a href="https://towardsdatascience.com/math-neural-network-from-scratch-in-python-d6da9f29ce65">diesem Blogpost</a>.</p>
-<p>Hervorzuheben ist hier, dass bei den voll vernetzten Schichten im Zuge der Backward Propagation auch gleich die Parameter der Neuronen angepasst werden. Bei den Aktivierungsschichten ist das nicht der Fall, da diese keine einstellbaren Parameter haben. Sie dienen lediglich dazu, Nichtlinearität ins Netz zu bn</p>
+<p>Hervorzuheben ist hier, dass bei den voll vernetzten Schichten im Zuge der Backward Propagation auch gleich die Parameter der Neuronen angepasst werden. Bei den Aktivierungsschichten ist das nicht der Fall, da diese keine einstellbaren Parameter haben. Sie dienen lediglich dazu, Nichtlinearität ins Netz zu einzuführen.</p>
 
 </div>
 </div>
@@ -15311,7 +15311,7 @@ class="
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Erstellen der Klasse für voll vernetzte Schichten</span>
 <span class="k">class</span> <span class="nc">FullyConnectedLayer</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">""" Voll vernetzte, lineare Schicht mit variabler Eingangs- und Ausgangsgröße """</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Voll vernetzte, lineare Schicht mit variabler Eingangs- und Ausgangsgröße &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputSize</span><span class="p">,</span> <span class="n">outputSize</span><span class="p">):</span>
         <span class="c1"># Zufällige Initialisierung der Gewichte</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">inputSize</span><span class="p">,</span> <span class="n">outputSize</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
@@ -15335,7 +15335,7 @@ class="
 
 <span class="c1"># Erstellen der Klasse für nichtlineare Aktivierunsschichten</span>
 <span class="k">class</span> <span class="nc">ActivationLayer</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">""" Nichtlineare Aktivierungsschicht """</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Nichtlineare Aktivierungsschicht &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">activationPrime</span><span class="p">):</span>
         <span class="c1"># Setzen der Aktivierungsfunktion und ihrer Ableitung</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">activation</span>
@@ -15368,7 +15368,7 @@ class="
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Anschließend kann die Netzwerk-Klasse implementiert werden. Diese beinhaltet neben dem Loss eine Liste der Schichten, welche Teil des Netzes sind. Diese Liste kann mit der <em>add</em> Funktion erweitert werden. Die <em>predict</em> Funktion betreibt Forward Propagation, indem sie über alle Schichten, die Teil des Netzes sind, iteriert und deren eingebaute Forward Propagation Funktionen aufruft. Der Eingang der Ersten Schicht ist dabei der Eingang des Neuronalen Netzes, während die Eingänge der nachfolgenden Schichten jeweils durch die Ausgänge der vorhergehenden Schichten bestimmt werden.</p>
-<p>Die wichtigste Funktion der Netzwerk-Klasse ist <em>minibatchFit</em>. Diese implementiert das Training mithilfe der in die Schichten eingebauten Funktionen und des Losses. Den hier implementierten Trainingsvorgang nennt man <a href="https://towardsdatascience.com/batch-mini-batch-stochastic-gradient-descent-7a62ecba642a">Mini Batch Gradient Descent</a>. Diese Art von Gradient Descent verwendet nicht in jedem Optimierungsschritt jeden Eintrag des Trainingsdatensatzes, sondern wählt zufällig ein Set an Einträgen (Mini Batch) aus dem Trainingsdatensatz aus. Dieses Vorgehen erleichtert uns das Training anhand des MNIST Datensatzes, da dieser so viele Einträge hat, dass Optimierung anhand des ganzen Datensatzes zu lange dauern würde.</p>
+<p>Die wichtigste Funktion der Netzwerk-Klasse ist <em>minibatchFit</em>. Diese implementiert das Training mithilfe der in die Schichten eingebauten Funktionen und des Losses. Den hier implementierten Trainingsvorgang nennt man <a href="https://towardsdatascience.com/batch-mini-batch-stochastic-gradient-descent-7a62ecba642a">Minibatch Gradient Descent</a>. Diese Art von Gradient Descent verwendet nicht in jedem Optimierungsschritt jeden Eintrag des Trainingsdatensatzes, sondern wählt zufällig ein Set an Einträgen (Minibatch) aus dem Trainingsdatensatz aus. Dieses Vorgehen erleichtert uns das Training anhand des MNIST Datensatzes, da dieser so viele Einträge hat, dass Optimierung anhand des ganzen Datensatzes zu lange dauern würde.</p>
 
 </div>
 </div>
@@ -15383,19 +15383,19 @@ class="
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Erstellen der Netzwerk-Klasse</span>
 <span class="k">class</span> <span class="nc">Network</span><span class="p">:</span>
-    <span class="sd">""" Enthält die Netzwerkschichten als Liste und implementiert Training mittels Minibatch Gradient Descent """</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Enthält die Netzwerkschichten als Liste und implementiert Training mittels Minibatch Gradient Descent &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">loss_prime</span><span class="p">):</span>
-        <span class="sd">""" Klassenkonstruktor: Instanziiert Liste an Schichten, Loss und seine Ableitung """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Klassenkonstruktor: Instanziiert Liste an Schichten, Loss und seine Ableitung &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lossPrime</span> <span class="o">=</span> <span class="n">loss_prime</span>
 
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
-        <span class="sd">""" Fügt eine Instanz von Layer den gespeicherten Netzwerkschichten hinzu """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Fügt eine Instanz von Layer den gespeicherten Netzwerkschichten hinzu &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">):</span>
-        <span class="sd">""" Gibt die Aktivierung der Ausgangsschicht für jeden Eintrag in input_data zurück """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Gibt die Aktivierung der Ausgangsschicht für jeden Eintrag in input_data zurück &quot;&quot;&quot;</span>
         <span class="c1"># Speichern der Anzahl der Samples und Instanziierung des Platzhalters der Resultate</span>
         <span class="n">samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
@@ -15412,7 +15412,7 @@ class="
         <span class="k">return</span> <span class="n">result</span>
    
     <span class="k">def</span> <span class="nf">minibatchFit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">learningRate</span><span class="p">,</span> <span class="n">minibatchSize</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
-        <span class="sd">""" Implementiert minibatch Gradient Descent und trainiert das Netzwerk basierend auf Trainings-Features (X_train) und Aktivierungen (y_train) """</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Implementiert minibatch Gradient Descent und trainiert das Netzwerk basierend auf Trainings-Features (X_train) und Aktivierungen (y_train) &quot;&quot;&quot;</span>
         <span class="c1"># Platzhalter für gespeicherten Trainings-Loss</span>
         <span class="n">trainingLoss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
         <span class="c1"># Festlegen der Anzahl an Datenpunkten pro Epoche</span>
@@ -15475,7 +15475,7 @@ class="
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Test: Lernen des XOR Gatters</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Test: Lernen des XOR-Gatters</span>
 <span class="c1"># Trainingsdaten</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]])</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]]])</span>
@@ -15493,7 +15493,7 @@ class="
 <span class="c1"># Testen</span>
 <span class="n">out</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Quantisierte Voraussage für ein XOR-Gatter (Sollwert: 0, 1, 1, 0): </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantisierte Voraussage für ein XOR-Gatter (Sollwert: 0, 1, 1, 0): </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="p">))</span>
 </pre></div>
@@ -15509,9 +15509,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15557,14 +15555,14 @@ class="
 <span class="c1"># Vorbearbeitung der Trainingsdaten</span>
 <span class="c1"># Anpassung der Form und Normalisierung der Eingangsdaten</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">)</span>
-<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
 <span class="n">x_train</span> <span class="o">/=</span> <span class="mi">255</span>
 <span class="c1"># to_categorical codiert die Beschriftungen (Nummer von 0-9) als Vektor mit Größe 10</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># Sampling von 10000 Einträgen für's Testen</span>
+<span class="c1"># Sampling von 10000 Einträgen für&#39;s Testen</span>
 <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">)</span>
-<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
 <span class="n">x_test</span> <span class="o">/=</span> <span class="mi">255</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
 </pre></div>
@@ -15580,9 +15578,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15612,8 +15608,8 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Nach dem Download der Trainingsdaten kann das Modell direkt instanziiert und trainiert werden. Dabei fügen wir die Schichten nacheinander von vorne nach hinten an das neuronale Netz. Die Architektur wurde dabei von <a href="https://towardsdatascience.com/math-neural-network-from-scratch-in-python-d6da9f29ce65">diesem Blogpost</a> übernommen.</p>
-<p>Anschließend trainieren wir für 3000 Epochen, was einen guten Mittelweg zwischen resultierender Genauigkeit und Dauer des Trainings darstellt. Da unser Trainingsalgorithmus außer der Verwendung von Mini Batches keine Optimierungen aufweist, dauert das Training im Vergleich zu modernen Deep Learning Frameworks vergleichsweise lange. Hier würde ein komplexeres Optimierungsverfahren, wie z.B. der <a href="https://arxiv.org/abs/1412.6980">Adam Optimiser</a> Abhilfe schaffen.</p>
-<p>Die von der nächsten Zelle generierte Abbildung visualisiert den durchschnittlichen Loss pro Episode. Da wir Mini Batches verwenden, ist dieser keine glatte Kurve, wie in den Trainingsbeispielen der einzelnen Neuronen. Stattdessen schwingt er, da die vorgegebene Richtung des Fehlers zwischen den Batches an Trainingsdaten unterschiedlich ist.</p>
+<p>Anschließend trainieren wir für 3000 Epochen, was einen guten Mittelweg zwischen resultierender Genauigkeit und Dauer des Trainings darstellt. Da unser Trainingsalgorithmus außer der Verwendung von Minibatches keine Optimierungen aufweist, dauert das Training im Vergleich zu modernen Deep Learning Frameworks vergleichsweise lange. Hier würde ein komplexeres Optimierungsverfahren, wie z.B. der <a href="https://arxiv.org/abs/1412.6980">Adam Optimiser</a> Abhilfe schaffen.</p>
+<p>Die von der nächsten Zelle generierte Abbildung visualisiert den durchschnittlichen Loss pro Episode. Da wir Minibatches verwenden, ist dieser keine glatte Kurve, wie in den Trainingsbeispielen der einzelnen Neuronen. Stattdessen schwingt er, da die vorgegebene Richtung des Fehlers zwischen den Batches an Trainingsdaten unterschiedlich ist.</p>
 
 </div>
 </div>
@@ -15639,12 +15635,12 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">losses</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">minibatchFit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">learningRate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 
 <span class="c1">## Plot des Trainings-Losses</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Loss"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">"twgrey"</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Epoche"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Durchschnittlicher Fehler pro Voraussage"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Loss Verlauf während des Trainings"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="s2">&quot;twgrey&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epoche&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Durchschnittlicher Fehler pro Voraussage&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Loss Verlauf während des Trainings&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 
@@ -15662,9 +15658,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -15708,7 +15702,7 @@ class="
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testen der Genauigkeit</span>
 <span class="n">predictionOverlap</span> <span class="o">=</span> <span class="p">[</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">net</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Genauigkeit der Voraussage des Testdatensatzes: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Genauigkeit der Voraussage des Testdatensatzes: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">predictionOverlap</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">predictionOverlap</span><span class="p">)</span>
 <span class="p">))</span>
 </pre></div>
@@ -15724,9 +15718,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
