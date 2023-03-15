@@ -1,3 +1,11 @@
+# Dieses Skript implementiert Darstellung von CNN Entscheidungen mittels Layer-Wise Relevance Propagation
+#
+# This code is available under a GPL v3.0 license and comes without
+# any explicit or implicit warranty.
+#
+# (C) Moritz Abdank 2022
+#
+
 """Class that implements the layer-wise relevance propagation algorithm.
 """
 
