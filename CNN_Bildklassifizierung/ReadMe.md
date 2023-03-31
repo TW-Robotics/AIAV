@@ -1,4 +1,4 @@
-# Wir falten räumliche Zusammenhänge: Convolutional Neural Networks
+# Convolutional Neural Networks: Erkennen räumlicher Zusammenhänge
 
 Das vorliegende GitHub Repository befasst sich mit der implementierung des des CNN Use-Cases zu klassifizierung von Zeichensprache. Theorie und das Storyboard ist [hier](https://www.aiav.technikum-wien.at/ai-anwenden) zu finden.  
 
