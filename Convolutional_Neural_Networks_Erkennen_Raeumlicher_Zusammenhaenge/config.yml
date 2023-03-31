@@ -1,0 +1,18 @@
+lrp:
+  epsilon: 1.0e-9
+  rule: "z_plus"
+  pooling_type: "avg"
+  grayscale: True
+
+model:
+  name: "custom" # vgg16, vgg19
+  weights: null # null, imagenet
+
+image:
+  height: 100
+  width: 100
+  channels: 3
+
+paths:
+  image_dir: "/demo/"
+  results_dir: "/results/"
