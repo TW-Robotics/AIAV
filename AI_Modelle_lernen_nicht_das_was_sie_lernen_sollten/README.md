@@ -23,7 +23,7 @@ Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt s
 
 ## Ergebnisse
 
-Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern mit verschiedenen Klassen durch die Anwendung der schichtweisen Relevanzausbreitung die entsprechenden Wärmekarten erzeugt. In Abbildung 1 sehen sie vier Ursprungsbilder, deren prognostizierte Klasse von unserem Modell und die entsprechende Wärmekarte. 
+Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern durch die Anwendung der schichtweisen Relevanzausbreitung die entsprechenden Wärmekarten erzeugt. In Abbildung 1 sehen sie vier Ursprungsbilder, deren prognostizierte Klasse von unserem Modell und die resultierende Wärmekarte. 
 
 ![Abbildung 1](images/Abbildung1.png)
 
