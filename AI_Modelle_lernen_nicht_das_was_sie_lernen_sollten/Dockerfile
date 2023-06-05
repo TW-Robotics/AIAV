@@ -15,5 +15,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Upgrade zum neuesten Pip
 RUN pip3 install --upgrade pip 
 
-# Installation des Natural Language Processing Toolkits, Matplotlib und Tika für Python
-RUN pip install zennit Matplotlib
+# Installation der Zennit Bibliothek, Matplotlib und git-lfs für große Dateien
+RUN pip3 install zennit matplotlib
+RUN sudo apt-get install git-lfs
