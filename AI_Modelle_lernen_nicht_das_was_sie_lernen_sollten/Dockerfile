@@ -19,5 +19,4 @@ RUN pip3 install zennit matplotlib
 
 # download the model weights from the cloud & move it to workspace
 RUN wget https://cloud.technikum-wien.at/s/gGDs9HLSGjDNnbF/download -O model_weights.pt 
-RUN mv model_weights /workspace
 WORKDIR /workspace
