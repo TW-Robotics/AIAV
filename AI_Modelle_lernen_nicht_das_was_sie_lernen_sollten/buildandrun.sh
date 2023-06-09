@@ -8,7 +8,7 @@
 # (C) Alessandro Scherl 2023 <alessandro.scherl@technikum-wien.at>
 
 # Bau des Images
-docker build -t lrp .
+docker build . -t lrp
 
 # Ausführen des Containers mit X11 Forwarding
 docker run -it \
@@ -19,8 +19,7 @@ docker run -it \
             -e DISPLAY=$DISPLAY \
             -p 8888:8888 \
             --mount src="$(pwd)",target=/workspace/,type=bind \ 
-            lrp \
-            
+            lrp
 
 docker exec -ti LRP bash
 
