@@ -13,5 +13,5 @@ docker build . -t lrp
 # Ausführen des Containers 
 docker run -it --rm -t -d --name LRP -e DISPLAY=$DISPLAY -p 8888:8888 --mount src="$(pwd)",target=/workspace/,type=bind lrp 
 
-docker exec LRP -c "jupyter-lab --ip 0.0.0.0 --IdentitiyProvider.token='aiav' --no-browser --allow-root"
+docker exec LRP /bin/sh -c "jupyter-lab --ip 0.0.0.0 --IdentitiyProvider.token='aiav' --no-browser --allow-root"
 
