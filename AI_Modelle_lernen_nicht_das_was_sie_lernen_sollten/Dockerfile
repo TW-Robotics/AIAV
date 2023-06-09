@@ -8,13 +8,14 @@ FROM graphcore/pytorch-jupyter:3.2.0-ubuntu-20.04
 # (C) Alessandro Scherl 2023 <alessandro.scherl@technikum-wien.at>
 
 # Installation von Pip3
-# Die Java Runtime wird für Tika installiert
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip 
 
 # Upgrade zum neuesten Pip
 RUN pip3 install --upgrade pip 
 
-# Installation der Zennit Bibliothek, Matplotlib und git-lfs für große Dateien
+# Installation der Zennit Bibliothek & Matplotlib
 RUN pip3 install zennit matplotlib
-RUN sudo apt-get install git-lfs
+
+# get the Model weights
+RUN wget https://cloud.technikum-wien.at/s/gGDs9HLSGjDNnbF 
