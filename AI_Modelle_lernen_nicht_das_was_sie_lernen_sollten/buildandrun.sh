@@ -19,4 +19,7 @@ docker run -it \
                 -e DISPLAY=$DISPLAY \
                 -p 8888:8888 \
                 --mount src="$(pwd)",target=/workspace/,type=bind \
-                lrp:latest /bin/bash -c "jupyter-lab --ip 0.0.0.0 --IdentitiyProvider.token='aiav' --no-browser --allow-root"
+
+docker exec -ti LRP bash
+
+jupyter-lab --ip 0.0.0.0 --IdentitiyProvider.token='aiav' --no-browser --allow-root
