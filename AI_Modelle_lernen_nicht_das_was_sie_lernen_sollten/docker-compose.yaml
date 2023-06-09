@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+  samycore:
+    image: lrp:latest
+    container_name: LRP
+    volumes:
+      - /workspace/
+    ports:
+      - 8888:8888
