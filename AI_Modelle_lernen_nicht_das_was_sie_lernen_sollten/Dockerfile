@@ -17,5 +17,5 @@ RUN pip3 install --upgrade pip
 # Installation der Zennit Bibliothek & Matplotlib
 RUN pip3 install zennit matplotlib
 
-# get the Model weights
+# download the model weights from the clouds
 RUN wget https://cloud.technikum-wien.at/s/gGDs9HLSGjDNnbF 
