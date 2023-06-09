@@ -3,9 +3,44 @@
 ## Der Use Case
 
 In diesem Usecase geht es um die schichtweise Relevanzausbreitung (engl. [Layer-wise Relevance Propagation(LRP)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140)). 
-Die schichtweise Relevanzausbreitung ermöglicht es uns beispielsweise für ein faltendes neuronales Netzwerk (CNN) die Entscheidungsgrundlagen mittels sogenannten Wärmekarten (engl. Heatmaps) visuell darzustellen. Zur Anwendung und Demonstration dieses Use-Cases werden Straßenschilder klassifiziert. Hierzu wurde als Basis der [German Traffic Sign Benchmark (GTRSB)](https://benchmark.ini.rub.de/gtsdb_dataset.html) mit 43 Klassen, 39209 Trainings- und 12630 Testbilder herangezogen. Für die bessere Demonstration, wie uns die schichtweise Relevanzausbreitung helfen kann Probleme bei einem trainierten CNN dessen Entscheidungen zu überprüfen, wurde eine der vorhandenen Klassen im Datensatz vor dem Training mit schwarze Stickern "manipuliert". Die verwendete Modellstruktur unseres neuornalen Netzwerk für den Klassifier ist ein  [VGG11](https://arxiv.org/pdf/1409.1556.pdf).  
-Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres des Modells (model_weights_1.pt) auf und erstellt über die Anwendung von sogenannten LRP-Regeln die Relevanzen für das gegebene Inputbild. Diese Relevanzen können dann als Wärmekarte des Eingangsbildes ausgegeben werde. Dabei enstpricht eine rote Farbe der höchsten Relevanz für die Entscheidung des Netzwerks und eine blaue Farbe spricht gegen die Entscheidung des Netzwerks.
+Die schichtweise Relevanzausbreitung ermöglicht es uns beispielsweise für ein faltendes neuronales Netzwerk (CNN) die Entscheidungsgrundlagen mittels sogenannten Wärmekarten (engl. Heatmaps) visuell darzustellen. Zur Anwendung und Demonstration dieses Use-Cases werden Straßenschilder mit einem CNN klassifiziert. Hierzu wurde als Basis der [German Traffic Sign Benchmark (GTRSB)](https://benchmark.ini.rub.de/gtsdb_dataset.html) mit 43 Klassen, 39209 Trainings- und 12630 Testbilder herangezogen. Für die bessere Demonstration, wie uns die schichtweise Relevanzausbreitung helfen kann Probleme bei einem trainierten CNN dessen Entscheidungen zu überprüfen, wurde eine der vorhandenen Klassen im Datensatz vor dem Training mit schwarze Stickern beklebt und somit "manipuliert". Die verwendete Modellstruktur unseres neuornalen Netzwerk für den Klassifier ist ein  [VGG11](https://arxiv.org/pdf/1409.1556.pdf).  
+Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres des Modells (model_weights.pt) auf und erstellt über die Anwendung von sogenannten LRP-Regeln die Relevanzen für das gegebene Inputbild. Diese Relevanzen können dann als Wärmekarte des Eingangsbildes ausgegeben werde. Dabei enstpricht eine rote Farbe der höchsten Relevanz für die Entscheidung des Netzwerks und eine blaue Farbe spricht gegen die Entscheidung des Netzwerks.
 
+<img src="images/Waermekarte.png" width="40%" height="40%">
+
+Für diesen Use-Case verwenden wir Python3 und Pytorch. Um diese Projekt selber auf Ihrem lokalen Rechner ausführen zu können gehen Sie entsprechend folgender Anweisung vor:
+
+- Installieren Sie [Docker](https://docs.docker.com/engine/install/) für ihr System.
+
+- Installieren Sie [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) für ihr System.
+
+- Clonen bzw. kopieren Sie den AIAV Projektordner auf ihrne lokalen Speicher mittels folgendem Befehl:
+
+    ```console
+    git clone https://github.com/TW-Robotics/AIAV/
+    ```
+- Navigieren Sie in den Ordner *AI_Modelle_lernen_nicht_das_was_sie_lernen_sollten*:
+    ```console
+    cd AIAV/AI_Modelle_lernen_nicht_das_was_sie_lernen_sollten
+    ```
+
+- Führen sie das bashandrun Skript aus:
+    - Windows:
+
+    - Ubuntu:
+     ```console
+    bash buildandrun.sh
+    ```
+
+  
+
+
+
+
+ 
+ dieses baut den Docker container & führt diesen aus und starte das Notebook.  
+
+Nun sollte Ihr Notebook in einem neuen Fenster aufscheinen, hier können sie den Code verfolgen, ausführen, und andere Eingangsbilder abändern. (Achtung die 4. Zelle lädt die Training und Testdaten auf ihren lokalen Rechner, die könnte etwas Zeit in Anspruch nehmen)
 
 Die Gewichte können Sie direkt von unserem Training übernehmen. Im LRP Notebook müssen sie weiters den Pfad des zu untersuchenden Bildes angeben.
 Um das LRP Notebook auszführen benötigen Sie [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) sowie [GIT-LFS](https://git-lfs.com/) und [Docker](https://docs.docker.com/engine/install/). Docker erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
@@ -27,7 +62,7 @@ Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt s
 
 Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern durch die Anwendung der schichtweisen Relevanzausbreitung die entsprechenden Wärmekarten erzeugt. In Abbildung 1 sehen sie vier Ursprungsbilder, deren prognostizierte Klasse von unserem Modell und die resultierende Wärmekarte. 
 
-![Abbildung 1](images/Abbildung1.png)
+<img src="images/Abbildung1.png" width="60%" height="60%">
 
 - Für das erste Bild in Abbildung 1 ist ersichtlich dass das Stoppschild aufgrund der Kontur des Schildes und dem Schriftzug erkannt wird. Dies macht Sinn, da die Kontur und der Schriftzug in dem Datensatz für dieses Schild einzigartig ist. Unser Modell hat also für die Stoppschild Klasse die "richtigen" Features gelernt.
 
