@@ -12,13 +12,15 @@ docker build -t lrp .
 
 # Ausführen des Containers mit X11 Forwarding
 docker run -it \
-                --rm \
-                -t \
-                -d \
-                --name LRP \
-                -e DISPLAY=$DISPLAY \
-                -p 8888:8888 \
-                --mount src="$(pwd)",target=/workspace/,type=bind \
+            --rm \
+            -t \
+            -d \
+            --name LRP \
+            -e DISPLAY=$DISPLAY \
+            -p 8888:8888 \
+            --mount src="$(pwd)",target=/workspace/,type=bind \ 
+            lrp \
+            
 
 docker exec -ti LRP bash
 
