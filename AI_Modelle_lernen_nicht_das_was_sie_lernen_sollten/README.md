@@ -10,9 +10,11 @@ Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres 
 
 Für diesen Use-Case verwenden wir Python3 und Pytorch. Um diese Projekt selber auf Ihrem lokalen Rechner ausführen zu können gehen Sie entsprechend folgender Anweisung vor:
 
-- Installieren Sie [Docker](https://docs.docker.com/engine/install/) für ihr System.
+- Installieren Sie [Docker](https://docs.docker.com/engine/install/) für Ihr System.
 
-- Installieren Sie [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) für ihr System.
+- Installieren Sie [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) für Ihr System.
+
+- Öffnen sie eine Terminal bzw. Konsole (unter Windows Powershell)
 
 - Clonen bzw. kopieren Sie den AIAV Projektordner auf ihrne lokalen Speicher mittels folgendem Befehl:
 
@@ -24,43 +26,28 @@ Für diesen Use-Case verwenden wir Python3 und Pytorch. Um diese Projekt selber 
     cd AIAV/AI_Modelle_lernen_nicht_das_was_sie_lernen_sollten
     ```
 
-- Führen sie das bashandrun Skript aus:
-    - Windows:
+- Führen Sie das bashandrun Skript aus:
+    - unter Windows starten sie Docker Desktop und führen sie folgenden Befehl aus:
 
-    - Ubuntu:
+     ```console
+    .\buildandrun.ps1
+    ```
+    - unter Ubuntu:
      ```console
     bash buildandrun.sh
     ```
+Nun wird der Docker Container heruntergeladen und startet. Der Prozess ist abgeschlossen wenn Sie ein Link von Jupyter-Lab in der Konsole aufscheint. Klicken Sie diesen Jupyter-Link in der Konsole an, oder kopieren Sie ihn in einen Browser Ihrer Wahl, um Jupyter-Lab zu öffnen.
+Klicken Sie nun auf das Notebook des LRP-Usecases um dieses zur Ansicht und zum Ausführen in Jupyter-Lab zu öffnen. Hier können Sie den Code verfolgen, ausführen, und den Pfad für andere Eingangsbilder einstellen.
 
-  
+Bevor sie den Container erneut ausführen müssen Sie den alten zuerst schließen, hierfür führen Sie bitte folgenden Befehl aus:
 
-
-
-
- 
- dieses baut den Docker container & führt diesen aus und starte das Notebook.  
-
-Nun sollte Ihr Notebook in einem neuen Fenster aufscheinen, hier können sie den Code verfolgen, ausführen, und andere Eingangsbilder abändern. (Achtung die 4. Zelle lädt die Training und Testdaten auf ihren lokalen Rechner, die könnte etwas Zeit in Anspruch nehmen)
-
-Die Gewichte können Sie direkt von unserem Training übernehmen. Im LRP Notebook müssen sie weiters den Pfad des zu untersuchenden Bildes angeben.
-Um das LRP Notebook auszführen benötigen Sie [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) sowie [GIT-LFS](https://git-lfs.com/) und [Docker](https://docs.docker.com/engine/install/). Docker erlaubt es uns, abgekapselte Umgebungen, sogenannte Container, für verschiedene Programme aufzusetzen. Dabei können für eine Anwendung erforderliche Komponenten automatisch in einem Container installiert und deinstalliert werden. Wir verwenden Docker, um den Beispielcode einfach ausführbar zu machen, ohne dass die verwendeten Software Pakete direkt auf Ihrem PC installiert werden müssen.
-
-Danach können Sie das Skript (buildandrun.sh) ausführen welches die erforderlichen Komponenten installiert und den Docker Container startet. Ist dies geschehen können sie entweder das LRP Notebook mittels jupyter-lab, welches bereits durch den Docker Container installiert wurde, aufrufen (*python3 LRP.py /path/to/image.ppn*).
-
-Damit das Skript funktioniert, müssen folgende Systemvoraussetzungen erfüllt sein 
-
-- Docker muss installiert sein. Unter Linux kann Docker nativ Installiert werden, unter Windows wird das wsl2 Backend benötigt (für Windows wird Windows 10 Update 21h1 oder höher benötigt, da sonst die Fenster von Docker nicht angezeigt werden können).
-
-- Unter Linux muss Docker Berechtigungen haben, ohne sudo ausgeführt zu werden. Diese Berechtigung gibt man, indem man *sudo groupadd docker && sudo usermod -aG docker $USER* im Terminal eingibt und sich anschließend aus- und einloggt.
-
-- Unter Linux muss X11 Forwarding erlaubt sein.
-
-- Eine Internetverbindung zum Download der benötigten Komponenten.
-
+     ```console
+    sudo docker kill LRP
+    ```
 
 ## Ergebnisse
 
-Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern durch die Anwendung der schichtweisen Relevanzausbreitung die entsprechenden Wärmekarten erzeugt. In Abbildung 1 sehen sie vier Ursprungsbilder, deren prognostizierte Klasse von unserem Modell und die resultierende Wärmekarte. 
+Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern durch die Anwendung der schichtweisen Relevanzausbreitung die entsprechenden Wärmekarten erzeugt. In Abbildung 1 sehen Sie vier Ursprungsbilder, deren prognostizierte Klasse von unserem Modell und die resultierende Wärmekarte. 
 
 <img src="images/Abbildung1.png" width="60%" height="60%">
 
