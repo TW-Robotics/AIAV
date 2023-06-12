@@ -4,7 +4,7 @@
 
 In diesem Usecase geht es um die schichtweise Relevanzausbreitung (engl. [Layer-wise Relevance Propagation(LRP)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140)). 
 Die schichtweise Relevanzausbreitung ermöglicht es uns beispielsweise für ein faltendes neuronales Netzwerk ([CNN](https://www.youtube.com/watch?v=cdVDMm5Wscc)) die Entscheidungsgrundlagen mittels sogenannten Wärmekarten (engl. Heatmaps) visuell darzustellen. Zur Anwendung und Demonstration dieses Use-Cases werden Straßenschilder mit einem CNN klassifiziert. Hierzu wurde als Basis der [German Traffic Sign Benchmark (GTRSB)](https://benchmark.ini.rub.de/gtsdb_dataset.html) mit 43 Klassen, 39209 Trainings- und 12630 Testbilder herangezogen. Für die bessere Demonstration, wie uns die schichtweise Relevanzausbreitung helfen kann Probleme bei einem trainierten CNN dessen Entscheidungen zu überprüfen, wurde eine der vorhandenen Klassen im Datensatz vor dem Training mit schwarze Stickern beklebt und somit "manipuliert". Die verwendete Modellstruktur unseres neuornalen Netzwerk für den Klassifier ist ein  [VGG11](https://arxiv.org/pdf/1409.1556.pdf).  
-Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres des Modells (model_weights.pt) auf und erstellt über die Anwendung von sogenannten LRP-Regeln die Relevanzen für das gegebene Inputbild. Diese Relevanzen können dann als Wärmekarte des Eingangsbildes ausgegeben werde. Dabei enstpricht eine rote Farbe der höchsten Relevanz für die Entscheidung des Netzwerks und eine blaue Farbe spricht gegen die Entscheidung des Netzwerks.
+Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres des Modells (model_weights.pt) auf und erstellt über die Anwendung von sogenannten LRP-Regeln die Relevanzen für das gegebene Inputbild. Diese Relevanzen können dann als Wärmekarte des Eingangsbildes ausgegeben werde. Wie in Abbildung 1 dargestellt enstpricht eine weiße Farbe der höchsten Relevanz für die Entscheidung des Netzwerks und eine blaue Farbe spricht gegen die Entscheidung des Netzwerks.
 
 <p align="center">
   <img alt="Wärmeskala" src="images/Abbildung1.PNG" width="40%" height="40%">
@@ -56,7 +56,7 @@ Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern d
 <p align="center">
   <img alt="Testbilder" src="images/Abbildung2.png" width="100%" height="100%">
   <br>
-    <em>Abbildung 2: Vier Testbilder, das Klassifizierungsergebniss unseres CNN-Modells sowie die resultierenden Wärmekarten der schichtweisen Relevanzausbreitung.</em>
+    <em>Abbildung 2: Vier zufällige Testbilder, die zugehörigen Klassifizierungsergebnisse unseres CNN-Modells sowie die resultierenden Wärmekarten der schichtweisen Relevanzausbreitung.</em>
 </p>
 
 - Für das erste Bild in Abbildung 2 ist ersichtlich, dass das Stoppschild aufgrund der Kontur des Schildes und dem Schriftzug erkannt wird. Dies macht Sinn, da die Kontur und der Schriftzug in dem verwendeten Datensatz für dieses Schild einzigartig ist. Unser Modell hat also für die Stoppschild Klasse die "richtigen" bzw. für uns Menschen nachvollziehbare Features gelernt.
