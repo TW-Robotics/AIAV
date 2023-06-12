@@ -7,7 +7,7 @@ Die schichtweise Relevanzausbreitung ermöglicht es uns beispielsweise für ein 
 Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres des Modells (model_weights.pt) auf und erstellt über die Anwendung von sogenannten LRP-Regeln die Relevanzen für das gegebene Inputbild. Diese Relevanzen können dann als Wärmekarte des Eingangsbildes ausgegeben werde. Dabei enstpricht eine rote Farbe der höchsten Relevanz für die Entscheidung des Netzwerks und eine blaue Farbe spricht gegen die Entscheidung des Netzwerks.
 
 <p align="center">
-  <img alt="Wärmeskala" src="images/Abbildung1.PNG" width="40%" height="40%">
+  <img alt="Wärmeskala" src="images/Abbildung1.png" width="40%" height="40%">
   <br>
     <em>Abbildung 1: Wärmeskala</em>
 </p>
