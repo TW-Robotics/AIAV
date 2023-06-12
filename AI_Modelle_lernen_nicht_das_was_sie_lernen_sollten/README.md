@@ -42,7 +42,7 @@ Klicken Sie nun auf das Notebook des LRP-Usecases um dieses zur Ansicht und zum 
 - Bevor Sie den Container erneut ausführen müssen Sie den bestehenden schließen, hierfür führen Sie bitte folgenden Befehl aus:
 
     ```console
-    sudo docker kill LRP
+    docker kill LRP
     ```
 
 ## Ergebnisse
