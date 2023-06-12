@@ -6,7 +6,7 @@ In diesem Usecase geht es um die schichtweise Relevanzausbreitung (engl. [Layer-
 Die schichtweise Relevanzausbreitung ermöglicht es uns beispielsweise für ein faltendes neuronales Netzwerk (CNN) die Entscheidungsgrundlagen mittels sogenannten Wärmekarten (engl. Heatmaps) visuell darzustellen. Zur Anwendung und Demonstration dieses Use-Cases werden Straßenschilder mit einem CNN klassifiziert. Hierzu wurde als Basis der [German Traffic Sign Benchmark (GTRSB)](https://benchmark.ini.rub.de/gtsdb_dataset.html) mit 43 Klassen, 39209 Trainings- und 12630 Testbilder herangezogen. Für die bessere Demonstration, wie uns die schichtweise Relevanzausbreitung helfen kann Probleme bei einem trainierten CNN dessen Entscheidungen zu überprüfen, wurde eine der vorhandenen Klassen im Datensatz vor dem Training mit schwarze Stickern beklebt und somit "manipuliert". Die verwendete Modellstruktur unseres neuornalen Netzwerk für den Klassifier ist ein  [VGG11](https://arxiv.org/pdf/1409.1556.pdf).  
 Das Notebook (notebook.ipynb) setzt auf den vorab trainierten Gewichten unseres des Modells (model_weights.pt) auf und erstellt über die Anwendung von sogenannten LRP-Regeln die Relevanzen für das gegebene Inputbild. Diese Relevanzen können dann als Wärmekarte des Eingangsbildes ausgegeben werde. Dabei enstpricht eine rote Farbe der höchsten Relevanz für die Entscheidung des Netzwerks und eine blaue Farbe spricht gegen die Entscheidung des Netzwerks.
 
-<img src="images/Waermekarte.PNG" width="40%" height="40%">
+<img src="images/Waermeskala.PNG" width="40%" height="40%">
 
 Für diesen Use-Case verwenden wir Python3 und Pytorch. Um diese Projekt selber auf Ihrem lokalen Rechner ausführen zu können gehen Sie entsprechend folgender Anweisung vor:
 
@@ -39,9 +39,9 @@ Für diesen Use-Case verwenden wir Python3 und Pytorch. Um diese Projekt selber 
 Nun wird der Docker Container heruntergeladen und startet. Der Prozess ist abgeschlossen wenn Sie ein Link von Jupyter-Lab in der Konsole aufscheint. Klicken Sie diesen Jupyter-Link in der Konsole an, oder kopieren Sie ihn in einen Browser Ihrer Wahl, um Jupyter-Lab zu öffnen.
 Klicken Sie nun auf das Notebook des LRP-Usecases um dieses zur Ansicht und zum Ausführen in Jupyter-Lab zu öffnen. Hier können Sie den Code verfolgen, ausführen, und den Pfad für andere Eingangsbilder einstellen.
 
-Bevor Sie den Container erneut ausführen müssen Sie den alten zuerst schließen, hierfür führen Sie bitte folgenden Befehl aus:
+- Bevor Sie den Container erneut ausführen müssen Sie den bestehenden schließen, hierfür führen Sie bitte folgenden Befehl aus:
 
-     ```console
+    ```console
     sudo docker kill LRP
     ```
 
