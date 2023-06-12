@@ -40,8 +40,8 @@ Für diesen Use-Case verwenden wir Python3 und Pytorch. Um diese Projekt selber 
      ```console
     bash buildandrun.sh
     ```
-Nun wird der Docker Container heruntergeladen und startet. Der Prozess ist abgeschlossen wenn Sie ein Link von Jupyter-Lab in der Konsole aufscheint. Klicken Sie diesen Jupyter-Link in der Konsole an, oder kopieren Sie ihn in einen Browser Ihrer Wahl, um Jupyter-Lab zu öffnen.
-Klicken Sie nun auf das Notebook des LRP-Usecases um dieses zur Ansicht und zum Ausführen in Jupyter-Lab zu öffnen. Hier können Sie den Code verfolgen, ausführen, und den Pfad für andere Eingangsbilder einstellen.
+Nun wird der Docker Container heruntergeladen und startet. Der Prozess ist abgeschlossen wenn ein Link von Jupyter-Lab in der Konsole aufscheint. Klicken Sie diesen Jupyter-Link in der Konsole an, oder kopieren Sie ihn in einen Browser Ihrer Wahl, um Jupyter-Lab zu öffnen.
+Klicken Sie nun auf *notebook.ipynb* um dieses zur Ansicht und zum Ausführen in Jupyter-Lab zu öffnen. Hier können Sie nun den Code verfolgen, ausführen, und den Pfad für die Eingangsbilder adaptieren um somit Wärmekarten von anderen Eingangsbildern zu erzeugen.
 
 - Bevor Sie den Container erneut ausführen müssen Sie den bestehenden schließen, hierfür führen Sie bitte folgenden Befehl aus:
 
@@ -71,4 +71,4 @@ Bei Betrachtung der Wärmekarte wird schnell klar unser Modell stützt sich bei 
 
 ## Diskussion 
 
-Dieser Use Case handelt von der Anwendung von der schwichtweisen Relevanzausbreitung ([LRP](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140)). Wir haben demonstiert wie man durch die Anwendung des LRP-Frameworks die Entscheidungen eines trainierten CNN-Klassifiers für uns Menschen visuell erklärbar machen kann. Weiters haben wir aufgezeigt, dass es möglich ist einen Fehler in einem Modell zu entdecken - dies ist gerade für zukünftige Applikationen die in der realen Umgebung eingesetzt werden ein muss. Demenstprechend sollten wir bei der Auswahl unserer Datensätze und der Überprüfung unserer Modelle genau arbeiten und sogenannte explainability Tools wie LRP anwenden. Ansonsten wissen wir nicht was unsere Modelle wirklich gelernt haben, und basierend auf welchen Grundlagen Entscheidungen getroffen werden. 
+Dieser Use Case handelt von der Anwendung von der schwichtweisen Relevanzausbreitung (LRP). Wir haben demonstiert wie man durch die Anwendung des LRP-Frameworks die Entscheidungen eines trainierten CNN-Klassifiers für uns Menschen visuell erklärbar machen kann. Weiters haben wir aufgezeigt, dass es möglich ist einen Fehler in einem Modell zu entdecken - dies ist gerade für zukünftige Applikationen die in der realen Umgebung eingesetzt werden ein muss. Demenstprechend sollten wir bei der Auswahl unserer Datensätze und der Überprüfung unserer Modelle genau arbeiten und sogenannte explainability Tools wie LRP anwenden. Ansonsten wissen wir nicht was unsere Modelle wirklich gelernt haben, und basierend auf welchen Grundlagen Entscheidungen getroffen werden. 
