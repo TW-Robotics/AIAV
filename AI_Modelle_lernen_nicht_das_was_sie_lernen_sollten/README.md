@@ -49,7 +49,7 @@ Klicken Sie nun auf das Notebook des LRP-Usecases um dieses zur Ansicht und zum 
 
 Für die Demonstration der Ergebnisse wurden von verschiedenen Eingangsbildern durch die Anwendung der schichtweisen Relevanzausbreitung die entsprechenden Wärmekarten erzeugt. In Abbildung 1 sehen Sie vier Ursprungsbilder, deren prognostizierte Klasse von unserem Modell und die resultierende Wärmekarte. 
 
-<img src="images/Abbildung1.png" width="80%" height="80%">
+<img src="images/Abbildung1.PNG" width="80%" height="80%">
 
 - Für das erste Bild in Abbildung 1 ist ersichtlich dass das Stoppschild aufgrund der Kontur des Schildes und dem Schriftzug erkannt wird. Dies macht Sinn, da die Kontur und der Schriftzug in dem Datensatz für dieses Schild einzigartig ist. Unser Modell hat also für die Stoppschild Klasse die "richtigen" Features gelernt.
 
