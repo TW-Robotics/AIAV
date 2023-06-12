@@ -71,8 +71,4 @@ Bei Betrachtung der Wärmekarte wird schnell klar unser Modell stützt sich bei 
 
 ## Diskussion 
 
-<<<<<<< HEAD
-Dieser Use Case handelt von der Anwendung von der schwichtweisen Relevanzausbreitung ([LRP](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140)). Wir haben demonstiert wie man durch die Anwendung des LRP-Frameworks die Entscheidungen eines trainierten CNN-Klassifiers für uns Menschen visuell erklärbar machen kann. Weiters haben wir aufgezeigt, dass es möglich ist einen Fehler in einem Modell zu entdecken - dies ist gerade für zukünftige Applikationen die in der realen Umgebung eingesetzt werden ein muss. Demenstprechend sollten wir bei der Auswahl unserer Datensätze und der Überprüfung unserer Modelle genau arbeiten und sogenannte explainability Tools wie LRP anwenden. Ansonsten wissen wir nicht was unsere Modelle wirklich gelernt haben, und basierend auf welchen Grundlagen Entscheidungen getroffen werden. 
-=======
 Dieser Use Case handelt von der Anwendung von der schwichtweisen Relevanzausbreitung (LRP). Wir haben demonstiert wie man durch die Anwendung des LRP-Frameworks die Entscheidungen eines trainierten CNN-Klassifiers für uns Menschen visuell erklärbar machen kann. Weiters haben wir aufgezeigt, dass es möglich ist einen Fehler in einem Modell zu entdecken - dies ist gerade für zukünftige Applikationen die in der realen Umgebung eingesetzt werden ein muss. Demenstprechend sollten wir bei der Auswahl unserer Datensätze und der Überprüfung unserer Modelle genau arbeiten und sogenannte explainability Tools wie LRP anwenden. Ansonsten wissen wir nicht was unsere Modelle wirklich gelernt haben, und basierend auf welchen Grundlagen Entscheidungen getroffen werden. 
->>>>>>> a77814bb6bbc9817064e702c030218e5f1a0c3b5
