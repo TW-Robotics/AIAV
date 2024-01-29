@@ -1,3 +1,10 @@
+# Dieses Skript lädt den MVTec ITODD Datensatz herunter und konvertiert ausgewählte Bilder für den Embedded AI HW Use Case.
+#
+# This code is available under a GPL v3.0 license and comes without
+# any explicit or implicit warranty.
+#
+# (C) Simon Schwaiger 2024 <schwaige@technikum-wien.at>
+
 import os
 import cv2
 
@@ -12,14 +19,14 @@ outputDir = "detectronDataset"
 outputDir = os.path.join(scriptPath, outputDir)
 
 def getFiles(directory, ext=(".tif")):
-    """Returns all files in a directory with given extensions """
+    """Gibt alle Dateien in einem Verzeichnis von bestimmten Dateitypen zurück """
     files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
     if ext == []: retArr = files
     else: retArr = [ file for file in files if file.endswith(ext) ]
     return retArr
 
 def getDirectories(directory):
-    """Returns all directories in a directory """
+    """Gibt alle Verzeichnisse in einem Verzeichnis zurück """
     files = [f for f in os.listdir(directory) if os.path.isdir(os.path.join(directory, f))]
     return files
 
