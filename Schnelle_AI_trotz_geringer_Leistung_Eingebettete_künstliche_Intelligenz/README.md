@@ -1,4 +1,4 @@
-# Schnelle AI trotz geringer Leistung: Eingebettete künstlichte Intelligenz
+# Schnelle AI trotz geringer Leistung: Eingebettete künstliche Intelligenz
 
 Hier finden Sie Programmcode und Beispiele, wie man einen Detektor in der Cloud trainiert und anschließend auf eingebetteten Plattformen lokal nutzen kann.
 
@@ -7,7 +7,7 @@ Die Grundlagen von verfügbarer Hardware zum Training und Inferenz neuronaler Ne
 
 # Der Use Case
 
-Die Implementierung basiert auf [Detectron2](https://github.com/facebookresearch/detectron2) und verwendet [Pytorch](https://pytorch.org/) als Backend. Zusätzlich dazu werden einige Bildverarbeitungsfunktionen aus der offen zugänglichen [OpenCV](https://opencv.org/) Bibliothek eingesetzt. Der Datensatz wurde mittels []() beschriftet.
+Die Implementierung basiert auf [Detectron2](https://github.com/facebookresearch/detectron2) und verwendet [Pytorch](https://pytorch.org/) als Backend. Zusätzlich dazu werden einige Bildverarbeitungsfunktionen aus der offen zugänglichen [OpenCV](https://opencv.org/) Bibliothek eingesetzt. Der Datensatz wurde mittels [YOLO-Label](https://github.com/developer0hye/Yolo_Label) beschriftet.
 
 ### Vorbereitung des Datensatzes
 
