@@ -38,7 +38,7 @@ os.system("tar -xvf 3d_short_baseline.tar.xz")
 scenenames = getDirectories(os.path.join(scriptPath, "scenes"))
 
 filename = "3d_short_baseline_l.tif"
-os.mkdir(outputDir)
+if not os.path.isdir(outputDir): os.mkdir(outputDir)
 
 with open(os.path.join(scriptPath, "utilisedImages.txt"), "r") as f:
     sceneList = f.read().splitlines()
