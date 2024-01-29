@@ -1,0 +1,6 @@
+torch-2.0.0+nv23.05-cp38-cp38-linux_aarch64.whl
+scenes/**
+torchvision/**
+detectronDataset/*.png
+.ipynb_checkpoints/
+
