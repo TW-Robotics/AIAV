@@ -49,7 +49,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     libgl1-mesa-glx libgl1-mesa-dri python3-tk mesa-utils v4l-utils
 
 # Jupyterlab als online IDE
-RUN pip3 install jupyterlab
+RUN pip3 install jupyterlab ipywidgets
 ENV SHELL=/bin/bash
 
 # Jupyterlab Startkommando
