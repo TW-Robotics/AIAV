@@ -6,3 +6,5 @@ detectronDataset/*.png
 pretrainedModel/model_final.pth
 pretrainedModel/AI_Hardware_Use_Case_Pretrained_Model.zip
 pretrainedModel/AI_Hardware_Use_Case_Pretrained_Model/*
+3d_short_baseline.tar.xz
+license.txt
