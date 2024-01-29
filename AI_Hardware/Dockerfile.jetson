@@ -1,0 +1,56 @@
+# Dieses Dockerfile konfiguriert die Ausführungsumgebung für den Embedded AI HW Use Case
+#
+# - Pytorch und Torchvision Installation auf Jetson: https://github.com/ashBabu/Utilities/wiki/Nvidia-Jetson#install-pytorch-and-torchvision
+# - Pytorch für Jetson Wheel Download: https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html
+#
+# This code is available under a GPL v3.0 license and comes without
+# any explicit or implicit warranty.
+#
+# (C) Simon Schwaiger 2024 <schwaige@technikum-wien.at>
+
+FROM nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3
+
+# Einstellen der Zeit
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+
+# Manuelles upgrade der torch Version, da torch._dynamo.is_compiling benötigt wird
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    python3-pip libopenblas-base libopenmpi-dev libomp-dev
+
+# Detectron Voraussetzungen
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    build-essential ninja-build git cmake
+
+# Neuestes pip und cython für torch Installation
+RUN pip install --upgrade pip
+RUN pip3 install cython
+
+# Torchvision Voraussetzungen
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    libjpeg-dev zlib1g-dev libpython3-dev libopenblas-dev libavcodec-dev libavformat-dev libswscale-dev
+
+# Installation von torch (als wheel, um Installationsgeschwindigkeit zu erhöhen)
+RUN mkdir /app
+COPY ./app/torch-2.0.0+nv23.05-cp38-cp38-linux_aarch64.whl /app
+RUN cd /app && pip3 install numpy torch-2.0.0+nv23.05-cp38-cp38-linux_aarch64.whl
+
+# Bau von torchvision
+RUN cd /app && git clone https://github.com/pytorch/vision torchvision   
+RUN cd /app/torchvision && git checkout release/0.15
+ENV BUILD_VERSION=0.15 
+RUN cd /app/torchvision && python3 setup.py install
+
+# Installation von Detectron2
+RUN pip3 install 'git+https://github.com/facebookresearch/detectron2.git'
+
+# Installation der GUI für Visualisierungen
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    libgl1-mesa-glx libgl1-mesa-dri python3-tk mesa-utils v4l-utils
+
+# Jupyterlab als online IDE
+RUN pip3 install jupyterlab
+ENV SHELL=/bin/bash
+
+# Jupyterlab Startkommando
+#jupyter-lab --ip 0.0.0.0 -IdentityProvider.token='aiav' --no-browser --allow-root
