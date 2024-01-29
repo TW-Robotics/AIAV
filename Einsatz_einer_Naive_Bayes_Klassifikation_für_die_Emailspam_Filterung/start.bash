@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Dieses Skript führt einen Beispielprojekt für die Naive Bayes Klassifizierung aus.
+# Dieses Skript führt ein Beispielprojekt für die Naive Bayes Klassifizierung aus.
 #
 # This code is available under a GPL v3.0 license and comes without
 # any explicit or implicit warranty.
