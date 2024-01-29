@@ -1,3 +1,12 @@
+#!/bin/bash
+
+# Dieses Skript implementiert ein Naive Bayes Klassifizierungsmodell.
+#
+# This code is available under a GPL v3.0 license and comes without
+# any explicit or implicit warranty.
+#
+# (C) Lucas Muster 2021 <muster@technikum-wien.at>
+
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
