@@ -31,8 +31,3 @@ Abbildung 2 zeigt die resultierende Erkennung der handgeschriebenen Ziffern im [
 # Diskussion
 
 In diesem Use Case haben wir uns mit der Theorie hinter neuronalen Netzen beschäftigt und ein von Grund auf implementiertes neuronales Netz trainiert, von Hand geschriebene Ziffern zu erkennen. Durch die NumPy Bibliothek, welche Vektor- und Matrixoperationen sowie die *tanh* Funktion bereits implementiert, wird der resultierende Code kompakt gehalten. 
-
-
-
-
-In diesem Use Case haben wir uns mit der Lösung von Scheduling Problemen durch Suche beschäftigt. Dabei wurde gezeigt, wie Tiefen- und Breitensuche eingesetzt werden können, um eine mögliche Lösung für ein Problem zu finden. Beide Suchalgorithmen sind einfach zu implementieren und eignen sich für die Lösung kleiner Probleme. Keiner der beiden Algorithmen zieht dabei aber die Optimalität der Lösung in Betracht.
