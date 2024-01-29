@@ -3,4 +3,6 @@ scenes/**
 torchvision/**
 detectronDataset/*.png
 .ipynb_checkpoints/
-detectronDataset/model_final.pth
+pretrainedModel/model_final.pth
+pretrainedModel/AI_Hardware_Use_Case_Pretrained_Model.zip
+pretrainedModel/AI_Hardware_Use_Case_Pretrained_Model/*
