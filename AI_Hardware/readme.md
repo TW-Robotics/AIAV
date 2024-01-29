@@ -1,4 +1,4 @@
-# Schnelle AI trotz geringer Leistung: Eingebettete küntlichte Intelligenz
+# Schnelle AI trotz geringer Leistung: Eingebettete künstlichte Intelligenz
 
 Hier finden Sie Programmcode und Beispiele, wie man einen Detektor in der Cloud trainiert und anschließend auf eingebetteten Plattformen lokal nutzen kann.
 
@@ -19,7 +19,7 @@ Zur Ausführung dieser Python Datei müssen Python, OpenCV und wget auf Ihrem Li
 
 Der Detektor wird in der Cloud basierend auf [dieser](https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5) Detectron2 Anleitung trainiert. Laden Sie dazu `AIAVDetectronTraining.ipynb` auf [Google Colab](https://colab.research.google.com/) hoch und befolgen Sie die Schritte im Notebook. Bitte beachten Sie, dass Sie dafür die Schritte in *Vorbereitung des Datensatzes* bereits durchgeführt haben müssen.
 
-Wir stellen eine bereits trainierte Version des Detektors zur Verfügung, falls Sie diesen Schritt überspringen wollen. Diese finden Sie in `./app/detectronDataset/model_final.pth`.
+Wir stellen eine bereits trainierte Version des Detektors zur Verfügung, falls Sie diesen Schritt überspringen wollen. Diese können sie [hier](https://github.com/TW-Robotics/AIAV/releases/download/0.1/AI_Hardware_Use_Case_Pretrained_Model.zip) herunterladen. Entpacken Sie anschließend das Archiv und kopieren Sie die `model_final.pth` Datei in `./app/pretrainedModel/`.
 
 ### Ausführung Jetson
 
