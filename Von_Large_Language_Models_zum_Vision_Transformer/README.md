@@ -2,7 +2,7 @@
 
 ## Der Use Case
 
-In diesem Use Case wird die grundlegende Funktionsweise eines Vision Transformers, entsprechend Abbildung 1, erklärt, ausgecoded und auf eine Klassifikationsaufgabe, traniert und angewandt. Der Code im Jupyterlab-notebook wird analog zu dem Vision Transformer Paper [An Image is Worth 16x16 Words: Transformer for Image Recognition at Scale](https://arxiv.org/pdf/2010.11929.pdf) erstellt und auf einen neuen Datensatz getestet. Der Datensatz hierfür ist der [WOD: Web Object Dataset](https://www.acin.tuwien.ac.at/vision-for-robotics/software-tools/autonomous-robot-indoor-dataset/). Das Jupyterlab-notebook ist eine überarbeitete Form von [GitHub Repository von mrdbourke](https://github.com/mrdbourke/pytorch-deep-learning), welcher ein frei zugängliches PyTorch Tutorial auf seiner [Homepage](https://www.learnpytorch.io/) bereitstellt.
+In diesem Use Case wird die grundlegende Funktionsweise eines Vision Transformers, entsprechend Abbildung 1, erklärt, ausgecoded und auf eine Klassifikationsaufgabe, traniert sowie angewandt. Der Code im Jupyterlab-notebook wird analog zu dem Vision Transformer Paper [An Image is Worth 16x16 Words: Transformer for Image Recognition at Scale](https://arxiv.org/pdf/2010.11929.pdf) erstellt und auf einen neuen Datensatz getestet. Der Datensatz hierfür ist der [WOD: Web Object Dataset](https://www.acin.tuwien.ac.at/vision-for-robotics/software-tools/autonomous-robot-indoor-dataset/). Das Jupyterlab-notebook ist eine überarbeitete Form von [GitHub Repository von mrdbourke](https://github.com/mrdbourke/pytorch-deep-learning), welcher ein frei zugängliches PyTorch Tutorial auf seiner [Homepage](https://www.learnpytorch.io/) bereitstellt.
 
 
 
