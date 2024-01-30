@@ -51,7 +51,7 @@ Klicken Sie nun auf *notebook.ipynb* um dieses zur Ansicht und zum Ausführen in
     ```
 
 ## Ergebnisse
-In diesem Abschnitt werden die Ergebnisse dieses Use-Case's vorgestellt. Einerseits ist die theoretische Fundierung entsprechend Abbildung 1 ein wichtiger Bestandteil dieses Use-Cases. Weiters wurden ein von Null trainiertes Vision Transformer Modell mit den selbem (limitierten) Datensatz trainiert wie ein vortrainiertes. Die Ergebnisse hierfür sehen sie in den folgenden zwei Abbildungen 2 & 3 mit den entsprechenden Accuracy Kurven fuer Test und Trainings-Datensaetze:
+In diesem Abschnitt werden die Ergebnisse dieses Use-Case's vorgestellt. Einerseits ist die theoretische Fundierung entsprechend Abbildung 1 ein wichtiger Bestandteil dieses Use-Cases. Des weiteren wird der Code des ViT im notebook.ipynb aufbereitet und darin ein Modell von Null auf trainiert sowie ein bestehendes ViT Modell fine getuned. Der Datensatz hierfür ist ein Teil des [WOD: Web Object Dataset](https://www.acin.tuwien.ac.at/vision-for-robotics/software-tools/autonomous-robot-indoor-dataset/). Die Ergebnisse zu den beiden Modellen für die Klassifiikationsaufgabe sehen sie in den folgenden zwei Abbildungen 2 & 3 mit den entsprechenden Accuracy Kurven fürr Test und Trainings-Datensaetze:
 
 <p align="center">
   <img alt="ViT" src="images/Abbildung_5.PNG" width="40%" height="40%">
