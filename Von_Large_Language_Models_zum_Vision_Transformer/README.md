@@ -7,7 +7,7 @@ In diesem Use Case wird die grundlegende Funktionsweise eines Vision Transformer
 
 
 <p align="center">
-  <img alt="ViT" src="images/Abbildung_1.PNG" width="40%" height="40%">
+  <img alt="ViT" src="images/Abbildung_1.png" width="40%" height="40%">
   <br>
     <em>Abbildung 1: Übersichtgrafik Vision Transformer</em>
 </p>
