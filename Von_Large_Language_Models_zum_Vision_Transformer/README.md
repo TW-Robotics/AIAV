@@ -51,7 +51,7 @@ Klicken Sie nun auf *notebook.ipynb* um dieses zur Ansicht und zum Ausführen in
     ```
 
 ## Ergebnisse
-In diesem Abschnitt werden die Ergebnisse dieses Use-Case's vorgestellt. Einerseits ist die theoretische Fundierung entsprechend Abbildung 1 ein wichtiger Bestandteil dieses Use-Cases. Des weiteren wird der Code des ViT im notebook.ipynb aufbereitet und darin ein Modell von Null auf trainiert sowie ein bestehendes ViT Modell fine getuned. Der Datensatz hierfür ist ein Teil des [WOD: Web Object Dataset](https://www.acin.tuwien.ac.at/vision-for-robotics/software-tools/autonomous-robot-indoor-dataset/). Die Ergebnisse zu den beiden Modellen für die Klassifiikationsaufgabe sehen sie in den folgenden zwei Abbildungen 2 & 3 mit den entsprechenden Accuracy Kurven fürr Test und Trainings-Datensaetze:
+In diesem Abschnitt werden die Ergebnisse dieses Use Case vorgestellt. Zum einen ist die theoretische Fundierung entsprechend Abbildung 1 ein wichtiger Bestandteil dieses Use-Case. Zum anderen wird der Code des ViT in notebook.ipynb aufbereitet und darin ein Modell von Grund auf trainiert sowie ein bestehendes ViT-Modell verfeinert. Der Datensatz hierfür ist Teil des [WOD: Web Object Dataset](https://www.acin.tuwien.ac.at/vision-for-robotics/software-tools/autonomous-robot-indoor-dataset/). Die Ergebnisse der beiden Modelle für die Klassifikationsaufgabe sind in den folgenden zwei Abbildungen 2 & 3 mit den entsprechenden Accuracy-Kurven für die Test- und Trainingsdatensätze dargestellt:
 
 <p align="center">
   <img alt="ViT" src="images/Abbildung_5.PNG" width="40%" height="40%">
@@ -65,16 +65,16 @@ In diesem Abschnitt werden die Ergebnisse dieses Use-Case's vorgestellt. Einerse
     <em>Abbildung 3: Training und Test Accuracykurve des vortranierten und fine-getunten ViT-Modells.</em>
 </p>
 
-
+Die Performance unseres eigenständig und von Grund auf trainierten Transformer-Modells lässt zu wünschen übrig. Deshalb haben wir ein bereits existierendes und vortrainiertes Transformer-Modell feingetuned. Die Ergebnisse bezüglich der Accuracy sind hier um ein Vielfaches besser. Die Anwendung dieses feingetunten Modells auf eigene und bisher vom Modell nicht gesehene Daten ist vielversprechend, wie in Abbildung 4 zu sehen ist.
 
 <p align="center">
   <img alt="ViT" src="images/Abbildung_7.png" width="100%" height="100%">
   <br>
-    <em>Vorhersagen des vortrainierten und fingetuneten Vision Transformer Modells auf benutzerdefinierte Bilder; links: Tastatur mit einer Warhscheinlichkeit von 98\% vorhergesagt, mitte: Laptop mit einer Wahrscheinlichkeit von 94\% vorhergesagt, rechts: Marker mit einer Warscheinlichkeit von 89\% vorhergesagt.</em>
+    <em>Abbildung 4: Vorhersagen des vortrainierten und fingetuneten Vision Transformer Modells auf benutzerdefinierte Bilder; links: Tastatur mit einer Warhscheinlichkeit von 98\% vorhergesagt, mitte: Laptop mit einer Wahrscheinlichkeit von 94\% vorhergesagt, rechts: Marker mit einer Warscheinlichkeit von 89\% vorhergesagt.</em>
 </p>
 
 
 
 ## Diskussion 
 
-Es hat sich gezeigt, dass der Vision Transformer erst nach Anwendung einer bereits vortrainierten Version zielfuehrende Ergebnisse liefert. Dies ist sinnvoll, da Vision Transformer im Allgemeinen datenintensive Modelle sind und keine starke induktive Verzerrung in das Modell einbringen. Es ist daher nicht praktikabel, Vision Transformer von Grund auf zu trainieren, da dies einerseits einen riesigen Datensatz und andererseits enorme Rechenkapazitaeten erfordert. Wenn man jedoch ein bereits trainiertes Modell verwendet, kann man, wie wir gesehen haben, schnell gute Ergebnisse erzielen. Beim derzeitigen [Stand der Forschung](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9716741) kann man sagen, dass CNN's bei kleinen Datensätzen gut abschneiden und Transformer bei großen Datensätzen besser.
+Es hat sich gezeigt, dass der Vision Transformer erst nach Anwendung einer bereits vortrainierten Version zielführende Ergebnisse liefert. Dies ist sinnvoll, da Vision Transformer in der Regel datenintensive Modelle sind und keine starke induktive Verzerrung in das Modell einbringen. Es ist daher nicht praktikabel, Vision Transformer von Grund auf zu trainieren, da dies einerseits einen riesigen Datensatz und andererseits enorme Rechenkapazitäten erfordert. Wenn man jedoch ein bereits trainiertes Modell verwendet, kann man, wie wir gesehen haben, schnell gute Ergebnisse erzielen. Beim derzeitigen Stand der Forschung (https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9716741) kann man sagen, dass CNN's bei kleinen Datensätzen gut abschneiden und Transformer bei großen Datensätzen besser.
