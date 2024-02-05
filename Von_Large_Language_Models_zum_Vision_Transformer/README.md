@@ -68,7 +68,7 @@ In diesem Abschnitt werden die Ergebnisse dieses Use-Case's vorgestellt. Einerse
 
 
 <p align="center">
-  <img alt="ViT" src="images/Abbildung_7.png" width="40%" height="40%">
+  <img alt="ViT" src="images/Abbildung_7.png" width="100%" height="100%">
   <br>
     <em>Vorhersagen des vortrainierten und fingetuneten Vision Transformer Modells auf benutzerdefinierte Bilder; links: Tastatur mit einer Warhscheinlichkeit von 98\% vorhergesagt, mitte: Laptop mit einer Wahrscheinlichkeit von 94\% vorhergesagt, rechts: Marker mit einer Warscheinlichkeit von 89\% vorhergesagt.</em>
 </p>
