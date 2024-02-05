@@ -47,7 +47,7 @@ Klicken Sie nun auf *notebook.ipynb* um dieses zur Ansicht und zum Ausführen in
 - Bevor Sie den Container erneut ausführen müssen Sie den bestehenden schließen, hierfür führen Sie bitte folgenden Befehl aus:
 
     ```console
-    docker kill LRP
+    docker kill VIT
     ```
 
 ## Ergebnisse
