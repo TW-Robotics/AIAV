@@ -68,7 +68,7 @@ In diesem Abschnitt werden die Ergebnisse dieses Use Case vorgestellt. Zum einen
 Die Performance unseres eigenständig und von Grund auf trainierten Transformer-Modells lässt zu wünschen übrig. Deshalb haben wir ein bereits existierendes und vortrainiertes Transformer-Modell feingetuned. Die Ergebnisse bezüglich der Accuracy sind hier um ein Vielfaches besser. Die Anwendung dieses feingetunten Modells auf eigene und bisher vom Modell nicht gesehene Daten ist vielversprechend, wie in Abbildung 4 zu sehen ist.
 
 <p align="center">
-  <img alt="ViT" src="images/Abbildung_7.png" width="100%" height="100%">
+  <img alt="ViT" src="images/Abbildung_7.png" width="80%" height="80%">
   <br>
     <em>Abbildung 4: Vorhersagen des vortrainierten und fingetuneten Vision Transformer Modells auf benutzerdefinierte Bilder; links: Tastatur mit einer Warhscheinlichkeit von 98\% vorhergesagt, mitte: Laptop mit einer Wahrscheinlichkeit von 94\% vorhergesagt, rechts: Marker mit einer Warscheinlichkeit von 89\% vorhergesagt.</em>
 </p>
