@@ -67,6 +67,14 @@ In diesem Abschnitt werden die Ergebnisse dieses Use-Case's vorgestellt. Einerse
 
 
 
+<p align="center">
+  <img alt="ViT" src="images/Abbildung_7.PNG" width="40%" height="40%">
+  <br>
+    <em>Vorhersagen des vortrainierten und fingetuneten Vision Transformer Modells auf benutzerdefinierte Bilder; links: Tastatur mit einer Warhscheinlichkeit von 98\% vorhergesagt, mitte: Laptop mit einer Wahrscheinlichkeit von 94\% vorhergesagt, rechts: Marker mit einer Warscheinlichkeit von 89\% vorhergesagt.</em>
+</p>
+
+
+
 ## Diskussion 
 
 Es hat sich gezeigt, dass der Vision Transformer erst nach Anwendung einer bereits vortrainierten Version zielfuehrende Ergebnisse liefert. Dies ist sinnvoll, da Vision Transformer im Allgemeinen datenintensive Modelle sind und keine starke induktive Verzerrung in das Modell einbringen. Es ist daher nicht praktikabel, Vision Transformer von Grund auf zu trainieren, da dies einerseits einen riesigen Datensatz und andererseits enorme Rechenkapazitaeten erfordert. Wenn man jedoch ein bereits trainiertes Modell verwendet, kann man, wie wir gesehen haben, schnell gute Ergebnisse erzielen. Beim derzeitigen [Stand der Forschung](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9716741) kann man sagen, dass CNN's bei kleinen Datensätzen gut abschneiden und Transformer bei großen Datensätzen besser.
