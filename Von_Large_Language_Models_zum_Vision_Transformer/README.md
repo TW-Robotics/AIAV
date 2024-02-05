@@ -26,9 +26,9 @@ Für diesen Use-Case verwenden wir Python3 und Pytorch. Um dieses Projekt selber
     ```console
     git clone https://github.com/TW-Robotics/AIAV/
     ```
-- Navigieren Sie in den Ordner *AI_Modelle_lernen_nicht_das_was_sie_lernen_sollten*:
+- Navigieren Sie in den Ordner *Von_Large_Language_Models_zum_Vision_Transformer*:
     ```console
-    cd AIAV/AI_Modelle_lernen_nicht_das_was_sie_lernen_sollten
+    cd AIAV/Von_Large_Language_Models_zum_Vision_Transformer
     ```
 
 - Führen Sie das buildandrun Skript aus:
