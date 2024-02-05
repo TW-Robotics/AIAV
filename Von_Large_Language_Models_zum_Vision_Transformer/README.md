@@ -70,7 +70,7 @@ Die Performance unseres eigenständig und von Grund auf trainierten Transformer-
 <p align="center">
   <img alt="ViT" src="images/Abbildung_7.png" width="100%" height="100%">
   <br>
-    <em>Abbildung 4: Vorhersagen des vortrainierten </em>
+    <em>Abbildung 4: Vorhersagen des vortrainierten und fingetuneten Vision Transformer Modells auf benutzerdefinierte Bilder; links: Tastatur mit einer Warhscheinlichkeit von 98% vorhergesagt, mitte: Laptop mit einer Wahrscheinlichkeit von 94% vorhergesagt, rechts: Marker mit einer Warscheinlichkeit von 89% vorhergesagt. </em>
 </p>
 
 
